@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+streamlit
+langchain-core
+langchain-community
+langchain-chroma
+langchain-text-splitters
+dashscope
+python-dotenv
+pytest
+httpx
