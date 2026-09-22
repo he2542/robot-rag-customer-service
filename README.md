@@ -81,5 +81,3 @@ Set-Location "path\to\robot-rag-customer-service"
 ## 数据说明
 
 `chroma_db/`、`chat_history/` 和 `md5.text` 是本地运行时数据，默认不会上传到 GitHub。首次运行或部署到新环境时，向量库需要重新导入知识内容。
-
-原有的 `app_qa.py` 和 `app_file_uploader.py` 是旧版 Streamlit 入口，新前端使用 `api.py` 和 `frontend/`。
