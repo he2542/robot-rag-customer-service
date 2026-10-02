@@ -18,6 +18,9 @@ env/
 backups/
 *.dump
 deploy/pgvector-v*.tar.gz
+robot-rag-access.json
+htpasswd
+.htpasswd
 
 # Runtime data (local Chroma index, chat history and upload fingerprints)
 chroma_db/
