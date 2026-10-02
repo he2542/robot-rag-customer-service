@@ -15,6 +15,9 @@ env/
 .env.*
 !.env.example
 .streamlit/secrets.toml
+backups/
+*.dump
+deploy/pgvector-v*.tar.gz
 
 # Runtime data (local Chroma index, chat history and upload fingerprints)
 chroma_db/

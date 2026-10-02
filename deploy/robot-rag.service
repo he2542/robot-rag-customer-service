@@ -1,8 +1,8 @@
 [Unit]
 Description=Robot RAG customer service API
-After=network-online.target postgresql@17-main.service
+After=network-online.target docker.service
 Wants=network-online.target
-Requires=postgresql@17-main.service
+Requires=docker.service
 
 [Service]
 Type=simple

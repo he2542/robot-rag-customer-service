@@ -6,4 +6,4 @@
 
 ## Local data
 
-`.env`、聊天历史及旧版 Chroma 数据默认被 Git 忽略。不要提交模型密钥、真实 `DATABASE_URL`、数据库备份或用户会话记录。生产 PostgreSQL 使用本机 Unix socket 与专用用户 peer 认证；数据库端口无需公开。集成测试只允许在独立 `robot_rag_test` 数据库上运行。
+`.env`、聊天历史及旧版 Chroma 数据默认被 Git 忽略。不要提交模型密钥、真实 `DATABASE_URL`、数据库备份或用户会话记录。生产 PostgreSQL 使用 1Panel Docker 实例，仅将端口发布到 `127.0.0.1:5432`，客服后端使用独立非超级用户角色；密码保存在 root 所有、权限 0600 的环境文件中。集成测试只允许在独立 `robot_rag_test` 数据库上运行。

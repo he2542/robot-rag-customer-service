@@ -1,0 +1,17 @@
+FROM postgres:17.11-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+
+ARG ALPINE_MIRROR=https://dl-cdn.alpinelinux.org/alpine
+
+# Download the v0.8.6 archive from the official pgvector repository first.
+COPY pgvector-v0.8.6.tar.gz /tmp/pgvector.tar.gz
+RUN echo "10bf9938906e5d643bbc4a7eea104b6f57ba4898e5b76b20e60484ea1d5a7f8f  /tmp/pgvector.tar.gz" | sha256sum -c - \
+    && cp /etc/apk/repositories /tmp/apk-repositories \
+    && sed -i "s|https://dl-cdn.alpinelinux.org/alpine|${ALPINE_MIRROR}|g" /etc/apk/repositories \
+    && apk --timeout 30 add --no-cache --virtual .pgvector-build-deps build-base \
+    && mkdir /tmp/pgvector \
+    && tar -xzf /tmp/pgvector.tar.gz --strip-components=1 -C /tmp/pgvector \
+    && make -C /tmp/pgvector -j2 OPTFLAGS="" with_llvm=no \
+    && make -C /tmp/pgvector install with_llvm=no \
+    && apk del .pgvector-build-deps \
+    && mv /tmp/apk-repositories /etc/apk/repositories \
+    && rm -rf /tmp/pgvector /tmp/pgvector.tar.gz

@@ -48,7 +48,7 @@ Copy-Item .env.example .env
 
 在数据库中由管理员执行 `CREATE EXTENSION vector`，然后配置 `DATABASE_URL`。
 开发环境可使用 `postgresql+psycopg://USER:PASSWORD@127.0.0.1:5432/robot_rag`；不要提交真实连接凭据。
-生产部署使用专用操作系统用户与 PostgreSQL peer 认证，无需数据库密码，连接信息见 `.env.example`。
+生产部署使用 1Panel PostgreSQL 实例、专用数据库角色与密码认证，仅通过 `127.0.0.1:5432` 连接，配置模板见 `.env.example`。
 数据库可创建后执行 `python database.py` 初始化业务表；`EMBEDDING_MODEL` 和 `EMBEDDING_DIMENSIONS` 必须与数据库记录一致，默认使用 `text-embedding-v4` 的 1024 维向量。
 
 ## 启动后端
