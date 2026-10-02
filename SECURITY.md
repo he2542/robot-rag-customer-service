@@ -6,4 +6,4 @@
 
 ## Local data
 
-`.env`、`chroma_db/`、`chat_history/` 和 `md5.text` 默认被 Git 忽略。部署前请确认没有将模型密钥、用户会话记录或其他本地数据加入提交。
+`.env`、聊天历史及旧版 Chroma 数据默认被 Git 忽略。不要提交模型密钥、真实 `DATABASE_URL`、数据库备份或用户会话记录。生产 PostgreSQL 使用本机 Unix socket 与专用用户 peer 认证；数据库端口无需公开。集成测试只允许在独立 `robot_rag_test` 数据库上运行。

@@ -1,13 +1,16 @@
 """RAG 项目的 HTTP API，供 Vue 前端调用。"""
 
 import json
+import os
+import logging
 from pathlib import Path
 from typing import Iterator
 from urllib.parse import unquote
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse
+from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
 # 在 API 入口自动读取本地 .env；如果用户通过系统环境变量配置，也同样有效。
@@ -20,6 +23,9 @@ except ImportError:
 
 from knowledge_base import KnowledgeBaseService
 from rag import RagService
+from database import database_ready
+
+logger = logging.getLogger(__name__)
 
 
 app = FastAPI(title="智能客服 RAG API", version="1.0.0")
@@ -34,7 +40,7 @@ app.add_middleware(
 
 class ChatRequest(BaseModel):
     input: str = Field(min_length=1, max_length=4000)
-    session_id: str = Field(default="user_001", min_length=1, max_length=100)
+    session_id: str = Field(default="user_001", min_length=1, max_length=100, pattern=r"^[A-Za-z0-9_-]+$")
 
 
 rag_service: RagService | None = None
@@ -62,12 +68,29 @@ def sse_event(payload: dict | str) -> str:
 
 
 @app.get("/api/health")
-def health() -> dict[str, str]:
-    return {"status": "ok"}
+def health() -> JSONResponse:
+    ready = database_ready()
+    return JSONResponse(
+        status_code=200 if ready else 503,
+        content={"status": "ok" if ready else "degraded",
+                 "model_configured": model_configured(),
+                 "storage_backend": "postgresql+pgvector", "database_ready": ready},
+    )
+
+
+def model_configured() -> bool:
+    key = os.environ.get("DASHSCOPE_API_KEY", "").strip()
+    return bool(key and key != "your_dashscope_api_key_here")
+
+
+def require_model() -> None:
+    if not model_configured():
+        raise HTTPException(status_code=503, detail="模型待配置，请管理员配置 DashScope API Key 后启用服务")
 
 
 @app.post("/api/chat")
 def chat(request: ChatRequest) -> StreamingResponse:
+    require_model()
     query = request.input.strip()
     if not query:
         raise HTTPException(status_code=400, detail="问题不能为空")
@@ -80,8 +103,9 @@ def chat(request: ChatRequest) -> StreamingResponse:
                 if chunk:
                     yield sse_event({"content": chunk})
             yield sse_event("[DONE]")
-        except Exception as exc:
-            yield sse_event({"error": str(exc)})
+        except Exception:
+            logger.exception("Chat request failed")
+            yield sse_event({"error": "问答服务暂时不可用，请稍后重试"})
 
     return StreamingResponse(
         stream(),
@@ -108,8 +132,13 @@ async def upload_knowledge(request: Request) -> dict[str, str]:
     if not text.strip():
         raise HTTPException(status_code=400, detail="文件内容不能为空")
 
+    require_model()
+
     try:
-        message = get_knowledge_base_service().upload_by_str(text, filename)
+        message = await run_in_threadpool(
+            lambda: get_knowledge_base_service().upload_by_str(text, filename)
+        )
         return {"message": message}
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"知识库更新失败：{exc}") from exc
+        logger.exception("Knowledge upload failed")
+        raise HTTPException(status_code=500, detail="知识库更新失败，请稍后重试") from exc

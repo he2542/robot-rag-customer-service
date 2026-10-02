@@ -1,5 +1,20 @@
 <script setup>
-import { nextTick, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
+
+const apiBase = `${import.meta.env.BASE_URL}api`
+const modelReady = ref(false)
+const serviceStatus = ref('检查服务中…')
+onMounted(async () => {
+  try {
+    const response = await fetch(`${apiBase}/health`)
+    if (!response.ok) throw new Error('health check failed')
+    const payload = await response.json()
+    modelReady.value = payload.model_configured === true
+    serviceStatus.value = modelReady.value ? '在线' : '模型待配置'
+  } catch {
+    serviceStatus.value = '服务暂不可用'
+  }
+})
 
 const messages = ref([
   { role: 'assistant', content: '你好，我是智能客服，有什么问题可以咨询我吗？' },
@@ -19,7 +34,7 @@ async function scrollToBottom() {
 
 async function sendMessage() {
   const question = input.value.trim()
-  if (!question || loading.value) return
+  if (!question || loading.value || !modelReady.value) return
 
   messages.value.push({ role: 'user', content: question })
   messages.value.push({ role: 'assistant', content: '' })
@@ -28,7 +43,7 @@ async function sendMessage() {
   await scrollToBottom()
 
   try {
-    const response = await fetch('/api/chat', {
+    const response = await fetch(`${apiBase}/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ input: question, session_id: sessionId }),
@@ -69,7 +84,7 @@ async function uploadFile(event) {
   uploadMessage.value = ''
   uploadError.value = ''
   try {
-    const response = await fetch('/api/knowledge/upload', {
+    const response = await fetch(`${apiBase}/knowledge/upload`, {
       method: 'POST',
       headers: { 'X-Filename': encodeURIComponent(file.name) },
       body: file,
@@ -92,7 +107,7 @@ async function uploadFile(event) {
           <h1>智能客服</h1>
           <p class="subtitle">基于知识库的专业问答助手</p>
         </div>
-        <div class="status"><span></span> 在线</div>
+        <div class="status"><span v-if="modelReady"></span> {{ serviceStatus }}</div>
       </header>
 
       <div ref="messagesEl" class="messages">
@@ -103,8 +118,8 @@ async function uploadFile(event) {
       </div>
 
       <form class="composer" @submit.prevent="sendMessage">
-        <input v-model="input" :disabled="loading" placeholder="请输入你的问题…" autocomplete="off" />
-        <button type="submit" :disabled="loading || !input.trim()">发送</button>
+        <input v-model="input" :disabled="loading || !modelReady" :placeholder="modelReady ? '请输入你的问题…' : serviceStatus" autocomplete="off" />
+        <button type="submit" :disabled="loading || !modelReady || !input.trim()">发送</button>
       </form>
     </section>
 
@@ -117,12 +132,13 @@ async function uploadFile(event) {
         </div>
       </div>
       <label class="upload-box">
-        <input type="file" accept=".txt,text/plain" @change="uploadFile" />
+        <input type="file" :disabled="!modelReady" accept=".txt,text/plain" @change="uploadFile" />
         <span>点击选择文件</span>
         <small>文件内容会自动切分并写入向量库</small>
       </label>
       <p v-if="uploadMessage" class="feedback success">{{ uploadMessage }}</p>
       <p v-if="uploadError" class="feedback error">{{ uploadError }}</p>
+      <p v-if="!modelReady" class="feedback">{{ serviceStatus }}，暂未开放问答和知识库上传。</p>
     </aside>
   </main>
 </template>

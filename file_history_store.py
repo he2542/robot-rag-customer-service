@@ -4,10 +4,11 @@ from pathlib import Path
 from langchain_core.chat_history import BaseChatMessageHistory
 from typing import Sequence, List
 from langchain_core.messages import BaseMessage, message_to_dict, messages_from_dict
+from config_data import DATA_ROOT
 
 
 def get_history(session_id):
-    storage_path = Path(__file__).resolve().parent / "chat_history"
+    storage_path = DATA_ROOT / "chat_history"
     return FileChatMessageHistory(session_id, str(storage_path))
 
 class FileChatMessageHistory(BaseChatMessageHistory):

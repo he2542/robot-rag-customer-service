@@ -2,7 +2,9 @@ fastapi
 uvicorn[standard]
 langchain-core
 langchain-community
-langchain-chroma
+langchain-postgres
+psycopg[binary]
+pgvector
 langchain-text-splitters
 dashscope
 python-dotenv
