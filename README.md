@@ -115,13 +115,4 @@ Set-Location "path\to\robot-rag-dev\backend"
 
 前端验证：在 `frontend` 执行 `node --test src/sse.test.js` 和 `npm run build`。
 
-## 当前服务器开发预览（2026-11-07）
 
-服务器开发副本为 `/home/ubuntu/robot-rag-dev`，解释器为 `backend/.venv/bin/python`；独立开发数据库为 `robot_rag_internal_dev`。
-临时服务 `robot-rag-internal-dev.service` 在 `127.0.0.1:8120` 运行，启用 `RAG_SERVE_FRONTEND=1` 时同时托管已构建的 `frontend/dist`。
-Windows 通过 SSH 转发到 `http://127.0.0.1:18080`，只有建立转发的这台电脑可以这样访问。旧网站没有恢复或更新。
-
-开发服务由 systemd 读取原有模型环境文件和开发库配置；不把已有模型密钥复制到代码或文档中。导入命令须在有模型凭据的管理员运行环境执行。
-旧 `qwen3-max` 在实测中返回“模型不存在”，开发配置现使用已实测可用的 `qwen-plus`，嵌入仍为 `text-embedding-v4` / 1024 维。
-
-旧部署与备份恢复说明仍见 [deploy/README.md](deploy/README.md)，不代表本版已经部署。`backend/requirements-deployed.txt` 是旧部署依赖记录；本版实测记录另存，勿混同。
