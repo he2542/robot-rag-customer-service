@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robot-rag"
+version = "1.0.0"
+description = "Internal-corpus robot customer service"
+requires-python = ">=3.10"
+dynamic = ["dependencies"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.scripts]
+robot-rag-import = "robot_rag.cli.import_knowledge:main"
+robot-rag-init-db = "robot_rag.cli.init_database:main"

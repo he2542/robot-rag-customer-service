@@ -1,0 +1,53 @@
+name: Publish release
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Publish newly added version notes after CI passes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          mapfile -t notes < <(git diff-tree --no-commit-id --name-only --diff-filter=A -r "$RELEASE_SHA" -- releases/)
+          for file in "${notes[@]}"; do
+            [[ "$file" =~ ^releases/(v[0-9]+\.[0-9]+\.[0-9]+)\.md$ ]] || continue
+            tag="${BASH_REMATCH[1]}"
+            title=$(head -n 1 "$file")
+            title="${title#\# }"
+            [[ "$title" == "$tag "* ]] || { echo 'Release title must start with its version'; exit 1; }
+            if gh release view "$tag" --json tagName > /dev/null 2>&1; then
+              actual=$(gh api "repos/$GH_REPO/git/ref/tags/$tag" --jq .object.sha)
+              [[ "$actual" == "$RELEASE_SHA" ]] || { echo 'Existing release points to a different commit'; exit 1; }
+              echo "$tag already published at this commit"
+              continue
+            fi
+            gh release create "$tag" --target "$RELEASE_SHA" --title "$title" --notes-file "$file" --latest
+          done
