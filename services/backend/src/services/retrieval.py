@@ -7,6 +7,7 @@ from src import config
 from .corpus import KNOWLEDGE_BASE, SCOPE_NOTE, load_internal_files
 from src.crud.knowledge import nearest_chunks, chunk_counts, scoped_chunks
 from .keyword import KeywordIndex
+from .rerank import Reranker
 
 
 def as_documents(rows) -> list[Document]:
@@ -36,8 +37,9 @@ def reciprocal_rank_fusion(rankings: list[list[Document]], limit: int,
 
 
 class InternalKnowledgeRetriever:
-    def __init__(self, embedding):
+    def __init__(self, embedding, reranker=None):
         self.embedding = embedding
+        self.reranker = reranker if reranker is not None else Reranker()
         self._keyword_lock = Lock()
         self._keyword_signature = None
         self._keyword_index = None
@@ -49,7 +51,10 @@ class InternalKnowledgeRetriever:
         mode = config.retrieval_mode if mode is None else mode
         if mode not in {"vector", "keyword", "hybrid"}:
             raise ValueError("Unknown retrieval mode")
-        return self.rankings(query, mode)[mode][:config.retrieval_top_k]
+        candidates = self.rankings(query, mode)[mode]
+        if mode == "hybrid" and config.rerank_enabled:
+            candidates = self.reranker.rerank(query, candidates).documents
+        return candidates[:config.retrieval_top_k]
 
     def rankings(self, query: str, mode: str = "hybrid") -> dict[str, list[Document]]:
         """Internal diagnostics for evaluation, never exposed as a public route."""

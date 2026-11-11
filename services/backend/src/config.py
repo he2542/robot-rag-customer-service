@@ -30,6 +30,17 @@ retrieval_rrf_k = int(os.environ.get("RAG_RRF_K", "60"))
 if not retrieval_top_k <= retrieval_candidate_k <= 100 or retrieval_rrf_k < 1:
     raise ValueError("Retrieval candidates must be 4..100 and RRF constant must be positive")
 
+_rerank_enabled = os.environ.get("RAG_RERANK_ENABLED", "false").lower()
+if _rerank_enabled not in {"true", "false"}:
+    raise ValueError("RAG_RERANK_ENABLED must be true or false")
+rerank_enabled = _rerank_enabled == "true"
+rerank_model = os.environ.get("RAG_RERANK_MODEL", "qwen3-rerank")
+rerank_url = os.environ.get("RAG_RERANK_URL",
+    "https://dashscope.aliyuncs.com/api/v1/services/rerank/text-rerank/text-rerank")
+rerank_timeout = float(os.environ.get("RAG_RERANK_TIMEOUT", "3"))
+if not 0 < rerank_timeout <= 30:
+    raise ValueError("RAG_RERANK_TIMEOUT must be greater than 0 and at most 30 seconds")
+
 embedding_model_name = os.environ.get("EMBEDDING_MODEL", "text-embedding-v4")
 chat_model_name = os.environ.get("CHAT_MODEL", "qwen-plus")
 

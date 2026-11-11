@@ -16,6 +16,7 @@
 | `src/services/rag.py` | 问答前置条件、上下文、生成、历史与引用编号 |
 | `src/services/retrieval.py` | 双路召回、片段去重和 RRF 融合 |
 | `src/services/keyword.py` | 中文分词和 BM25 索引 |
+| `src/services/rerank.py` | 可选排序 API、结果校验和失败回退 |
 | `src/services/ingestion.py` | 切块、批量嵌入和入库编排 |
 | `src/services/corpus.py` | TXT 读取、知识库命名空间和版本身份 |
 | `src/services/prompts.py` | 回答约束与系统提示词 |
@@ -29,6 +30,7 @@
 ```text
 routes/chat → services/rag → services/retrieval
                                   ├─ services/keyword
+                                  ├─ services/rerank（可选）
                                   └─ crud/knowledge → database/connection
 ```
 
@@ -44,6 +46,7 @@ routes/chat → services/rag → services/retrieval
 - `rag_configuration` 保存嵌入模型和维度，阻止不兼容的向量空间混用。
 - 文档身份由命名空间、文件名和内容计算；检索同时限定命名空间和当前文档版本。
 - 默认按 1000 字符切块、重叠 100 字符；混合检索两路各取 10 条，RRF 后保留 4 条。
+- 开启模型精排后，先对完整 RRF 候选重排，再截取 4 条；vector 和 keyword 模式保持原排序。
 - 会话历史保存在 `runtime/chat_history/robot_internal_v1/`，提示词最多使用最近 12 条历史消息。
 
 BM25 为进程内索引，每次检索读取有效片段快照，仅在 UUID 或内容变化时重建。此实现面向小型资料库；规模增大时需评估全量读取、索引持久化与资源开销。

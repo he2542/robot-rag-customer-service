@@ -50,4 +50,49 @@ python -m evaluation.evaluate --output evaluation/results/run-01.json
 
 首版每题只标一个片段，所以 Hit@4 与 Recall@4 相同。标签不穷尽其他等价证据，题集只覆盖 3/5 份资料，不能把这些指标视为完整相关性或回答准确率。计时包含网络与首次索引初始化，单轮顺序运行不代表并发性能。
 
-结果见 [混合检索评测](validation/hybrid-retrieval-20261111.md)。后续应补充独立问题、无答案问题与完整相关性标注，再调参或接入 rerank。
+结果见 [混合检索评测](validation/hybrid-retrieval-20261111.md)。后续应补充独立问题、无答案问题与完整相关性标注，再调整检索与精排参数。
+
+### 模型精排对比
+
+```bash
+python -m evaluation.evaluate --rerank --output evaluation/results/rerank-01.json
+```
+
+显式传入 `--rerank` 后，在同一批 RRF 候选上额外比较 `hybrid_rerank`，不需要打开应用开关。除 24 次查询嵌入外，会增加最多 24 次排序调用；不调用聊天生成模型。
+
+逐题记录精排状态、回退原因、分数、排序模型报告的 Token 用量和耗时。回退的基线结果仍计入总体指标，同时单独报告状态；不能把回退算作精排成功。已有原始评测不覆盖，比较时保留原有题集和参数。验证结果见 [模型精排评测](validation/rerank-20261111.md)。
+
+## 300 题配对检索与回答评测
+
+[扩样报告](validation/paired-300-20261111.md) 覆盖全部五份资料，比较同一批 RRF 候选的前四与模型精排前四。回答通过要求同时“答对问题”和“事实由自己的上下文支持”；模型评分尚未替代人工金标准。两轮评分、参考答案与判分分歧均保留，不能只挑其中较好的一轮报告。
+
+### 离线复算（不调用 API）
+
+在 `services/backend` 执行，先将证据包解压到新的本地结果目录：
+
+```bash
+python -m tarfile -e ../../docs/validation/paired-300-20261111-v1.tar.gz evaluation/results/reference-300
+python -m evaluation.summarize_benchmark --root evaluation/results/reference-300 --output evaluation/results/recomputed-300.json
+python -m pytest tests/test_paired_statistics.py tests/test_benchmark_binding.py -q
+```
+
+汇总程序检查每条回答、排序与评分的题集哈希，按预设片段组生成配对区间。输出文件已存在时拒绝覆盖；统计用例覆盖百分点、配对计数、分层权重、重采样复现、Wilson 边界与 UUID 重绑定。
+
+### 重跑已冻结的题集（产生 API 用量）
+
+新建结果目录，先绑定本机数据库的 UUID。绑定只查询数据库，不导入、不修改题目或参考答案；要求当前资料和切块内容与发布快照相同，内容有变化时拒绝将其当成同语料复现。
+
+```bash
+python -m evaluation.benchmark bind --template evaluation/results/reference-300 --root evaluation/results/run-300
+python -m evaluation.benchmark retrieve --root evaluation/results/run-300
+python -m evaluation.benchmark answer --root evaluation/results/run-300 --workers 4
+python -m evaluation.benchmark judge --root evaluation/results/run-300 --workers 4
+python -m evaluation.benchmark audit --audit-limit 300 --root evaluation/results/run-300 --workers 4
+python -m evaluation.summarize_benchmark --root evaluation/results/run-300 --output evaluation/results/run-300-summary.json
+```
+
+完整流程包含 300 次查询嵌入、最多 300 次排序、600 份回答和两轮各 300 次成对评分，失败重试可能增加调用。需要账户能调用 `qwen-plus`、`qwen-max` 与配置中的嵌入和排序模型；生成与评审固定 temperature=0、seed=20261111。模型别名、服务版本和网络状态可变，重跑不承诺相同生成文本。
+
+程序按条目保存成功结果，同一个结果目录可续跑，既有题目、回答和分数不会被替换。中断写入造成的损坏文件需要先保留原件并核对，不应当作已完成结果；不要在同一目录并行运行两个相同阶段。
+
+`prepare / generate / validate / freeze` 用于创建新题集，不属于复现既有分数的必要步骤。它们会生成新问题与参考答案，需要先检查标签并冻结，再运行系统；禁止看过结果后调整标签以提升报告数值。原始模型检查说明也可能不准确，不能当作人工审校记录。

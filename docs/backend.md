@@ -20,6 +20,10 @@
 | `RAG_RETRIEVAL_MODE` | `hybrid`；也支持 `vector`、`keyword` |
 | `RAG_RETRIEVAL_CANDIDATES` | `10`，每路候选数，范围 4—100 |
 | `RAG_RRF_K` | `60`，RRF 正整数平滑常数 |
+| `RAG_RERANK_ENABLED` | `false`，设为 `true` 为 hybrid 模式启用精排 |
+| `RAG_RERANK_MODEL` | `qwen3-rerank`，已验证的排序模型 |
+| `RAG_RERANK_TIMEOUT` | `3` 秒，HTTP 阶段超时，范围大于 0 且不超过 30 |
+| `RAG_RERANK_URL` | 默认北京地域 DashScope 原生文本排序接口；须与密钥地域匹配 |
 | `RAG_SERVE_FRONTEND` | 设为 `1` 时托管已构建的前端 |
 
 最终上下文为前 4 个片段，配置值位于 `src/config.py`。修改环境配置后重启应用。更换聊天模型不需要重建向量；更换嵌入模型或维度需要独立迁移和验证，不能直接覆盖已有配置记录。
@@ -68,3 +72,13 @@ SSE 先发送 `sources`，再发送 `content`，成功以 `data: [DONE]` 结束�
 `hybrid` 将向量与中文 BM25 的排名通过等权 RRF 融合；`vector` 保留纯向量模式，`keyword` 用于单独比较 BM25。两路均从数据库读取当前有效资料，按 UUID 去重。无关键词匹配时不凑足候选；系统故障沿用错误通道，不静默当作低相关性。
 
 实现见 `src/services/retrieval.py` 和 `src/services/keyword.py`，方法见 [混合检索设计](specs/hybrid-retrieval_design.md)，验证见 [测试](testing.md)。
+
+## 模型精排
+
+在 `.env` 中设置 `RAG_RERANK_ENABLED=true` 后重启应用，即可在 hybrid 模式对 RRF 的全部候选重新排序，再选择最终 4 条。关闭开关可恢复原 RRF 结果；vector、keyword 不调用精排。使用已有 `DASHSCOPE_API_KEY`，请求会将问题和候选正文发送给配置的排序服务，每次非平凡候选查询增加一次 API 调用。
+
+实现不自动重试，网络阶段超时、限流、服务错误、非法结果或输入预算超出时，保留 RRF 顺序并以分类原因记录回退。初始连接超时不超过 1 秒，读写等阶段超时为配置值，不是严格的端到端总时限。
+
+初版按 UTF-8 字节做保守输入预算：单查询/片段不超过 4000 字节，请求总预算不超过 120000 字节（查询按候选数重复计入）。这不是精确 Token 计算，较长中文问题可能跳过精排；不会截断问题或原文。模型分数只用于本请求内排序，不是回答置信度或拒答阈值。更换模型需重新核验接口与输入限制。
+
+设计见 [模型精排](specs/rerank_design.md)，效果与用量见 [精排评测](validation/rerank-20261111.md)。
