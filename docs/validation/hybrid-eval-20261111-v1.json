@@ -1,0 +1,3545 @@
+{
+  "dataset_version": "seed-20261111-v1",
+  "dataset_sha256": "6e2c70e05cd68d5510c2c902ed61382cff87efa88153af36e65751688ffd8889",
+  "corpus_documents": 5,
+  "corpus_chunks": 63,
+  "parameters": {
+    "candidate_k": 10,
+    "final_k": 4,
+    "rrf_k": 60
+  },
+  "limitations": "Project-authored seed labels, 3/5 files covered; non-exhaustive relevance. No LLM answer-quality or product correctness evaluation. Timing includes embedding/network and first BM25 initialization; one sequential pass, not a load benchmark.",
+  "summary": {
+    "vector": {
+      "hit_at_4": 0.4166666666666667,
+      "recall_at_4": 0.4166666666666667,
+      "reciprocal_rank_at_4": 0.16666666666666666,
+      "candidate_hit": 0.5833333333333334
+    },
+    "keyword": {
+      "hit_at_4": 0.5416666666666666,
+      "recall_at_4": 0.5416666666666666,
+      "reciprocal_rank_at_4": 0.4722222222222222,
+      "candidate_hit": 0.75
+    },
+    "hybrid": {
+      "hit_at_4": 0.5833333333333334,
+      "recall_at_4": 0.5833333333333334,
+      "reciprocal_rank_at_4": 0.4097222222222222,
+      "candidate_hit": 0.7916666666666666
+    }
+  },
+  "improved_rr": [
+    "q04",
+    "q05",
+    "q08",
+    "q12",
+    "q15",
+    "q17",
+    "q18",
+    "q19",
+    "q20",
+    "q21",
+    "q22",
+    "q24"
+  ],
+  "regressed_rr": [
+    "q07"
+  ],
+  "timing_ms": {
+    "vector_ms": {
+      "median": 175.74425134807825,
+      "max": 369.19567082077265
+    },
+    "keyword_ms": {
+      "median": 22.68774528056383,
+      "max": 798.4198071062565
+    },
+    "hybrid_total_ms": {
+      "median": 200.45040268450975,
+      "max": 1168.9405152574182
+    }
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "category": "keyword",
+      "query": "机器人无法连接WiFi，先检查什么？",
+      "labeled_chunk_ids": [
+        "68c7bb5e-72f9-542b-acc9-fd47fcddb799"
+      ],
+      "vector_ms": 369.19567082077265,
+      "keyword_ms": 798.4198071062565,
+      "hybrid_total_ms": 1168.9405152574182,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "653bc497-e281-5260-8cb5-e7192b70fe77"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "9438de20-d582-5788-bbf8-d997bf74a5fc",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "808d0221-2312-5916-b222-8d13d19de73c"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 4
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "9438de20-d582-5788-bbf8-d997bf74a5fc",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "808d0221-2312-5916-b222-8d13d19de73c"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q02",
+      "category": "keyword",
+      "query": "主刷不旋转是什么原因？",
+      "labeled_chunk_ids": [
+        "68c7bb5e-72f9-542b-acc9-fd47fcddb799"
+      ],
+      "vector_ms": 188.57959844172,
+      "keyword_ms": 21.264773793518543,
+      "hybrid_total_ms": 210.9599933028221,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "0c11ed3e-5b68-5676-9309-55cf86ce1dfc",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "cdd18674-692b-5256-b931-36aa379e4508",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 2
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "chunk_ids": [
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "500d9b1f-6701-5667-96ba-af49e58f6591"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.125
+          },
+          "chunk_ids": [
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "0c11ed3e-5b68-5676-9309-55cf86ce1dfc",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "cdd18674-692b-5256-b931-36aa379e4508",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "500d9b1f-6701-5667-96ba-af49e58f6591"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q03",
+      "category": "keyword",
+      "query": "水箱漏水需要检查哪些部位？",
+      "labeled_chunk_ids": [
+        "653bc497-e281-5260-8cb5-e7192b70fe77"
+      ],
+      "vector_ms": 159.4533221796155,
+      "keyword_ms": 19.94232553988695,
+      "hybrid_total_ms": 180.60888536274433,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.14285714285714285
+          },
+          "chunk_ids": [
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "fe1f7d5d-d0d9-5ee4-bced-e53d162d3727",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "05da7168-e4c1-51d0-b1b5-464ca05dc419",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1"
+          ],
+          "sources": [
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 2
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "05da7168-e4c1-51d0-b1b5-464ca05dc419",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "fe1f7d5d-d0d9-5ee4-bced-e53d162d3727",
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839",
+            "1057c85c-31eb-526d-8a7d-de7f0f3dac66"
+          ],
+          "sources": [
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 11
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 7
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.1
+          },
+          "chunk_ids": [
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "fe1f7d5d-d0d9-5ee4-bced-e53d162d3727",
+            "05da7168-e4c1-51d0-b1b5-464ca05dc419",
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "1057c85c-31eb-526d-8a7d-de7f0f3dac66",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1"
+          ],
+          "sources": [
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 11
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q04",
+      "category": "keyword",
+      "query": "集尘功能失效时检查集尘袋还是集尘通道？",
+      "labeled_chunk_ids": [
+        "e599ede3-a10b-56fc-a616-d517c20c7714"
+      ],
+      "vector_ms": 270.57258784770966,
+      "keyword_ms": 21.571467630565166,
+      "hybrid_total_ms": 293.5007940977812,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "chunk_ids": [
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "1057c85c-31eb-526d-8a7d-de7f0f3dac66",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 6
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "9a96df3d-b408-5d24-94f8-1b156dd05548"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 5
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "1057c85c-31eb-526d-8a7d-de7f0f3dac66",
+            "9a96df3d-b408-5d24-94f8-1b156dd05548"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q05",
+      "category": "keyword",
+      "query": "尘盒装好却提示尘盒未安装，怎么办？",
+      "labeled_chunk_ids": [
+        "e599ede3-a10b-56fc-a616-d517c20c7714"
+      ],
+      "vector_ms": 178.4649472683668,
+      "keyword_ms": 20.65060567110777,
+      "hybrid_total_ms": 200.23790001869202,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "chunk_ids": [
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 5
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.2
+          },
+          "chunk_ids": [
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "685fe4d2-2138-594e-a105-24297c78258b",
+            "653bc497-e281-5260-8cb5-e7192b70fe77"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 12
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 10
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "685fe4d2-2138-594e-a105-24297c78258b",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "653bc497-e281-5260-8cb5-e7192b70fe77"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q06",
+      "category": "keyword",
+      "query": "APP控制不了机器人，需要检查什么？",
+      "labeled_chunk_ids": [
+        "68c7bb5e-72f9-542b-acc9-fd47fcddb799"
+      ],
+      "vector_ms": 158.6764520034194,
+      "keyword_ms": 21.172592416405678,
+      "hybrid_total_ms": 180.9395281597972,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "e599ede3-a10b-56fc-a616-d517c20c7714"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 10
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 15
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.125
+          },
+          "chunk_ids": [
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 10
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.09090909090909091
+          },
+          "chunk_ids": [
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839",
+            "e599ede3-a10b-56fc-a616-d517c20c7714"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 10
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q07",
+      "category": "keyword",
+      "query": "机器人边刷不旋转怎么排查？",
+      "labeled_chunk_ids": [
+        "68c7bb5e-72f9-542b-acc9-fd47fcddb799"
+      ],
+      "vector_ms": 255.52335288375616,
+      "keyword_ms": 24.246234446763992,
+      "hybrid_total_ms": 280.96973430365324,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "463266c1-05e4-53f2-ba69-47165eced745"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 8
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.2
+          },
+          "chunk_ids": [
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 11
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "chunk_ids": [
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "463266c1-05e4-53f2-ba69-47165eced745"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 11
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q08",
+      "category": "keyword",
+      "query": "地毯增压开关与无法跨越地毯有关吗？",
+      "labeled_chunk_ids": [
+        "808d0221-2312-5916-b222-8d13d19de73c"
+      ],
+      "vector_ms": 158.48237928003073,
+      "keyword_ms": 22.533850744366646,
+      "hybrid_total_ms": 182.2107145562768,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.16666666666666666
+          },
+          "chunk_ids": [
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "1057c85c-31eb-526d-8a7d-de7f0f3dac66",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 3
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "1057c85c-31eb-526d-8a7d-de7f0f3dac66",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q09",
+      "category": "paraphrase",
+      "query": "机器吸灰越来越没劲，应该先查看哪里？",
+      "labeled_chunk_ids": [
+        "68c7bb5e-72f9-542b-acc9-fd47fcddb799"
+      ],
+      "vector_ms": 151.46212093532085,
+      "keyword_ms": 23.010998032987118,
+      "hybrid_total_ms": 175.6950058043003,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "6368f545-fbf0-5382-af0f-9132e9745335"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 14
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "685fe4d2-2138-594e-a105-24297c78258b",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "a0fa6b9f-27d7-56ce-b984-ada0c162e269",
+            "9438de20-d582-5788-bbf8-d997bf74a5fc"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 4
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "685fe4d2-2138-594e-a105-24297c78258b",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "a0fa6b9f-27d7-56ce-b984-ada0c162e269",
+            "9438de20-d582-5788-bbf8-d997bf74a5fc"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q10",
+      "category": "paraphrase",
+      "query": "扫完地它一直在外面转，找不着回去充电的地方。",
+      "labeled_chunk_ids": [
+        "68c7bb5e-72f9-542b-acc9-fd47fcddb799"
+      ],
+      "vector_ms": 262.67116889357567,
+      "keyword_ms": 21.140918135643005,
+      "hybrid_total_ms": 285.39321292191744,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 14
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "638071a9-857e-5e66-bb72-abbdc86f3b18",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 8
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 4
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "9f2683c1-e6d5-568c-be18-9842799b4e8a",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "638071a9-857e-5e66-bb72-abbdc86f3b18",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 10
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q11",
+      "category": "paraphrase",
+      "query": "拖完地地上湿漉漉留下一道道痕迹，怎么回事？",
+      "labeled_chunk_ids": [
+        "e599ede3-a10b-56fc-a616-d517c20c7714"
+      ],
+      "vector_ms": 172.32050001621246,
+      "keyword_ms": 20.909256301820278,
+      "hybrid_total_ms": 194.39473561942577,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "638071a9-857e-5e66-bb72-abbdc86f3b18",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 8
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 4
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "638071a9-857e-5e66-bb72-abbdc86f3b18",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5"
+          ],
+          "sources": [
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 8
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q12",
+      "category": "paraphrase",
+      "query": "以前画好的房间图变得乱七八糟，有什么排查方向？",
+      "labeled_chunk_ids": [
+        "653bc497-e281-5260-8cb5-e7192b70fe77"
+      ],
+      "vector_ms": 176.7251482233405,
+      "keyword_ms": 23.226559162139893,
+      "hybrid_total_ms": 201.10813342034817,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.16666666666666666
+          },
+          "chunk_ids": [
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 12
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.2
+          },
+          "chunk_ids": [
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 3
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "chunk_ids": [
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q13",
+      "category": "paraphrase",
+      "query": "它老是撞桌腿，是不是感应的地方脏了？",
+      "labeled_chunk_ids": [
+        "68c7bb5e-72f9-542b-acc9-fd47fcddb799"
+      ],
+      "vector_ms": 189.44211676716805,
+      "keyword_ms": 20.077813416719437,
+      "hybrid_total_ms": 214.61649797856808,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f"
+          ],
+          "sources": [
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 3
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "5b037114-368e-5f92-b1ff-eba342896601",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 7
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "5b037114-368e-5f92-b1ff-eba342896601",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q14",
+      "category": "paraphrase",
+      "query": "房间墙边总有一圈灰尘没扫到，先看看什么？",
+      "labeled_chunk_ids": [
+        "808d0221-2312-5916-b222-8d13d19de73c"
+      ],
+      "vector_ms": 177.88356449455023,
+      "keyword_ms": 20.081328228116035,
+      "hybrid_total_ms": 199.29024018347263,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 3
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "685fe4d2-2138-594e-a105-24297c78258b",
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "9438de20-d582-5788-bbf8-d997bf74a5fc",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 0
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "685fe4d2-2138-594e-a105-24297c78258b",
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "9438de20-d582-5788-bbf8-d997bf74a5fc",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1"
+          ],
+          "sources": [
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q15",
+      "category": "paraphrase",
+      "query": "拖地时布一直是干的，水没有出来怎么排查？",
+      "labeled_chunk_ids": [
+        "653bc497-e281-5260-8cb5-e7192b70fe77"
+      ],
+      "vector_ms": 161.24053206294775,
+      "keyword_ms": 22.841639816761017,
+      "hybrid_total_ms": 185.33947132527828,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "05da7168-e4c1-51d0-b1b5-464ca05dc419",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "463266c1-05e4-53f2-ba69-47165eced745"
+          ],
+          "sources": [
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 13
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 5
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "685fe4d2-2138-594e-a105-24297c78258b"
+          ],
+          "sources": [
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 8
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "chunk_ids": [
+            "56e13135-1844-537e-bd05-ad2dbeb1c911",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "89956e66-d030-5460-999c-c8014ab20f25",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "f4a122d8-64c8-5656-ae6c-8d9822c8fdcb",
+            "05da7168-e4c1-51d0-b1b5-464ca05dc419",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "685fe4d2-2138-594e-a105-24297c78258b"
+          ],
+          "sources": [
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q16",
+      "category": "paraphrase",
+      "query": "家里的门槛它总是爬不过去，可能是什么原因？",
+      "labeled_chunk_ids": [
+        "e599ede3-a10b-56fc-a616-d517c20c7714"
+      ],
+      "vector_ms": 169.64652854949236,
+      "keyword_ms": 23.36484007537365,
+      "hybrid_total_ms": 194.75700333714485,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 6
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.1111111111111111
+          },
+          "chunk_ids": [
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 6
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.06666666666666667
+          },
+          "chunk_ids": [
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "122bfd1f-bd0b-587d-88d8-302442b34147",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "e599ede3-a10b-56fc-a616-d517c20c7714",
+            "efcbbde8-a246-5c14-ab89-54f1079aced4",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 10
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q17",
+      "category": "maintenance",
+      "query": "充电触点平时用什么擦拭？",
+      "labeled_chunk_ids": [
+        "515c9b9c-6f60-51ab-91bf-72e91a5fdf90"
+      ],
+      "vector_ms": 175.62949936836958,
+      "keyword_ms": 24.795478209853172,
+      "hybrid_total_ms": 201.66404265910387,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.25
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.25
+          },
+          "chunk_ids": [
+            "0c11ed3e-5b68-5676-9309-55cf86ce1dfc",
+            "cdd18674-692b-5256-b931-36aa379e4508",
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "5b037114-368e-5f92-b1ff-eba342896601",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "638071a9-857e-5e66-bb72-abbdc86f3b18",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "6368f545-fbf0-5382-af0f-9132e9745335"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 0
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "9438de20-d582-5788-bbf8-d997bf74a5fc",
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "f7766f5a-af9b-59c3-815b-0aeefbe09213",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "a03866b7-6aec-5b99-99b9-67f84b0200fe",
+            "137a0875-32a0-582b-a00e-505408d0a734"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 4
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90",
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "0c11ed3e-5b68-5676-9309-55cf86ce1dfc",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "cdd18674-692b-5256-b931-36aa379e4508",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "ba4a62bc-c247-56a9-8aa3-f9d981747b1b",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "9438de20-d582-5788-bbf8-d997bf74a5fc",
+            "5b037114-368e-5f92-b1ff-eba342896601",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "f7766f5a-af9b-59c3-815b-0aeefbe09213",
+            "638071a9-857e-5e66-bb72-abbdc86f3b18",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "a03866b7-6aec-5b99-99b9-67f84b0200fe",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "6368f545-fbf0-5382-af0f-9132e9745335"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q18",
+      "category": "maintenance",
+      "query": "怎样保养防跌落和沿边传感器表面？",
+      "labeled_chunk_ids": [
+        "515c9b9c-6f60-51ab-91bf-72e91a5fdf90"
+      ],
+      "vector_ms": 159.76429264992476,
+      "keyword_ms": 24.609156884253025,
+      "hybrid_total_ms": 185.53647957742214,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.14285714285714285
+          },
+          "chunk_ids": [
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "a0fa6b9f-27d7-56ce-b984-ada0c162e269",
+            "1057c85c-31eb-526d-8a7d-de7f0f3dac66",
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "cdd18674-692b-5256-b931-36aa379e4508"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 9
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "bfb23046-e985-5386-a1a4-e08262310419"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "chunk_ids": [
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90",
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "808d0221-2312-5916-b222-8d13d19de73c",
+            "a0fa6b9f-27d7-56ce-b984-ada0c162e269",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "1057c85c-31eb-526d-8a7d-de7f0f3dac66",
+            "653bc497-e281-5260-8cb5-e7192b70fe77",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "463266c1-05e4-53f2-ba69-47165eced745",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "cdd18674-692b-5256-b931-36aa379e4508"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q19",
+      "category": "maintenance",
+      "query": "长头发缠在主刷上，应该直接拉扯吗？",
+      "labeled_chunk_ids": [
+        "63839886-9bc2-5c25-b739-f39809905539"
+      ],
+      "vector_ms": 208.30990560352802,
+      "keyword_ms": 20.50296775996685,
+      "hybrid_total_ms": 229.9776580184698,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.25
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.25
+          },
+          "chunk_ids": [
+            "0c11ed3e-5b68-5676-9309-55cf86ce1dfc",
+            "cdd18674-692b-5256-b931-36aa379e4508",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "f7766f5a-af9b-59c3-815b-0aeefbe09213",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 3
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "2e98043c-805e-5500-b70b-de853acf1a68",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "638071a9-857e-5e66-bb72-abbdc86f3b18"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 9
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 10
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "3e33395d-d3bf-5277-9650-6855ab6422d9",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "0c11ed3e-5b68-5676-9309-55cf86ce1dfc",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "cdd18674-692b-5256-b931-36aa379e4508",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "2e98043c-805e-5500-b70b-de853acf1a68",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "920e59c6-2029-56cb-bfc2-d68c20c2c833",
+            "cf5f6aa3-ce4b-5154-818f-934e8c3ec3d6",
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "f7766f5a-af9b-59c3-815b-0aeefbe09213",
+            "638071a9-857e-5e66-bb72-abbdc86f3b18",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q20",
+      "category": "maintenance",
+      "query": "机器人在楼梯口工作时，除了防跌落功能还要注意什么？",
+      "labeled_chunk_ids": [
+        "859ce28d-3b29-594d-bd1d-6502ba22ebdd"
+      ],
+      "vector_ms": 152.7337795123458,
+      "keyword_ms": 22.952383384108543,
+      "hybrid_total_ms": 176.9164865836501,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "a0fa6b9f-27d7-56ce-b984-ada0c162e269",
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "9a96df3d-b408-5d24-94f8-1b156dd05548",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 10
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 9
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "9409a893-5933-5ae2-a81b-cc74485a466c",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 8
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 8
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "859ce28d-3b29-594d-bd1d-6502ba22ebdd",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "e8f86b9c-cbe9-55b4-b993-8d53d737f69a",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "a0fa6b9f-27d7-56ce-b984-ada0c162e269",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "9a96df3d-b408-5d24-94f8-1b156dd05548",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "9409a893-5933-5ae2-a81b-cc74485a466c",
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90",
+            "7c8c1b39-6995-5d1f-8a14-ad5bd754dfa1"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q21",
+      "category": "identifier",
+      "query": "资料里的HEPA和H13说的是哪方面的选购要求？",
+      "labeled_chunk_ids": [
+        "8b1f03cd-43ec-5e94-9717-a8dfb496d126"
+      ],
+      "vector_ms": 165.4008012264967,
+      "keyword_ms": 42.21880715340376,
+      "hybrid_total_ms": 208.75689387321472,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.3333333333333333
+          },
+          "chunk_ids": [
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "f7766f5a-af9b-59c3-815b-0aeefbe09213",
+            "df77db4c-8ce6-50c8-98c5-2abcacff0d54",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "5b037114-368e-5f92-b1ff-eba342896601",
+            "6368f545-fbf0-5382-af0f-9132e9745335"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 1
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "cd666857-9b66-5583-afc6-72605fd723fa",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "f7766f5a-af9b-59c3-815b-0aeefbe09213",
+            "bfb23046-e985-5386-a1a4-e08262310419"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫拖一体机器人100问.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "f7766f5a-af9b-59c3-815b-0aeefbe09213",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "3cc4a217-8de6-5c63-b511-36d96fc7b652",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+            "cd666857-9b66-5583-afc6-72605fd723fa",
+            "df77db4c-8ce6-50c8-98c5-2abcacff0d54",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "5b037114-368e-5f92-b1ff-eba342896601",
+            "bfb23046-e985-5386-a1a4-e08262310419"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 7
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q22",
+      "category": "identifier",
+      "query": "选购时2.4G/5G双频WiFi需要注意什么？",
+      "labeled_chunk_ids": [
+        "8b1f03cd-43ec-5e94-9717-a8dfb496d126"
+      ],
+      "vector_ms": 158.93342532217503,
+      "keyword_ms": 20.42747475206852,
+      "hybrid_total_ms": 180.51101174205542,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "df77db4c-8ce6-50c8-98c5-2abcacff0d54",
+            "a03866b7-6aec-5b99-99b9-67f84b0200fe",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 7
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "9a96df3d-b408-5d24-94f8-1b156dd05548",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "808d0221-2312-5916-b222-8d13d19de73c"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 12
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 8
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "47b993b1-bf2f-5f0d-b072-780bed19d839",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "9a96df3d-b408-5d24-94f8-1b156dd05548",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+            "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+            "df77db4c-8ce6-50c8-98c5-2abcacff0d54",
+            "a03866b7-6aec-5b99-99b9-67f84b0200fe",
+            "bfb23046-e985-5386-a1a4-e08262310419",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "808d0221-2312-5916-b222-8d13d19de73c"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 8
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 12
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q23",
+      "category": "selection",
+      "query": "家里养宠物而且有长头发，主刷设计要考虑什么？",
+      "labeled_chunk_ids": [
+        "8b1f03cd-43ec-5e94-9717-a8dfb496d126"
+      ],
+      "vector_ms": 324.935769662261,
+      "keyword_ms": 25.434093549847603,
+      "hybrid_total_ms": 351.5405086800456,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "chunk_ids": [
+            "0c11ed3e-5b68-5676-9309-55cf86ce1dfc",
+            "cdd18674-692b-5256-b931-36aa379e4508",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "a03866b7-6aec-5b99-99b9-67f84b0200fe",
+            "cd666857-9b66-5583-afc6-72605fd723fa",
+            "df77db4c-8ce6-50c8-98c5-2abcacff0d54"
+          ],
+          "sources": [
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 7
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 2
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "故障排除.txt",
+              "chunk_index": 16
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 3
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": false,
+            "recall": 0.0,
+            "reciprocal_rank": 0.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.2
+          },
+          "chunk_ids": [
+            "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+            "63839886-9bc2-5c25-b739-f39809905539",
+            "6368f545-fbf0-5382-af0f-9132e9745335",
+            "0c11ed3e-5b68-5676-9309-55cf86ce1dfc",
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "cdd18674-692b-5256-b931-36aa379e4508",
+            "b98f9b6b-de8b-5094-a701-61fb280c34b9",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "500d9b1f-6701-5667-96ba-af49e58f6591",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "18ac87e1-5bf9-5c97-9c64-78eebd52cc5b",
+            "a03866b7-6aec-5b99-99b9-67f84b0200fe",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "cd666857-9b66-5583-afc6-72605fd723fa",
+            "79a2e259-56cf-5e17-b79b-726f4eea62c6",
+            "df77db4c-8ce6-50c8-98c5-2abcacff0d54"
+          ],
+          "sources": [
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 4
+            },
+            {
+              "filename": "维护保养.txt",
+              "chunk_index": 3
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "q24",
+      "category": "selection",
+      "query": "资料对激光导航和视觉导航的选购区别怎么描述？",
+      "labeled_chunk_ids": [
+        "8b1f03cd-43ec-5e94-9717-a8dfb496d126"
+      ],
+      "vector_ms": 175.85900332778692,
+      "keyword_ms": 23.620452731847763,
+      "hybrid_total_ms": 200.6629053503275,
+      "modes": {
+        "vector": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 0.5
+          },
+          "chunk_ids": [
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "a03866b7-6aec-5b99-99b9-67f84b0200fe",
+            "df77db4c-8ce6-50c8-98c5-2abcacff0d54",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "扫地机器人100问2.txt",
+              "chunk_index": 6
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 1
+            }
+          ]
+        },
+        "keyword": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "cd666857-9b66-5583-afc6-72605fd723fa",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 5
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 8
+            }
+          ]
+        },
+        "hybrid": {
+          "at_4": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "candidates": {
+            "hit": true,
+            "recall": 1.0,
+            "reciprocal_rank": 1.0
+          },
+          "chunk_ids": [
+            "8b1f03cd-43ec-5e94-9717-a8dfb496d126",
+            "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+            "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+            "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+            "137a0875-32a0-582b-a00e-505408d0a734",
+            "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+            "cd666857-9b66-5583-afc6-72605fd723fa",
+            "a03866b7-6aec-5b99-99b9-67f84b0200fe",
+            "b7504a90-b147-548e-8137-d160bf041dc7",
+            "df77db4c-8ce6-50c8-98c5-2abcacff0d54",
+            "8a9a30d5-9bb3-5857-a9d1-af8941db6c20",
+            "405cf759-28e7-5e8a-848f-e89d912cc6d8",
+            "ed9242d8-644f-5b37-8455-b8184bfcd7c5",
+            "e4fad3de-a545-5edf-bafb-6976e78c6871",
+            "515c9b9c-6f60-51ab-91bf-72e91a5fdf90",
+            "efe982e1-33f7-5658-af5e-13ceccf38fff"
+          ],
+          "sources": [
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 0
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 2
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 1
+            },
+            {
+              "filename": "选购指南.txt",
+              "chunk_index": 7
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

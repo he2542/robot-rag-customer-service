@@ -116,7 +116,9 @@ def test_upload_batches_at_most_ten_chunks():
     assert max(embedding.batch_sizes) <= 10
 
 
-def test_internal_retrieval_excludes_uploads_and_superseded_versions(tmp_path, monkeypatch):
+@pytest.mark.parametrize("mode", ["vector", "keyword", "hybrid"])
+def test_internal_retrieval_excludes_uploads_and_superseded_versions(tmp_path, monkeypatch, mode):
+    monkeypatch.setattr(config, "retrieval_mode", mode)
     monkeypatch.setattr(config, "INTERNAL_KNOWLEDGE_DIR", tmp_path)
     source = tmp_path / "电池.txt"
     source.write_text("电池维护旧版资料。", encoding="utf-8")

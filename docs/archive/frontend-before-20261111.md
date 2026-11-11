@@ -1,5 +1,5 @@
-# Vue 版 RAG 前端
+# 前端文档归档
 
-详细的项目结构、环境变量、启动方式和 API 说明请查看 [README.md](README.md)。
+旧版前端位于仓库根 `frontend/`。当前目录为 `services/frontend/`，页面、组件、状态与 SSE 处理已分开组织。
 
-本项目仅保留 Vue 3 前端和 FastAPI 后端实现。
+安装、代理和构建说明见 [当前前端文档](../frontend.md)，旧目录路径不再作为运行入口。

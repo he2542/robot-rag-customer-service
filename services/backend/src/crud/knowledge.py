@@ -61,9 +61,20 @@ def nearest_chunks(document_hashes, knowledge_base, vector, limit):
         check_embedding_configuration(connection)
         return connection.execute(
             "WITH candidates AS MATERIALIZED ("
-            "SELECT content, metadata, embedding, document_hash FROM rag_chunks "
+            "SELECT id, content, metadata, embedding, document_hash FROM rag_chunks "
             "WHERE document_hash = ANY(%s) AND metadata->>'knowledge_base' = %s) "
-            "SELECT content, metadata, document_hash FROM candidates "
-            "ORDER BY embedding <=> %s LIMIT %s",
+            "SELECT content, metadata, document_hash, id FROM candidates "
+            "ORDER BY embedding <=> %s, id LIMIT %s",
             (document_hashes, knowledge_base, Vector(vector), limit),
+        ).fetchall()
+
+
+def scoped_chunks(document_hashes, knowledge_base):
+    """Read the same authorized corpus as vector search, in stable UUID order."""
+    with connect() as connection:
+        check_embedding_configuration(connection)
+        return connection.execute(
+            "SELECT content, metadata, document_hash, id FROM rag_chunks "
+            "WHERE document_hash = ANY(%s) AND metadata->>'knowledge_base' = %s "
+            "ORDER BY id", (document_hashes, knowledge_base),
         ).fetchall()

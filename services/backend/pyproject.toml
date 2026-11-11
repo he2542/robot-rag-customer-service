@@ -19,7 +19,9 @@ dependencies = [
   "python-dotenv",
   "pytest",
   "httpx",
-  "pydantic"
+  "pydantic",
+  "jieba",
+  "rank-bm25"
 ]
 
 [project.scripts]

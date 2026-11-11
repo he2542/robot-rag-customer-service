@@ -22,6 +22,13 @@ chunk_size = 1000
 chunk_overlap = 100
 
 retrieval_top_k = 4
+retrieval_mode = os.environ.get("RAG_RETRIEVAL_MODE", "hybrid")
+if retrieval_mode not in {"vector", "keyword", "hybrid"}:
+    raise ValueError("RAG_RETRIEVAL_MODE must be vector, keyword or hybrid")
+retrieval_candidate_k = int(os.environ.get("RAG_RETRIEVAL_CANDIDATES", "10"))
+retrieval_rrf_k = int(os.environ.get("RAG_RRF_K", "60"))
+if not retrieval_top_k <= retrieval_candidate_k <= 100 or retrieval_rrf_k < 1:
+    raise ValueError("Retrieval candidates must be 4..100 and RRF constant must be positive")
 
 embedding_model_name = os.environ.get("EMBEDDING_MODEL", "text-embedding-v4")
 chat_model_name = os.environ.get("CHAT_MODEL", "qwen-plus")

@@ -1,8 +1,21 @@
-# Contributing
+# 贡献指南
 
-欢迎提交 Issue 和 Pull Request。
+欢迎提交问题、改进建议和 Pull Request。提交前请阅读 [架构](docs/architecture.md) 与 [安全说明](SECURITY.md)。
 
-1. 创建功能分支并保持改动范围清晰。
-2. 修改后运行 `python -m pytest` 和前端 `npm run build`。
-3. 不要提交 `.env`、向量数据库、聊天记录、缓存或模型密钥。
-4. Pull Request 中说明改动内容、测试方式以及可能的兼容性影响。
+## 开发约定
+
+- 后端 HTTP、业务和持久化职责分离，SQL 使用参数绑定；来源响应只返回公开字段。
+- 后端依赖在 `services/backend/pyproject.toml` 声明，验证后的版本记录在 `constraints.txt`；前端依赖使用现有锁文件。
+- 修改检索、切块、模型或提示词时，说明兼容性影响，并用固定问题集比较；不只报告改善案例。
+- 不提交 `.env`、真实连接凭据、会话历史、数据库备份、构建产物或内部操作记录。
+- 运行数据和原始资料的变更应独立说明，避免与代码重构混在同一次改动中。
+
+## 验证
+
+后端在 `services/backend` 运行 `python -m pytest -q`；数据库用例必须使用一次性独立测试库。前端在 `services/frontend` 运行 `npm test` 和 `npm run build`。具体配置见 [测试与评测](docs/testing.md)。
+
+只修改文档时检查路径、链接、命令与当前实现即可。涉及功能的改动运行对应测试，不把测试替身的成功当作真实模型效果。
+
+## Pull Request
+
+说明解决的问题、最终行为、验证方式和必要限制。涉及评测时提供题集版本、参数和逐题结果；涉及数据结构或配置变更时提供迁移与回退方式。不要在 Issue、截图或日志中粘贴真实密钥。

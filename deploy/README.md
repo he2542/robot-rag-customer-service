@@ -1,15 +1,42 @@
-# 私有开发预览
+# 部署说明
 
-当前后端代码与环境位于 services/backend，启动目标为 src.main:app。模板 robot-rag-internal-dev.service 仅供现有开发预览；不替换已停用的 robot-rag.service，也不自动启用开机启动。
+当前应用适合本地开发或受控网络演示。应用尚未实现身份认证、会话归属校验和请求限速，不能直接将后端端口暴露为公开客服服务。
 
-现有凭据由管理员环境提供，不把 /etc/robot-rag.env 复制进仓库。开发库配置保存在 services/backend/.env；RAG_SERVE_FRONTEND=1 时托管 services/frontend/dist。仅监听 127.0.0.1:8120，不能绕过公开认证条件直接暴露端口。
+## 构建与运行
 
-本地预览使用 SSH：
+在 `services/frontend` 安装依赖并构建：
 
-```powershell
-ssh -N -L 18080:127.0.0.1:8120 -i C:\Users\Administrator\.ssh\id_ed25519_new ubuntu@124.220.177.67
+```bash
+npm ci
+npm run build
 ```
 
-建立连接后打开 http://127.0.0.1:18080。这是本机转发地址。停止开发预览用 sudo systemctl stop robot-rag-internal-dev.service。
+在 `services/backend` 配置专用数据库与模型环境，并完成初始化和资料导入，参考 [后端说明](../docs/backend.md)。设置环境变量 `RAG_SERVE_FRONTEND=1` 后启动：
 
-旧生产 OpenResty、访问控制及构建说明保存在 ../docs/archive/deploy-before-20261111，仅用于历史恢复参考，不代表当前开发版已经发布。
+```bash
+python -m uvicorn src.main:app --host 127.0.0.1 --port 8000 --workers 1
+```
+
+后端会托管已存在的 `services/frontend/dist`。若独立托管静态文件，反向代理需要将 `/api` 路径转发到后端，并支持 SSE 持续传输。
+
+## 进程管理
+
+`robot-rag-internal-dev.service` 是固定目录布局的 systemd 样例。使用前必须调整服务用户、工作目录、解释器和环境文件路径，并确认数据目录可写；不能直接照搬路径。
+
+运行账号和数据库角色应遵循最小权限原则。环境文件、数据库备份及会话历史应限制访问并单独备份，不放入静态资源目录或 Git 仓库。
+
+## 远程演示
+
+后端保持回环监听，可通过 SSH 转发访问。以下命令中的账号、主机与端口按自己的环境替换：
+
+```bash
+ssh -N -L 18080:127.0.0.1:8000 user@example.com
+```
+
+若远端已托管前端，建立连接后访问 [本地转发页面](http://127.0.0.1:18080)。该地址只在建立转发的设备上生效。
+
+## 公开服务前
+
+需要完成资料审校、HTTPS、认证、会话授权和限速，并验证页面、静态资源和 API 使用一致的访问控制，后端不存在可绕过认证的入口。健康检查、模型连通性和一条成功问答不足以证明具备公开服务条件。详见 [安全说明](../SECURITY.md)。
+
+历史配置位于 [部署归档](../docs/archive/deploy-before-20261111/README.md)，其中脚本仅适用于其对应版本，不能作为当前版本的直接部署方案。

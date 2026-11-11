@@ -1,0 +1,30 @@
+{
+  "version": "seed-20261111-v1",
+  "description": "24 project-authored questions frozen before retrieval evaluation; evidence anchors identify labeled chunks, not exhaustive semantic relevance or verified product advice.",
+  "questions": [
+    {"id":"q01","category":"keyword","query":"机器人无法连接WiFi，先检查什么？","source":"故障排除.txt","evidence":"确认手机与机器人连同一2.4G网络"},
+    {"id":"q02","category":"keyword","query":"主刷不旋转是什么原因？","source":"故障排除.txt","evidence":"主刷是否被异物卡死"},
+    {"id":"q03","category":"keyword","query":"水箱漏水需要检查哪些部位？","source":"故障排除.txt","evidence":"水箱盖是否拧紧，密封圈是否老化"},
+    {"id":"q04","category":"keyword","query":"集尘功能失效时检查集尘袋还是集尘通道？","source":"故障排除.txt","evidence":"集尘袋是否安装到位，集尘通道是否堵塞"},
+    {"id":"q05","category":"keyword","query":"尘盒装好却提示尘盒未安装，怎么办？","source":"故障排除.txt","evidence":"尘盒感应传感器是否有灰尘"},
+    {"id":"q06","category":"keyword","query":"APP控制不了机器人，需要检查什么？","source":"故障排除.txt","evidence":"APP是否为最新版本，机器人是否处于待机状态"},
+    {"id":"q07","category":"keyword","query":"机器人边刷不旋转怎么排查？","source":"故障排除.txt","evidence":"边刷是否安装到位，转轴是否缠绕毛发"},
+    {"id":"q08","category":"keyword","query":"地毯增压开关与无法跨越地毯有关吗？","source":"故障排除.txt","evidence":"地毯是否过厚，机器人是否开启地毯增压功能"},
+    {"id":"q09","category":"paraphrase","query":"机器吸灰越来越没劲，应该先查看哪里？","source":"故障排除.txt","evidence":"尘盒、滤网、风道是否堵塞"},
+    {"id":"q10","category":"paraphrase","query":"扫完地它一直在外面转，找不着回去充电的地方。","source":"故障排除.txt","evidence":"充电座周围是否有遮挡，回充传感器是否有灰尘"},
+    {"id":"q11","category":"paraphrase","query":"拖完地地上湿漉漉留下一道道痕迹，怎么回事？","source":"故障排除.txt","evidence":"出水量是否过大，拖布是否脏污、硬化"},
+    {"id":"q12","category":"paraphrase","query":"以前画好的房间图变得乱七八糟，有什么排查方向？","source":"故障排除.txt","evidence":"环境是否有反光物，移动障碍物是否过多"},
+    {"id":"q13","category":"paraphrase","query":"它老是撞桌腿，是不是感应的地方脏了？","source":"故障排除.txt","evidence":"避障摄像头/传感器是否有灰尘、水渍"},
+    {"id":"q14","category":"paraphrase","query":"房间墙边总有一圈灰尘没扫到，先看看什么？","source":"故障排除.txt","evidence":"边刷是否磨损，沿边传感器是否有灰尘"},
+    {"id":"q15","category":"paraphrase","query":"拖地时布一直是干的，水没有出来怎么排查？","source":"故障排除.txt","evidence":"水箱是否有水，出水量是否调至最低"},
+    {"id":"q16","category":"paraphrase","query":"家里的门槛它总是爬不过去，可能是什么原因？","source":"故障排除.txt","evidence":"门槛高度是否超过机器人越障能力"},
+    {"id":"q17","category":"maintenance","query":"充电触点平时用什么擦拭？","source":"维护保养.txt","evidence":"用干布擦拭机身和充电座的金属触点"},
+    {"id":"q18","category":"maintenance","query":"怎样保养防跌落和沿边传感器表面？","source":"维护保养.txt","evidence":"每日检查机身底部防跌落、沿边传感器"},
+    {"id":"q19","category":"maintenance","query":"长头发缠在主刷上，应该直接拉扯吗？","source":"维护保养.txt","evidence":"用剪刀剪断缠绕物，切勿强行拉扯"},
+    {"id":"q20","category":"maintenance","query":"机器人在楼梯口工作时，除了防跌落功能还要注意什么？","source":"维护保养.txt","evidence":"即使有防跌落功能，也需做好防护"},
+    {"id":"q21","category":"identifier","query":"资料里的HEPA和H13说的是哪方面的选购要求？","source":"选购指南.txt","evidence":"HEPA滤网等级≥H13"},
+    {"id":"q22","category":"identifier","query":"选购时2.4G/5G双频WiFi需要注意什么？","source":"选购指南.txt","evidence":"确认支持2.4G/5G双频WiFi"},
+    {"id":"q23","category":"selection","query":"家里养宠物而且有长头发，主刷设计要考虑什么？","source":"选购指南.txt","evidence":"防缠绕主刷（带硅胶条）适合长发/宠物家庭"},
+    {"id":"q24","category":"selection","query":"资料对激光导航和视觉导航的选购区别怎么描述？","source":"选购指南.txt","evidence":"激光导航定位精准、抗干扰强"}
+  ]
+}

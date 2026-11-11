@@ -1,9 +1,12 @@
-# 技术分层迁移验收（2026-11-11）
+# 技术分层回归记录
 
-已完成 services/backend 与 services/frontend 迁移，后端按 routes/schemas/services/crud/database 分层；前端拆分 views/components/api/store/assets。统一 CLI，依赖声明归入 pyproject.toml，旧配置和资料归档。RAG 参数和协议保持基线。
+记录日期：2026-11-11，适用于混合检索引入前的目录整理阶段。当前检索实现与评测见 [混合检索记录](hybrid-retrieval-20261111.md)。
 
-31 项后端测试在独立 PostgreSQL 库通过；9 项前端测试通过，构建通过；本地 editable 包和 robot-rag import-knowledge 入口通过。实际模型问题、订单边界、风险提示 SSE 完成；浏览器实际发送得到回答及四个来源。五份/63 片段不变，重复导入全部跳过。原始资料、提示词、样式和既有历史未改变。旧生产服务与博客未更新。
+## 验证范围
 
-证据见同目录 technical-layers-checks-20261111.json 和 technical-layers-live-20261111.json。未完成整体质量、性能或成本评估；原有内容、认证、会话归属、限速与引用语义问题仍待后续处理。IDE 父项目的旧 SDK 关联已备份修正，重开后的 Agent 与 robot-rag 软件包列表均实际显示，当前启动日志未再出现远程凭据丢失异常。
+- 后端迁入 `services/backend`，按技术职责分层；前端迁入 `services/frontend` 并拆分组件、状态和 API。
+- 当时 31 项后端测试在独立 PostgreSQL 库通过，9 项前端测试和生产构建通过。
+- 可编辑安装和统一管理员命令可用，重复导入同版本资料会跳过。
+- API、SSE、资料身份、提示词及会话命名空间保持兼容，资料为 5 份、63 个片段。
 
-运行命令及解释器见 ../backend.md，当前整体目录见 ../architecture.md。
+这些结果证明当时的功能回归通过，不证明全部浏览器交互、手机适配、检索质量或公开部署条件已验证。当前命令以 [后端](../backend.md)、[前端](../frontend.md) 和 [测试](../testing.md) 为准。
