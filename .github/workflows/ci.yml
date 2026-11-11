@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: backend
+        working-directory: services/backend
     services:
       postgres:
         image: pgvector/pgvector:0.8.6-pg17
@@ -33,21 +33,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -r requirements.txt -c requirements-internal-20261107.txt
-      - run: python -m compileall -q src scripts api.py database.py import_knowledge.py
-      - run: PYTHONPATH=src python -c "from robot_rag.shared.database import connect; c = connect(); c.execute('CREATE EXTENSION IF NOT EXISTS vector'); c.commit(); c.close()"
+      - run: python -m pip install -e . -c constraints.txt
+      - run: python -m compileall -q src
+      - run: python -c "from src.database.connection import connect; c = connect(); c.execute('CREATE EXTENSION IF NOT EXISTS vector'); c.commit(); c.close()"
       - run: pytest -q
 
   frontend:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: frontend
+        working-directory: services/frontend
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: npm install
-      - run: node --test src/sse.test.js
+      - run: npm ci
+      - run: npm test
       - run: npm run build

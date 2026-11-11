@@ -1,0 +1,14 @@
+[Unit]
+Description=Robot RAG private development preview
+After=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/robot-rag-dev/services/backend
+EnvironmentFile=/etc/robot-rag.env
+EnvironmentFile=/home/ubuntu/robot-rag-dev/services/backend/.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/ubuntu/robot-rag-dev/services/backend/.venv/bin/python -m uvicorn src.main:app --host 127.0.0.1 --port 8120 --workers 1 --no-server-header
+MemoryMax=512M
+UMask=0077

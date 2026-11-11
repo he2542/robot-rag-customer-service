@@ -17,38 +17,30 @@ Vue 提供聊天和检索参考资料展示，FastAPI 负责会话、内置知�
 
 ## 项目结构
 
-后端按 Router / Schemas / Service / Repository 分层，完整目录与调用关系见 [backend/架构导航.md](backend/架构导航.md)。这是模块化单体，不是完整 DDD。
+采用与“笔记本管理”一致的技术分层，完整说明见 [架构](docs/architecture.md)。
 
 ```text
-robot-rag-dev/
-├── backend/
-│   ├── src/robot_rag/
-│   │   ├── main.py、config.py、dependencies.py
-│   │   ├── modules/chat/          # HTTP、请求契约、问答业务
-│   │   ├── modules/rag/           # RAG 流程与提示词
-│   │   ├── modules/knowledge/     # 导入、检索、知识仓储
-│   │   ├── modules/health/        # 健康状态
-│   │   ├── shared/                # 连接、建表、历史、SSE
-│   │   └── cli/                   # 管理员命令
-│   ├── scripts/                   # 导入与初始化入口
-│   ├── tests/
-│   ├── pyproject.toml
-│   └── requirements.txt
-├── knowledge/robot/               # 管理员维护 TXT
-├── frontend/                      # Vue 3 + Vite
-├── deploy/                        # 历史生产部署参考
-└── specs/                         # 设计说明
+services/backend/src/   # routes、schemas、services、crud、database
+services/frontend/src/  # views、components、api、store、assets
+knowledge/robot/         # 内部资料
+runtime/                # 运行历史，不提交
 ```
+
+- [后端与管理员命令](docs/backend.md)
+- [前端开发](docs/frontend.md)
+- [测试](docs/testing.md)
+- [开发预览](deploy/README.md)
+- [工作台账](docs/backlog.md)
 
 ## 环境准备
 
 需要 Python 3.10+、Node.js 18+、PostgreSQL + pgvector，以及 DashScope API Key。
 
 ```powershell
-Set-Location "path\to\robot-rag-dev\backend"
+Set-Location "path\to\robot-rag-dev\services\backend"
 
 python -m venv .venv
-& ".\.venv\Scripts\python.exe" -m pip install -r requirements.txt -c requirements-internal-20261107.txt
+& ".\.venv\Scripts\python.exe" -m pip install -e . -c constraints.txt
 Copy-Item .env.example .env
 ```
 
@@ -56,21 +48,21 @@ Copy-Item .env.example .env
 
 在数据库中由管理员执行 `CREATE EXTENSION vector`，然后配置 `DATABASE_URL`。
 开发环境可使用 `postgresql+psycopg://USER:PASSWORD@127.0.0.1:5432/robot_rag`；不要提交真实连接凭据。
-开发版使用独立数据库和专用角色，不要直接指向旧生产库；配置模板见 `backend/.env.example`。
-数据库可创建后执行 `python scripts/init_database.py` 初始化业务表；`EMBEDDING_MODEL` 和 `EMBEDDING_DIMENSIONS` 必须与数据库记录一致，默认使用 `text-embedding-v4` 的 1024 维向量。
+开发版使用独立数据库和专用角色，不要直接指向旧生产库；配置模板见 `services/backend/.env.example`。
+数据库可创建后执行 `python -m src.cli init-db` 初始化业务表；`EMBEDDING_MODEL` 和 `EMBEDDING_DIMENSIONS` 必须与数据库记录一致，默认使用 `text-embedding-v4` 的 1024 维向量。
 
 ## 预览和导入内置资料
 
-在 `backend` 中执行 `python scripts/import_knowledge.py`，只输出文件和预计切块数，不连接数据库或调用模型。
-确认后执行 `python scripts/import_knowledge.py --apply`，才会调用 DashScope 嵌入模型并产生用量、写入数据库。
+在 `services/backend` 中执行 `python -m src.cli import-knowledge`，只输出文件和预计切块数，不连接数据库或调用模型。
+确认后执行 `python -m src.cli import-knowledge --apply`，才会调用 DashScope 嵌入模型并产生用量、写入数据库。
 已有相同文件版本会跳过；中断后可重跑。修改 TXT 后重新导入即可，新版本生效，旧记录保留但不再召回。
 文件位于 `knowledge/robot`；也可通过 `RAG_KNOWLEDGE_DIR` 指定管理员目录。普通用户的上传接口已移除。
 
 ## 启动后端
 
 ```powershell
-Set-Location "path\to\robot-rag-dev\backend"
-& ".\.venv\Scripts\python.exe" -m uvicorn robot_rag.main:app --app-dir src --reload --host 127.0.0.1 --port 8000
+Set-Location "path\to\robot-rag-dev\services\backend"
+& ".\.venv\Scripts\python.exe" -m uvicorn src.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 API 文档：<http://127.0.0.1:8000/docs>
@@ -78,7 +70,7 @@ API 文档：<http://127.0.0.1:8000/docs>
 ## 启动前端
 
 ```powershell
-Set-Location "path\to\robot-rag-dev\frontend"
+Set-Location "path\to\robot-rag-dev\services\frontend"
 npm install
 npm run dev
 ```
@@ -99,7 +91,7 @@ npm run dev
 ## 测试
 
 ```powershell
-Set-Location "path\to\robot-rag-dev\backend"
+Set-Location "path\to\robot-rag-dev\services\backend"
 & ".\.venv\Scripts\python.exe" -m pytest
 ```
 
@@ -113,6 +105,6 @@ Set-Location "path\to\robot-rag-dev\backend"
 
 数据库集成测试必须使用名为 `robot_rag_test` 的独立测试库，先由管理员启用 pgvector，然后设置 `DATABASE_URL` 指向测试库及 `RAG_RUN_DB_TESTS=1` 后运行 `pytest -q`。测试会清空该测试库中的知识表，拒绝在生产库上运行。未设置该标志时跳过数据库集成测试。CI 已配置独立 PostgreSQL + pgvector 服务。
 
-前端验证：在 `frontend` 执行 `node --test src/sse.test.js` 和 `npm run build`。
+前端验证：在 `services/frontend` 执行 `npm test` 和 `npm run build`。
 
 

@@ -28,9 +28,9 @@ chat_history/
 md5.text
 
 # Frontend
-frontend/node_modules/
-frontend/dist/
-frontend/.vite/
+node_modules/
+dist/
+.vite/
 npm-debug.log*
 
 # IDE / OS
@@ -38,3 +38,7 @@ npm-debug.log*
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Local runtime and packaging output
+/runtime/
+build/

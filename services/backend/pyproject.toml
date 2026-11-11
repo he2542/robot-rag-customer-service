@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robot-rag"
+version = "1.0.0"
+description = "Internal-corpus robot customer service"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi",
+  "uvicorn[standard]",
+  "langchain-core",
+  "langchain-community",
+  "psycopg[binary]",
+  "pgvector",
+  "langchain-text-splitters",
+  "dashscope",
+  "python-dotenv",
+  "pytest",
+  "httpx",
+  "pydantic"
+]
+
+[project.scripts]
+robot-rag = "src.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src", "src.*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = ["integration: requires an isolated disposable PostgreSQL database"]
