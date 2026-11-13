@@ -1,5 +1,6 @@
 """Grounded robot customer-service answers over a managed internal corpus."""
 
+import json
 import re
 
 from langchain_community.embeddings import DashScopeEmbeddings
@@ -18,13 +19,6 @@ from .prompts import SYSTEM_PROMPT
 
 def internal_history(session_id):
     return FileChatMessageHistory(session_id, str(config.DATA_ROOT / "chat_history" / "robot_internal_v1"))
-
-
-def format_documents(documents):
-    return "\n\n".join(
-        f"[S{index}] {document.metadata.get('source', '内置资料')}\n{document.page_content}"
-        for index, document in enumerate(documents, 1)
-    )
 
 
 def source_items(documents):
@@ -50,11 +44,15 @@ class RagService:
             model_kwargs={"enable_thinking": False, "max_tokens": 1024},
         )
         prompt = ChatPromptTemplate.from_messages([
-            ("system", SYSTEM_PROMPT), MessagesPlaceholder("history"), ("human", "{input}"),
+            ("system", SYSTEM_PROMPT), MessagesPlaceholder("history"),
+            ("human", "{request_payload}"),
         ])
         chain = RunnableLambda(lambda value: {
-            "input": value["input"], "history": value.get("history", [])[-12:],
-            "context": format_documents(value["documents"]),
+            "history": value.get("history", [])[-12:],
+            "request_payload": json.dumps({
+                "question": value["input"],
+                "references": source_items(value["documents"]),
+            }, ensure_ascii=False),
         }) | prompt | self.chat_model | StrOutputParser()
         self.chain = RunnableWithMessageHistory(
             chain, history_factory, input_messages_key="input", history_messages_key="history",

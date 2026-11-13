@@ -49,6 +49,8 @@ routes/chat → services/rag → services/retrieval
 - 开启模型精排后，先对完整 RRF 候选重排，再截取 4 条；vector 和 keyword 模式保持原排序。
 - 会话历史保存在 `runtime/chat_history/robot_internal_v1/`，提示词最多使用最近 12 条历史消息。
 
+模型消息按“固定系统规则 → 原生角色历史 → 本轮 JSON 数据”组织。本轮数据包含 `question` 和 `references`，后者复用 SSE 来源结构，检索正文不再插入系统消息。历史记录保存原始问答，本轮参考资料在生成时单独组装；字段示例见 [后端开发](backend.md#上下文消息结构)。
+
 BM25 为进程内索引，每次检索读取有效片段快照，仅在 UUID 或内容变化时重建。此实现面向小型资料库；规模增大时需评估全量读取、索引持久化与资源开销。
 
 ## 相关文档

@@ -12,6 +12,14 @@ python -m pytest -q
 
 默认跳过数据库集成测试。其余用例覆盖 API、SSE、来源字段、风险分支、分词、编号、RRF 去重、缓存刷新、并发和依赖方向。
 
+### 上下文消息回归
+
+```bash
+python -m pytest tests/test_internal_rag.py tests/test_rerank.py tests/test_api.py -q
+```
+
+用例检查不同轮次的系统提示词相同、本轮 JSON 资料与 SSE 来源一致，以及引号、花括号、换行和资料中的指令式文本仍作为数据传递。多轮用例还验证历史保留原生消息角色，保存的是用户原始问题，并为新问题提供本轮参考资料。这些检查使用替代模型验证消息契约；回答效果按独立评测比较。
+
 ### 数据库集成测试
 
 使用一次性 PostgreSQL + pgvector 数据库，库名必须为 `robot_rag_test`；另兼容测试夹具中列出的历史专用测试库名。管理员需先启用 `vector` 扩展。
