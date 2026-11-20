@@ -153,6 +153,16 @@ python -m evaluation.intent_workflow answer --root evaluation/results/intent-20 
 
 预案为20题×两版，最多40次尝试；Qwen-Plus非思考，输出上限1024。保持每份结果独立空历史，记录原始JSON、可见回答、用量、结束原因、耗时和消息/协议哈希。已完成的有效检查点复用，失败记录保留，不追加付费评审、Embedding或精排。原始结论的要点覆盖与最终可见回答分别按冻结要点核对，超长截断计入未完成。准备及效果记录见[生成流程验证](validation/intent-workflow-20261120.md)。
 
+### 离线汇总20题结果
+
+20题真实生成的固定要点评审可完全离线汇总：
+
+```bash
+python -m evaluation.summarize_intent --root evaluation/results/intent-20 --review review.json --output evaluation/results/intent-summary.json
+```
+
+`review.json`须逐题记录原始结论和最终回答的要点布尔值、证据支持、操作边界及未通过原因，并绑定答案SHA-256。汇总前核对冻结输入和源码、完整20题、结束原因及Token字段，拒绝篡改后的检查点；截断计为未通过。[真实配对报告](validation/intent-workflow-live-20-20261121.md)提供可独立解压复算的证据包。
+
 ### 数据库集成测试
 
 使用一次性 PostgreSQL + pgvector 数据库，库名必须为 `robot_rag_test`；另兼容测试夹具中列出的历史专用测试库名。管理员需先启用 `vector` 扩展。
