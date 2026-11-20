@@ -23,6 +23,34 @@ _REPAIR_FIELD = re.compile(r"(?:修复|处理方法|解决方法)[：:]")
 _REPAIR_RISK = re.compile(r"内部|拆机|拆卸|拆解|电池|电机|轴承|排线|保护装置|短路|充电|发热|鼓包|火花|漏电|起火")
 _INSTRUCTION = re.compile(r"系统提示|提示词|密钥|密码|忽略.{0,8}(?:规则|指令)|https?://|执行命令")
 _REPAIR_VERB = re.compile(r"重启|关闭|打开|开启|解锁|设置|选择|调整|调大|调小|清理|清洗|更换|重新|晾干|联系")
+_ACTION_ALIASES = {"重新启动":"重启", "启用":"开启", "打开":"开启", "关掉":"关闭",
+                   "调低":"调小", "调高":"调大", "替换":"更换", "清除":"清理"}
+_ALIAS_PATTERN = re.compile("|".join(sorted(_ACTION_ALIASES, key=len, reverse=True)))
+_QUALIFIED_ACTION = re.compile(r"无需|不必|不需要|不想|不愿|别让|只有|除非|否则|尚未|已经|已(?:开启|启用|打开|更换|重启|设置|完成|安装|清理)")
+
+
+def repair_actions_covered(remedy, text):
+    """Check action words, plus distinct targets for repeated action words.
+
+    This is a lexical coverage check, not a semantic correctness judgment.
+    """
+    # Normalize only the coverage comparison, never the displayed source text.
+    remedy = _ALIAS_PATTERN.sub(lambda m: _ACTION_ALIASES[m.group()], remedy)
+    text = _ALIAS_PATTERN.sub(lambda m: _ACTION_ALIASES[m.group()], text)
+    targets = {}
+    for clause in re.split(r"[，,。；;！？\n]", remedy):
+        actions = list(_REPAIR_VERB.finditer(clause))
+        for i, action in enumerate(actions):
+            end = actions[i + 1].start() if i + 1 < len(actions) else len(clause)
+            target = clause[action.end():end].strip()
+            target = re.sub(r"(?:并且|并|然后|再|和|与|及)$", "", target)
+            target = re.sub(r"[\s、‘’“”]", "", target)
+            targets.setdefault(action.group(), set())
+            if target:
+                targets[action.group()].add(target)
+    plain_text = re.sub(r"[\s、‘’“”]", "", text)
+    return bool(targets) and all(verb in text and (len(objects) <= 1 or all(
+        target and target in plain_text for target in objects)) for verb, objects in targets.items())
 
 
 def complete_action_quote(text, quote, question, covered_text=None):
@@ -32,6 +60,7 @@ def complete_action_quote(text, quote, question, covered_text=None):
     its conditions, rather than splice an isolated repair step into a new claim.
     """
     if (not _ASK_ACTION.search(question) or operation_boundary(question)
+            or _NEGATION.search(question) or _QUALIFIED_ACTION.search(question)
             or _REPAIR_RISK.search(question + quote) or _INSTRUCTION.search(quote)
             or _positive_actions(quote, _ACTION) or not quote.rstrip().endswith(("。", "！", "？"))):
         return text
@@ -44,12 +73,13 @@ def complete_action_quote(text, quote, question, covered_text=None):
     if not (structured or conditional):
         return text
     remedy = quote[repairs[0].end():] if structured else quote[quote.index("若"):]
-    verbs = set(_REPAIR_VERB.findall(remedy))
-    if not verbs or any(verb in (text if covered_text is None else covered_text) for verb in verbs):
+    covered = text if covered_text is None else covered_text
+    if (not _REPAIR_VERB.search(remedy) or repair_actions_covered(remedy, covered)
+            or _NEGATION.search(covered) or _QUALIFIED_ACTION.search(covered)):
         return text
     # Preserve any conditions introduced in the claim as well as in the quote.
-    condition = re.search(r"如果|若|仅限|仅在|当|型号|适用于", text)
-    if condition and text[condition.start():].strip() not in quote:
+    condition = re.search(r"如果|若|仅限|仅在|当|型号|适用于", covered)
+    if condition and covered[condition.start():].strip() not in quote:
         return text
     return re.sub(r"^\s*\d+[.、]\s*", "", quote.strip())
 

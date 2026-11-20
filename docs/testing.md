@@ -1,6 +1,6 @@
 # 测试与评测
 
-日常测试默认离线，使用替代模型和已保存的评测结果。真实生成、模型评分、Embedding和模型精排分别产生接口用量，按需单独运行。
+日常回归优先离线，必要的真实验证使用有预算的小样本。真实生成、模型评分、Embedding和模型精排分别产生接口用量，按需单独运行。
 
 ## 低成本测试方法
 
@@ -30,10 +30,53 @@
 
 ### 付费测试的预算约定
 
-- 默认预算为零次付费调用。需要真实接口时，执行前列明用途、模型、样本数、包含失败与重试的总调用上限、输入/输出Token上限及预计费用上限，取得本轮明确授权。
+- 允许必要的少量真实调用，在已批准的次数和费用额度内自主安排；尚无明确额度时，先列明用途、模型、小样本数量、含重试的总调用上限、输入/输出上限及预计费用并取得预算。批量脚本未提供预算时不自动发送付费请求。
 - 生成、评审、Embedding、rerank统一计数；SDK自动重试和失败请求占用调用额度，取消请求不假定免费。预算按输入上限、输出上限、最大尝试次数及运行时价格估算。
 - 调用前核对剩余额度，达到调用、Token或费用上限即停止；不自动扩样、续跑缺项或增加模型复评。成功结果保存为检查点，后续只处理获准的缺项。
-- **当前批量评测脚本尚未实现统一的调用与费用硬拦截。** 付费执行前须确认调用计数和Token限制覆盖全部出口与自动重试；文档约定不替代程序控制。下文付费命令用于有预算的专项复现，不作为日常回归步骤。
+- `evaluation.evaluate`和`evaluation.benchmark`的付费阶段已接入请求级预算：必须同时传入`--allow-paid`和`--budget FILE`。缺少任一项时在执行付费阶段前退出；直接调用付费函数也需要有效预算上下文。下文付费命令用于有预算的专项复现，不作为日常回归步骤。
+
+### 请求级预算
+
+预算上下文在独立评测进程内使用，HTTP拦截作用于该进程，不在业务服务进程中开启。运行器在同步`httpx`和`requests`的HTTP发送前预留额度。失败和SDK级重试各算一次请求；底层连接适配器自动重试在运行期间关闭并在结束后恢复。所有线程共享一份加锁计数；耗尽时停止新请求并取消排队任务，已在途请求占用的额度已预留。
+
+| 字段 | 单位及含义 |
+|---|---|
+| `max_calls` | 总HTTP尝试次数，失败与重试均计入 |
+| `max_input_bytes` | 累计序列化请求UTF-8字节，消息请求每条消息另加256字节、其他请求另加256字节；精排还重复计入每个候选的问题 |
+| `max_output_tokens` | 累计按请求`max_tokens`预留的输出额度 |
+| `max_output_tokens_per_call` | 每次生成的输出上限；请求未指定或超过该值时拒绝发送 |
+| `max_estimated_cost_cny` | 按下面的批准价格累计预留的预计人民币金额 |
+| `models` | 允许模型，以及每百万输入/输出Token的批准单价 |
+
+输入字节作为保守Token代理参与费用预留，输出按请求上限计费预留，失败不返还额度，也不预扣缓存折扣。该金额是本次请求的估算配额；精确输入Token和真实账单另行核对。当前支持中国内地域名`dashscope.aliyuncs.com`上的同步文本生成、文本Embedding和精排；未知模型、其他地址、富媒体、工具调用及异步请求拒绝执行。它只约束这两个评测入口，不修改正常业务服务。
+
+获得本轮授权后，使用新的预算文件。下面的价格和模型名为待填写字段，未替换会被拒绝；数值仅示范结构：
+
+```json
+{
+  "max_calls": 10,
+  "max_input_bytes": 100000,
+  "max_output_tokens": 10240,
+  "max_output_tokens_per_call": 1024,
+  "max_estimated_cost_cny": "1.00",
+  "models": {
+    "APPROVED_MODEL_ID": {
+      "input_per_million_cny": "APPROVED_INPUT_PRICE",
+      "output_per_million_cny": "APPROVED_OUTPUT_PRICE"
+    }
+  }
+}
+```
+
+示例运行形式：`python -m evaluation.benchmark answer --root evaluation/results/run-01 --allow-paid --budget approved-run-01.json`。程序独占创建旁边的`approved-run-01.json.usage.json`，每次发送前落盘；同一文件不能重复使用或被两个进程同时开启。后续阶段及恢复缺项使用新批准的预算文件，保留旧账本。账本仅保存模型、请求数、预留量和预算哈希，不保存请求内容、密钥或授权头。归档中的历史runner属于证据快照，新的付费运行使用当前受控入口。
+
+控制回归使用替代HTTP传输并阻断网络：
+
+```bash
+python -m pytest tests/test_evaluation_budget.py tests/test_answer_coverage.py -q
+```
+
+预算控制与上下文边界的合并验证见[综合离线验收](validation/context-budget-20261120.md)。
 
 ## 后端测试
 
@@ -85,6 +128,8 @@ python -m evaluation.replay_answers --archive ../../docs/validation/phase1-conte
 
 结果用于验证生成后处理，没有重新生成或沿用旧评分给新答案打分。[步骤覆盖回归报告](validation/answer-coverage-20261120.md)记录已确认恢复的要点和保持不变的风险用例。
 
+增量修改还覆盖部分动作遗漏、重复动作的不同对象、跨结论动作已齐全、条件已满足或存在禁止语句，以及相邻动作词的空对象误判。对比上一阶段的逐题可见回答，而非沿用旧评分；[部分步骤增量回归](validation/partial-answer-coverage-20261120.md)保留父报告哈希及全部前后文本。
+
 ### 数据库集成测试
 
 使用一次性 PostgreSQL + pgvector 数据库，库名必须为 `robot_rag_test`；另兼容测试夹具中列出的历史专用测试库名。管理员需先启用 `vector` 扩展。
@@ -109,7 +154,7 @@ npm run build
 本节会产生查询嵌入用量，按上述预算约定授权后，在 `services/backend` 配置可用数据库和模型密钥并执行：
 
 ```bash
-python -m evaluation.evaluate --output evaluation/results/run-01.json
+python -m evaluation.evaluate --output evaluation/results/run-01.json --allow-paid --budget approved-retrieval.json
 ```
 
 程序只查询知识库，不导入资料、不调用聊天模型。24 个问题分别调用一次查询嵌入接口，产生对应 API 用量；输出已存在时拒绝覆盖。
@@ -130,7 +175,7 @@ python -m evaluation.evaluate --output evaluation/results/run-01.json
 本节会产生查询嵌入和精排用量，须单独纳入获准预算。
 
 ```bash
-python -m evaluation.evaluate --rerank --output evaluation/results/rerank-01.json
+python -m evaluation.evaluate --rerank --output evaluation/results/rerank-01.json --allow-paid --budget approved-rerank.json
 ```
 
 显式传入 `--rerank` 后，在同一批 RRF 候选上额外比较 `hybrid_rerank`，不需要打开应用开关。除 24 次查询嵌入外，会增加最多 24 次排序调用；不调用聊天生成模型。
@@ -161,10 +206,10 @@ python -m pytest tests/test_paired_statistics.py tests/test_benchmark_binding.py
 
 ```bash
 python -m evaluation.benchmark bind --template evaluation/results/reference-300 --root evaluation/results/run-300
-python -m evaluation.benchmark retrieve --root evaluation/results/run-300
-python -m evaluation.benchmark answer --root evaluation/results/run-300 --workers 4
-python -m evaluation.benchmark judge --root evaluation/results/run-300 --workers 4
-python -m evaluation.benchmark audit --audit-limit 300 --root evaluation/results/run-300 --workers 4
+python -m evaluation.benchmark retrieve --root evaluation/results/run-300 --allow-paid --budget approved-retrieve.json
+python -m evaluation.benchmark answer --root evaluation/results/run-300 --workers 4 --allow-paid --budget approved-answer.json
+python -m evaluation.benchmark judge --root evaluation/results/run-300 --workers 4 --allow-paid --budget approved-judge.json
+python -m evaluation.benchmark audit --audit-limit 300 --root evaluation/results/run-300 --workers 4 --allow-paid --budget approved-audit.json
 python -m evaluation.summarize_benchmark --root evaluation/results/run-300 --output evaluation/results/run-300-summary.json
 ```
 
