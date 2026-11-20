@@ -1,0 +1,3448 @@
+{
+  "kind": "offline evidence-fidelity audit; not answer-quality scoring",
+  "frozen_dataset_sha256": "76fb82394d5997cdb12005abf3cd01beb6fc76cee5004b4d8fdfecc6a96382c5",
+  "corpus_chunks": 63,
+  "prepared_sources": 63,
+  "fallbacks": 0,
+  "blocked_review_ids": [
+    "EV-001",
+    "EV-002",
+    "EV-003",
+    "EV-004",
+    "EV-005"
+  ],
+  "reviewed_entry_leaks": 0,
+  "source_text_and_line_ranges_verified": true,
+  "questions": 300,
+  "protected_original_anchors": 254,
+  "protected_anchors_retained": 254,
+  "intentionally_excluded_question_ids": [
+    "b022",
+    "b090",
+    "b148",
+    "b174"
+  ],
+  "original_anchor_present": 258,
+  "prepared_anchor_present": 254,
+  "total_original_excerpt_bytes": 2734512,
+  "total_prepared_excerpt_bytes": 2872153,
+  "per_question": [
+    {
+      "id": "b001",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003"
+      ],
+      "original_bytes": 9991,
+      "prepared_bytes": 10019,
+      "source_count": 4
+    },
+    {
+      "id": "b002",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003",
+        "EV-004"
+      ],
+      "original_bytes": 9677,
+      "prepared_bytes": 9291,
+      "source_count": 4
+    },
+    {
+      "id": "b003",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7604,
+      "prepared_bytes": 8105,
+      "source_count": 4
+    },
+    {
+      "id": "b004",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003"
+      ],
+      "original_bytes": 10107,
+      "prepared_bytes": 9940,
+      "source_count": 4
+    },
+    {
+      "id": "b005",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-005"
+      ],
+      "original_bytes": 9602,
+      "prepared_bytes": 9592,
+      "source_count": 4
+    },
+    {
+      "id": "b006",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7352,
+      "prepared_bytes": 8096,
+      "source_count": 4
+    },
+    {
+      "id": "b007",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8739,
+      "prepared_bytes": 8981,
+      "source_count": 4
+    },
+    {
+      "id": "b008",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9703,
+      "prepared_bytes": 10377,
+      "source_count": 4
+    },
+    {
+      "id": "b009",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9987,
+      "prepared_bytes": 10210,
+      "source_count": 4
+    },
+    {
+      "id": "b010",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9636,
+      "prepared_bytes": 10127,
+      "source_count": 4
+    },
+    {
+      "id": "b011",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8921,
+      "prepared_bytes": 9787,
+      "source_count": 4
+    },
+    {
+      "id": "b012",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10210,
+      "prepared_bytes": 10862,
+      "source_count": 4
+    },
+    {
+      "id": "b013",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10189,
+      "prepared_bytes": 10841,
+      "source_count": 4
+    },
+    {
+      "id": "b014",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 5915,
+      "prepared_bytes": 6891,
+      "source_count": 4
+    },
+    {
+      "id": "b015",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6992,
+      "prepared_bytes": 7898,
+      "source_count": 4
+    },
+    {
+      "id": "b016",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10445,
+      "prepared_bytes": 10782,
+      "source_count": 4
+    },
+    {
+      "id": "b017",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10285,
+      "prepared_bytes": 10850,
+      "source_count": 4
+    },
+    {
+      "id": "b018",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9819,
+      "prepared_bytes": 10707,
+      "source_count": 4
+    },
+    {
+      "id": "b019",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6419,
+      "prepared_bytes": 7315,
+      "source_count": 4
+    },
+    {
+      "id": "b020",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 4273,
+      "prepared_bytes": 5079,
+      "source_count": 4
+    },
+    {
+      "id": "b021",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 8716,
+      "prepared_bytes": 8980,
+      "source_count": 4
+    },
+    {
+      "id": "b022",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": false,
+      "target_review_excluded": true,
+      "excluded_reviews": [
+        "EV-001",
+        "EV-003"
+      ],
+      "original_bytes": 10311,
+      "prepared_bytes": 10035,
+      "source_count": 4
+    },
+    {
+      "id": "b023",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 9163,
+      "prepared_bytes": 9373,
+      "source_count": 4
+    },
+    {
+      "id": "b024",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 10344,
+      "prepared_bytes": 10406,
+      "source_count": 4
+    },
+    {
+      "id": "b025",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001",
+        "EV-004"
+      ],
+      "original_bytes": 10627,
+      "prepared_bytes": 10470,
+      "source_count": 4
+    },
+    {
+      "id": "b026",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 6142,
+      "prepared_bytes": 6580,
+      "source_count": 4
+    },
+    {
+      "id": "b027",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001",
+        "EV-003"
+      ],
+      "original_bytes": 8758,
+      "prepared_bytes": 8585,
+      "source_count": 4
+    },
+    {
+      "id": "b028",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001",
+        "EV-004"
+      ],
+      "original_bytes": 10616,
+      "prepared_bytes": 10459,
+      "source_count": 4
+    },
+    {
+      "id": "b029",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10357,
+      "prepared_bytes": 10910,
+      "source_count": 4
+    },
+    {
+      "id": "b030",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9799,
+      "prepared_bytes": 10346,
+      "source_count": 4
+    },
+    {
+      "id": "b031",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10471,
+      "prepared_bytes": 10829,
+      "source_count": 4
+    },
+    {
+      "id": "b032",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9607,
+      "prepared_bytes": 10096,
+      "source_count": 4
+    },
+    {
+      "id": "b033",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10640,
+      "prepared_bytes": 11007,
+      "source_count": 4
+    },
+    {
+      "id": "b034",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8240,
+      "prepared_bytes": 8965,
+      "source_count": 4
+    },
+    {
+      "id": "b035",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6334,
+      "prepared_bytes": 7000,
+      "source_count": 4
+    },
+    {
+      "id": "b036",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9833,
+      "prepared_bytes": 10198,
+      "source_count": 4
+    },
+    {
+      "id": "b037",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8265,
+      "prepared_bytes": 8639,
+      "source_count": 4
+    },
+    {
+      "id": "b038",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8042,
+      "prepared_bytes": 8407,
+      "source_count": 4
+    },
+    {
+      "id": "b039",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8477,
+      "prepared_bytes": 8908,
+      "source_count": 4
+    },
+    {
+      "id": "b040",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10000,
+      "prepared_bytes": 10893,
+      "source_count": 4
+    },
+    {
+      "id": "b041",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9890,
+      "prepared_bytes": 10282,
+      "source_count": 4
+    },
+    {
+      "id": "b042",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10299,
+      "prepared_bytes": 10750,
+      "source_count": 4
+    },
+    {
+      "id": "b043",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8650,
+      "prepared_bytes": 9369,
+      "source_count": 4
+    },
+    {
+      "id": "b044",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10632,
+      "prepared_bytes": 11311,
+      "source_count": 4
+    },
+    {
+      "id": "b045",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6622,
+      "prepared_bytes": 7258,
+      "source_count": 4
+    },
+    {
+      "id": "b046",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6077,
+      "prepared_bytes": 6848,
+      "source_count": 4
+    },
+    {
+      "id": "b047",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7813,
+      "prepared_bytes": 8739,
+      "source_count": 4
+    },
+    {
+      "id": "b048",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10235,
+      "prepared_bytes": 10738,
+      "source_count": 4
+    },
+    {
+      "id": "b049",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9565,
+      "prepared_bytes": 10020,
+      "source_count": 4
+    },
+    {
+      "id": "b050",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9299,
+      "prepared_bytes": 9720,
+      "source_count": 4
+    },
+    {
+      "id": "b051",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10409,
+      "prepared_bytes": 10951,
+      "source_count": 4
+    },
+    {
+      "id": "b052",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9996,
+      "prepared_bytes": 10733,
+      "source_count": 4
+    },
+    {
+      "id": "b053",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003"
+      ],
+      "original_bytes": 10551,
+      "prepared_bytes": 10586,
+      "source_count": 4
+    },
+    {
+      "id": "b054",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 10431,
+      "prepared_bytes": 10638,
+      "source_count": 4
+    },
+    {
+      "id": "b055",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10631,
+      "prepared_bytes": 11142,
+      "source_count": 4
+    },
+    {
+      "id": "b056",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8880,
+      "prepared_bytes": 9070,
+      "source_count": 4
+    },
+    {
+      "id": "b057",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9567,
+      "prepared_bytes": 9814,
+      "source_count": 4
+    },
+    {
+      "id": "b058",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9177,
+      "prepared_bytes": 9691,
+      "source_count": 4
+    },
+    {
+      "id": "b059",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7990,
+      "prepared_bytes": 8595,
+      "source_count": 4
+    },
+    {
+      "id": "b060",
+      "source": "扫地机器人100问2.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7874,
+      "prepared_bytes": 8656,
+      "source_count": 4
+    },
+    {
+      "id": "b061",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7950,
+      "prepared_bytes": 8178,
+      "source_count": 4
+    },
+    {
+      "id": "b062",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6381,
+      "prepared_bytes": 6851,
+      "source_count": 4
+    },
+    {
+      "id": "b063",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8287,
+      "prepared_bytes": 8663,
+      "source_count": 4
+    },
+    {
+      "id": "b064",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8715,
+      "prepared_bytes": 9031,
+      "source_count": 4
+    },
+    {
+      "id": "b065",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7913,
+      "prepared_bytes": 8347,
+      "source_count": 4
+    },
+    {
+      "id": "b066",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8824,
+      "prepared_bytes": 9139,
+      "source_count": 4
+    },
+    {
+      "id": "b067",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8331,
+      "prepared_bytes": 8869,
+      "source_count": 4
+    },
+    {
+      "id": "b068",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9192,
+      "prepared_bytes": 9746,
+      "source_count": 4
+    },
+    {
+      "id": "b069",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 10092,
+      "prepared_bytes": 10575,
+      "source_count": 4
+    },
+    {
+      "id": "b070",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8145,
+      "prepared_bytes": 8747,
+      "source_count": 4
+    },
+    {
+      "id": "b071",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8817,
+      "prepared_bytes": 9638,
+      "source_count": 4
+    },
+    {
+      "id": "b072",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7954,
+      "prepared_bytes": 8767,
+      "source_count": 4
+    },
+    {
+      "id": "b073",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9429,
+      "prepared_bytes": 10147,
+      "source_count": 4
+    },
+    {
+      "id": "b074",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10740,
+      "prepared_bytes": 11130,
+      "source_count": 4
+    },
+    {
+      "id": "b075",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 8004,
+      "prepared_bytes": 8642,
+      "source_count": 4
+    },
+    {
+      "id": "b076",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7920,
+      "prepared_bytes": 8571,
+      "source_count": 4
+    },
+    {
+      "id": "b077",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7661,
+      "prepared_bytes": 8461,
+      "source_count": 4
+    },
+    {
+      "id": "b078",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8887,
+      "prepared_bytes": 9479,
+      "source_count": 4
+    },
+    {
+      "id": "b079",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-004"
+      ],
+      "original_bytes": 10701,
+      "prepared_bytes": 10816,
+      "source_count": 4
+    },
+    {
+      "id": "b080",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8187,
+      "prepared_bytes": 8726,
+      "source_count": 4
+    },
+    {
+      "id": "b081",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8820,
+      "prepared_bytes": 9629,
+      "source_count": 4
+    },
+    {
+      "id": "b082",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9655,
+      "prepared_bytes": 10194,
+      "source_count": 4
+    },
+    {
+      "id": "b083",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9983,
+      "prepared_bytes": 10486,
+      "source_count": 4
+    },
+    {
+      "id": "b084",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8719,
+      "prepared_bytes": 9337,
+      "source_count": 4
+    },
+    {
+      "id": "b085",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8847,
+      "prepared_bytes": 9450,
+      "source_count": 4
+    },
+    {
+      "id": "b086",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8242,
+      "prepared_bytes": 9103,
+      "source_count": 4
+    },
+    {
+      "id": "b087",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6622,
+      "prepared_bytes": 7258,
+      "source_count": 4
+    },
+    {
+      "id": "b088",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 10575,
+      "prepared_bytes": 10721,
+      "source_count": 4
+    },
+    {
+      "id": "b089",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 10454,
+      "prepared_bytes": 10775,
+      "source_count": 4
+    },
+    {
+      "id": "b090",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": false,
+      "target_review_excluded": true,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 8632,
+      "prepared_bytes": 8812,
+      "source_count": 4
+    },
+    {
+      "id": "b091",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 10422,
+      "prepared_bytes": 10568,
+      "source_count": 4
+    },
+    {
+      "id": "b092",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 8333,
+      "prepared_bytes": 8513,
+      "source_count": 4
+    },
+    {
+      "id": "b093",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 8802,
+      "prepared_bytes": 9204,
+      "source_count": 4
+    },
+    {
+      "id": "b094",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 8165,
+      "prepared_bytes": 8781,
+      "source_count": 4
+    },
+    {
+      "id": "b095",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 10422,
+      "prepared_bytes": 10730,
+      "source_count": 4
+    },
+    {
+      "id": "b096",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 8133,
+      "prepared_bytes": 8596,
+      "source_count": 4
+    },
+    {
+      "id": "b097",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 8611,
+      "prepared_bytes": 9035,
+      "source_count": 4
+    },
+    {
+      "id": "b098",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6441,
+      "prepared_bytes": 7238,
+      "source_count": 4
+    },
+    {
+      "id": "b099",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9230,
+      "prepared_bytes": 10003,
+      "source_count": 4
+    },
+    {
+      "id": "b100",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9838,
+      "prepared_bytes": 10235,
+      "source_count": 4
+    },
+    {
+      "id": "b101",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8177,
+      "prepared_bytes": 8941,
+      "source_count": 4
+    },
+    {
+      "id": "b102",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9230,
+      "prepared_bytes": 10003,
+      "source_count": 4
+    },
+    {
+      "id": "b103",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10666,
+      "prepared_bytes": 11006,
+      "source_count": 4
+    },
+    {
+      "id": "b104",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6477,
+      "prepared_bytes": 7164,
+      "source_count": 4
+    },
+    {
+      "id": "b105",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8706,
+      "prepared_bytes": 9139,
+      "source_count": 4
+    },
+    {
+      "id": "b106",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8025,
+      "prepared_bytes": 8615,
+      "source_count": 4
+    },
+    {
+      "id": "b107",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8409,
+      "prepared_bytes": 8740,
+      "source_count": 4
+    },
+    {
+      "id": "b108",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9932,
+      "prepared_bytes": 10498,
+      "source_count": 4
+    },
+    {
+      "id": "b109",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8643,
+      "prepared_bytes": 8771,
+      "source_count": 4
+    },
+    {
+      "id": "b110",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8409,
+      "prepared_bytes": 8740,
+      "source_count": 4
+    },
+    {
+      "id": "b111",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9270,
+      "prepared_bytes": 9617,
+      "source_count": 4
+    },
+    {
+      "id": "b112",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9131,
+      "prepared_bytes": 9633,
+      "source_count": 4
+    },
+    {
+      "id": "b113",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10257,
+      "prepared_bytes": 10816,
+      "source_count": 4
+    },
+    {
+      "id": "b114",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9678,
+      "prepared_bytes": 10009,
+      "source_count": 4
+    },
+    {
+      "id": "b115",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8669,
+      "prepared_bytes": 9214,
+      "source_count": 4
+    },
+    {
+      "id": "b116",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8202,
+      "prepared_bytes": 8528,
+      "source_count": 4
+    },
+    {
+      "id": "b117",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10440,
+      "prepared_bytes": 10837,
+      "source_count": 4
+    },
+    {
+      "id": "b118",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9425,
+      "prepared_bytes": 9537,
+      "source_count": 4
+    },
+    {
+      "id": "b119",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8132,
+      "prepared_bytes": 8674,
+      "source_count": 4
+    },
+    {
+      "id": "b120",
+      "source": "扫拖一体机器人100问.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8678,
+      "prepared_bytes": 9223,
+      "source_count": 4
+    },
+    {
+      "id": "b121",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003"
+      ],
+      "original_bytes": 9338,
+      "prepared_bytes": 9409,
+      "source_count": 4
+    },
+    {
+      "id": "b122",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003"
+      ],
+      "original_bytes": 10518,
+      "prepared_bytes": 10570,
+      "source_count": 4
+    },
+    {
+      "id": "b123",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003"
+      ],
+      "original_bytes": 10347,
+      "prepared_bytes": 10237,
+      "source_count": 4
+    },
+    {
+      "id": "b124",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9802,
+      "prepared_bytes": 9973,
+      "source_count": 4
+    },
+    {
+      "id": "b125",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8317,
+      "prepared_bytes": 8916,
+      "source_count": 4
+    },
+    {
+      "id": "b126",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10412,
+      "prepared_bytes": 10997,
+      "source_count": 4
+    },
+    {
+      "id": "b127",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10954,
+      "prepared_bytes": 11377,
+      "source_count": 4
+    },
+    {
+      "id": "b128",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-005"
+      ],
+      "original_bytes": 10500,
+      "prepared_bytes": 10547,
+      "source_count": 4
+    },
+    {
+      "id": "b129",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-005"
+      ],
+      "original_bytes": 8757,
+      "prepared_bytes": 8898,
+      "source_count": 4
+    },
+    {
+      "id": "b130",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10779,
+      "prepared_bytes": 11202,
+      "source_count": 4
+    },
+    {
+      "id": "b131",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10153,
+      "prepared_bytes": 10757,
+      "source_count": 4
+    },
+    {
+      "id": "b132",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9471,
+      "prepared_bytes": 9649,
+      "source_count": 4
+    },
+    {
+      "id": "b133",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-004"
+      ],
+      "original_bytes": 10690,
+      "prepared_bytes": 10699,
+      "source_count": 4
+    },
+    {
+      "id": "b134",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10468,
+      "prepared_bytes": 10858,
+      "source_count": 4
+    },
+    {
+      "id": "b135",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 10537,
+      "prepared_bytes": 11020,
+      "source_count": 4
+    },
+    {
+      "id": "b136",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8119,
+      "prepared_bytes": 8384,
+      "source_count": 4
+    },
+    {
+      "id": "b137",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7696,
+      "prepared_bytes": 8410,
+      "source_count": 4
+    },
+    {
+      "id": "b138",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8866,
+      "prepared_bytes": 9458,
+      "source_count": 4
+    },
+    {
+      "id": "b139",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10794,
+      "prepared_bytes": 11022,
+      "source_count": 4
+    },
+    {
+      "id": "b140",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10459,
+      "prepared_bytes": 11011,
+      "source_count": 4
+    },
+    {
+      "id": "b141",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 8563,
+      "prepared_bytes": 8989,
+      "source_count": 4
+    },
+    {
+      "id": "b142",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10824,
+      "prepared_bytes": 11052,
+      "source_count": 4
+    },
+    {
+      "id": "b143",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9795,
+      "prepared_bytes": 10180,
+      "source_count": 4
+    },
+    {
+      "id": "b144",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6064,
+      "prepared_bytes": 6811,
+      "source_count": 4
+    },
+    {
+      "id": "b145",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002",
+        "EV-004"
+      ],
+      "original_bytes": 9849,
+      "prepared_bytes": 9945,
+      "source_count": 4
+    },
+    {
+      "id": "b146",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 10679,
+      "prepared_bytes": 11149,
+      "source_count": 4
+    },
+    {
+      "id": "b147",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8601,
+      "prepared_bytes": 9193,
+      "source_count": 4
+    },
+    {
+      "id": "b148",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": false,
+      "target_review_excluded": true,
+      "excluded_reviews": [
+        "EV-004"
+      ],
+      "original_bytes": 10772,
+      "prepared_bytes": 10788,
+      "source_count": 4
+    },
+    {
+      "id": "b149",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003"
+      ],
+      "original_bytes": 9790,
+      "prepared_bytes": 9614,
+      "source_count": 4
+    },
+    {
+      "id": "b150",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-005"
+      ],
+      "original_bytes": 10874,
+      "prepared_bytes": 11083,
+      "source_count": 4
+    },
+    {
+      "id": "b151",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8932,
+      "prepared_bytes": 9696,
+      "source_count": 4
+    },
+    {
+      "id": "b152",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10450,
+      "prepared_bytes": 11012,
+      "source_count": 4
+    },
+    {
+      "id": "b153",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7432,
+      "prepared_bytes": 8229,
+      "source_count": 4
+    },
+    {
+      "id": "b154",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 9250,
+      "prepared_bytes": 9712,
+      "source_count": 4
+    },
+    {
+      "id": "b155",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10831,
+      "prepared_bytes": 11254,
+      "source_count": 4
+    },
+    {
+      "id": "b156",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 10723,
+      "prepared_bytes": 10785,
+      "source_count": 4
+    },
+    {
+      "id": "b157",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10632,
+      "prepared_bytes": 11311,
+      "source_count": 4
+    },
+    {
+      "id": "b158",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9907,
+      "prepared_bytes": 10078,
+      "source_count": 4
+    },
+    {
+      "id": "b159",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10664,
+      "prepared_bytes": 11054,
+      "source_count": 4
+    },
+    {
+      "id": "b160",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-005"
+      ],
+      "original_bytes": 10899,
+      "prepared_bytes": 10946,
+      "source_count": 4
+    },
+    {
+      "id": "b161",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10785,
+      "prepared_bytes": 11338,
+      "source_count": 4
+    },
+    {
+      "id": "b162",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9711,
+      "prepared_bytes": 10153,
+      "source_count": 4
+    },
+    {
+      "id": "b163",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6375,
+      "prepared_bytes": 6986,
+      "source_count": 4
+    },
+    {
+      "id": "b164",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10607,
+      "prepared_bytes": 11192,
+      "source_count": 4
+    },
+    {
+      "id": "b165",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8347,
+      "prepared_bytes": 8939,
+      "source_count": 4
+    },
+    {
+      "id": "b166",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8166,
+      "prepared_bytes": 8597,
+      "source_count": 4
+    },
+    {
+      "id": "b167",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8788,
+      "prepared_bytes": 9033,
+      "source_count": 4
+    },
+    {
+      "id": "b168",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10659,
+      "prepared_bytes": 11373,
+      "source_count": 4
+    },
+    {
+      "id": "b169",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10723,
+      "prepared_bytes": 11450,
+      "source_count": 4
+    },
+    {
+      "id": "b170",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9852,
+      "prepared_bytes": 10371,
+      "source_count": 4
+    },
+    {
+      "id": "b171",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10567,
+      "prepared_bytes": 10795,
+      "source_count": 4
+    },
+    {
+      "id": "b172",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-005"
+      ],
+      "original_bytes": 9045,
+      "prepared_bytes": 9297,
+      "source_count": 4
+    },
+    {
+      "id": "b173",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6764,
+      "prepared_bytes": 7676,
+      "source_count": 4
+    },
+    {
+      "id": "b174",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": false,
+      "target_review_excluded": true,
+      "excluded_reviews": [
+        "EV-004",
+        "EV-005"
+      ],
+      "original_bytes": 10667,
+      "prepared_bytes": 10495,
+      "source_count": 4
+    },
+    {
+      "id": "b175",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10382,
+      "prepared_bytes": 10772,
+      "source_count": 4
+    },
+    {
+      "id": "b176",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 10013,
+      "prepared_bytes": 10535,
+      "source_count": 4
+    },
+    {
+      "id": "b177",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10478,
+      "prepared_bytes": 10706,
+      "source_count": 4
+    },
+    {
+      "id": "b178",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10495,
+      "prepared_bytes": 10885,
+      "source_count": 4
+    },
+    {
+      "id": "b179",
+      "source": "故障排除.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10765,
+      "prepared_bytes": 11155,
+      "source_count": 4
+    },
+    {
+      "id": "b180",
+      "source": "故障排除.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7665,
+      "prepared_bytes": 8144,
+      "source_count": 4
+    },
+    {
+      "id": "b181",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10385,
+      "prepared_bytes": 11075,
+      "source_count": 4
+    },
+    {
+      "id": "b182",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7651,
+      "prepared_bytes": 8594,
+      "source_count": 4
+    },
+    {
+      "id": "b183",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7744,
+      "prepared_bytes": 8264,
+      "source_count": 4
+    },
+    {
+      "id": "b184",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8553,
+      "prepared_bytes": 9310,
+      "source_count": 4
+    },
+    {
+      "id": "b185",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 3971,
+      "prepared_bytes": 4694,
+      "source_count": 4
+    },
+    {
+      "id": "b186",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6419,
+      "prepared_bytes": 7315,
+      "source_count": 4
+    },
+    {
+      "id": "b187",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8319,
+      "prepared_bytes": 9091,
+      "source_count": 4
+    },
+    {
+      "id": "b188",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6928,
+      "prepared_bytes": 7668,
+      "source_count": 4
+    },
+    {
+      "id": "b189",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 9900,
+      "prepared_bytes": 10597,
+      "source_count": 4
+    },
+    {
+      "id": "b190",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8517,
+      "prepared_bytes": 9426,
+      "source_count": 4
+    },
+    {
+      "id": "b191",
+      "source": "维护保养.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8499,
+      "prepared_bytes": 9075,
+      "source_count": 4
+    },
+    {
+      "id": "b192",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9230,
+      "prepared_bytes": 10003,
+      "source_count": 4
+    },
+    {
+      "id": "b193",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8207,
+      "prepared_bytes": 8918,
+      "source_count": 4
+    },
+    {
+      "id": "b194",
+      "source": "维护保养.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8636,
+      "prepared_bytes": 9562,
+      "source_count": 4
+    },
+    {
+      "id": "b195",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8047,
+      "prepared_bytes": 8990,
+      "source_count": 4
+    },
+    {
+      "id": "b196",
+      "source": "维护保养.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-004"
+      ],
+      "original_bytes": 10948,
+      "prepared_bytes": 10957,
+      "source_count": 4
+    },
+    {
+      "id": "b197",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-003"
+      ],
+      "original_bytes": 10728,
+      "prepared_bytes": 10780,
+      "source_count": 4
+    },
+    {
+      "id": "b198",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8254,
+      "prepared_bytes": 9162,
+      "source_count": 4
+    },
+    {
+      "id": "b199",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 5216,
+      "prepared_bytes": 6208,
+      "source_count": 4
+    },
+    {
+      "id": "b200",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7945,
+      "prepared_bytes": 8669,
+      "source_count": 4
+    },
+    {
+      "id": "b201",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8253,
+      "prepared_bytes": 8976,
+      "source_count": 4
+    },
+    {
+      "id": "b202",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7725,
+      "prepared_bytes": 8186,
+      "source_count": 4
+    },
+    {
+      "id": "b203",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6686,
+      "prepared_bytes": 7635,
+      "source_count": 4
+    },
+    {
+      "id": "b204",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7651,
+      "prepared_bytes": 8594,
+      "source_count": 4
+    },
+    {
+      "id": "b205",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9230,
+      "prepared_bytes": 10003,
+      "source_count": 4
+    },
+    {
+      "id": "b206",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10118,
+      "prepared_bytes": 10891,
+      "source_count": 4
+    },
+    {
+      "id": "b207",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7386,
+      "prepared_bytes": 7856,
+      "source_count": 4
+    },
+    {
+      "id": "b208",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8716,
+      "prepared_bytes": 9483,
+      "source_count": 4
+    },
+    {
+      "id": "b209",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 4273,
+      "prepared_bytes": 5079,
+      "source_count": 4
+    },
+    {
+      "id": "b210",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-005"
+      ],
+      "original_bytes": 10531,
+      "prepared_bytes": 10935,
+      "source_count": 4
+    },
+    {
+      "id": "b211",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8836,
+      "prepared_bytes": 9617,
+      "source_count": 4
+    },
+    {
+      "id": "b212",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9264,
+      "prepared_bytes": 9916,
+      "source_count": 4
+    },
+    {
+      "id": "b213",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9775,
+      "prepared_bytes": 10361,
+      "source_count": 4
+    },
+    {
+      "id": "b214",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 9910,
+      "prepared_bytes": 10432,
+      "source_count": 4
+    },
+    {
+      "id": "b215",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7410,
+      "prepared_bytes": 8405,
+      "source_count": 4
+    },
+    {
+      "id": "b216",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8986,
+      "prepared_bytes": 9734,
+      "source_count": 4
+    },
+    {
+      "id": "b217",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9406,
+      "prepared_bytes": 10179,
+      "source_count": 4
+    },
+    {
+      "id": "b218",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8613,
+      "prepared_bytes": 9166,
+      "source_count": 4
+    },
+    {
+      "id": "b219",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8420,
+      "prepared_bytes": 8994,
+      "source_count": 4
+    },
+    {
+      "id": "b220",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6992,
+      "prepared_bytes": 7898,
+      "source_count": 4
+    },
+    {
+      "id": "b221",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8253,
+      "prepared_bytes": 8820,
+      "source_count": 4
+    },
+    {
+      "id": "b222",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-002"
+      ],
+      "original_bytes": 8743,
+      "prepared_bytes": 9307,
+      "source_count": 4
+    },
+    {
+      "id": "b223",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10483,
+      "prepared_bytes": 11174,
+      "source_count": 4
+    },
+    {
+      "id": "b224",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8689,
+      "prepared_bytes": 9498,
+      "source_count": 4
+    },
+    {
+      "id": "b225",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9047,
+      "prepared_bytes": 9576,
+      "source_count": 4
+    },
+    {
+      "id": "b226",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-001"
+      ],
+      "original_bytes": 10358,
+      "prepared_bytes": 10597,
+      "source_count": 4
+    },
+    {
+      "id": "b227",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8552,
+      "prepared_bytes": 9523,
+      "source_count": 4
+    },
+    {
+      "id": "b228",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-004"
+      ],
+      "original_bytes": 8651,
+      "prepared_bytes": 9024,
+      "source_count": 4
+    },
+    {
+      "id": "b229",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 5512,
+      "prepared_bytes": 6328,
+      "source_count": 4
+    },
+    {
+      "id": "b230",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8181,
+      "prepared_bytes": 8738,
+      "source_count": 4
+    },
+    {
+      "id": "b231",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10954,
+      "prepared_bytes": 11377,
+      "source_count": 4
+    },
+    {
+      "id": "b232",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8066,
+      "prepared_bytes": 8866,
+      "source_count": 4
+    },
+    {
+      "id": "b233",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9850,
+      "prepared_bytes": 10811,
+      "source_count": 4
+    },
+    {
+      "id": "b234",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8239,
+      "prepared_bytes": 9240,
+      "source_count": 4
+    },
+    {
+      "id": "b235",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8571,
+      "prepared_bytes": 9294,
+      "source_count": 4
+    },
+    {
+      "id": "b236",
+      "source": "维护保养.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 6084,
+      "prepared_bytes": 6694,
+      "source_count": 4
+    },
+    {
+      "id": "b237",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9923,
+      "prepared_bytes": 10494,
+      "source_count": 4
+    },
+    {
+      "id": "b238",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8571,
+      "prepared_bytes": 9294,
+      "source_count": 4
+    },
+    {
+      "id": "b239",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7805,
+      "prepared_bytes": 8171,
+      "source_count": 4
+    },
+    {
+      "id": "b240",
+      "source": "维护保养.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 5906,
+      "prepared_bytes": 6882,
+      "source_count": 4
+    },
+    {
+      "id": "b241",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10197,
+      "prepared_bytes": 10293,
+      "source_count": 4
+    },
+    {
+      "id": "b242",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10044,
+      "prepared_bytes": 10188,
+      "source_count": 4
+    },
+    {
+      "id": "b243",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10135,
+      "prepared_bytes": 10279,
+      "source_count": 4
+    },
+    {
+      "id": "b244",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9665,
+      "prepared_bytes": 10080,
+      "source_count": 4
+    },
+    {
+      "id": "b245",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10338,
+      "prepared_bytes": 10837,
+      "source_count": 4
+    },
+    {
+      "id": "b246",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10139,
+      "prepared_bytes": 10283,
+      "source_count": 4
+    },
+    {
+      "id": "b247",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10175,
+      "prepared_bytes": 10367,
+      "source_count": 4
+    },
+    {
+      "id": "b248",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9088,
+      "prepared_bytes": 9200,
+      "source_count": 4
+    },
+    {
+      "id": "b249",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8236,
+      "prepared_bytes": 8584,
+      "source_count": 4
+    },
+    {
+      "id": "b250",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8899,
+      "prepared_bytes": 9305,
+      "source_count": 4
+    },
+    {
+      "id": "b251",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10084,
+      "prepared_bytes": 10228,
+      "source_count": 4
+    },
+    {
+      "id": "b252",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10118,
+      "prepared_bytes": 10262,
+      "source_count": 4
+    },
+    {
+      "id": "b253",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10084,
+      "prepared_bytes": 10228,
+      "source_count": 4
+    },
+    {
+      "id": "b254",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9719,
+      "prepared_bytes": 9986,
+      "source_count": 4
+    },
+    {
+      "id": "b255",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7172,
+      "prepared_bytes": 7520,
+      "source_count": 4
+    },
+    {
+      "id": "b256",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7872,
+      "prepared_bytes": 8567,
+      "source_count": 4
+    },
+    {
+      "id": "b257",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9592,
+      "prepared_bytes": 9959,
+      "source_count": 4
+    },
+    {
+      "id": "b258",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10086,
+      "prepared_bytes": 10378,
+      "source_count": 4
+    },
+    {
+      "id": "b259",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10160,
+      "prepared_bytes": 10475,
+      "source_count": 4
+    },
+    {
+      "id": "b260",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10067,
+      "prepared_bytes": 10359,
+      "source_count": 4
+    },
+    {
+      "id": "b261",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8048,
+      "prepared_bytes": 8226,
+      "source_count": 4
+    },
+    {
+      "id": "b262",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10183,
+      "prepared_bytes": 10375,
+      "source_count": 4
+    },
+    {
+      "id": "b263",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8693,
+      "prepared_bytes": 9232,
+      "source_count": 4
+    },
+    {
+      "id": "b264",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8720,
+      "prepared_bytes": 9468,
+      "source_count": 4
+    },
+    {
+      "id": "b265",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8878,
+      "prepared_bytes": 9284,
+      "source_count": 4
+    },
+    {
+      "id": "b266",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10295,
+      "prepared_bytes": 10448,
+      "source_count": 4
+    },
+    {
+      "id": "b267",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10162,
+      "prepared_bytes": 10306,
+      "source_count": 4
+    },
+    {
+      "id": "b268",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9128,
+      "prepared_bytes": 9272,
+      "source_count": 4
+    },
+    {
+      "id": "b269",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9639,
+      "prepared_bytes": 9906,
+      "source_count": 4
+    },
+    {
+      "id": "b270",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10135,
+      "prepared_bytes": 10327,
+      "source_count": 4
+    },
+    {
+      "id": "b271",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9303,
+      "prepared_bytes": 9495,
+      "source_count": 4
+    },
+    {
+      "id": "b272",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9783,
+      "prepared_bytes": 10321,
+      "source_count": 4
+    },
+    {
+      "id": "b273",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9229,
+      "prepared_bytes": 9373,
+      "source_count": 4
+    },
+    {
+      "id": "b274",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9261,
+      "prepared_bytes": 9453,
+      "source_count": 4
+    },
+    {
+      "id": "b275",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8431,
+      "prepared_bytes": 9005,
+      "source_count": 4
+    },
+    {
+      "id": "b276",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10119,
+      "prepared_bytes": 10482,
+      "source_count": 4
+    },
+    {
+      "id": "b277",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9464,
+      "prepared_bytes": 10011,
+      "source_count": 4
+    },
+    {
+      "id": "b278",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9891,
+      "prepared_bytes": 10222,
+      "source_count": 4
+    },
+    {
+      "id": "b279",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8412,
+      "prepared_bytes": 8938,
+      "source_count": 4
+    },
+    {
+      "id": "b280",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10357,
+      "prepared_bytes": 10856,
+      "source_count": 4
+    },
+    {
+      "id": "b281",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10406,
+      "prepared_bytes": 10730,
+      "source_count": 4
+    },
+    {
+      "id": "b282",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9089,
+      "prepared_bytes": 9444,
+      "source_count": 4
+    },
+    {
+      "id": "b283",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9558,
+      "prepared_bytes": 9906,
+      "source_count": 4
+    },
+    {
+      "id": "b284",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10197,
+      "prepared_bytes": 10293,
+      "source_count": 4
+    },
+    {
+      "id": "b285",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9410,
+      "prepared_bytes": 9725,
+      "source_count": 4
+    },
+    {
+      "id": "b286",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10181,
+      "prepared_bytes": 10496,
+      "source_count": 4
+    },
+    {
+      "id": "b287",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10118,
+      "prepared_bytes": 10262,
+      "source_count": 4
+    },
+    {
+      "id": "b288",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8326,
+      "prepared_bytes": 8729,
+      "source_count": 4
+    },
+    {
+      "id": "b289",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 7891,
+      "prepared_bytes": 8288,
+      "source_count": 4
+    },
+    {
+      "id": "b290",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10197,
+      "prepared_bytes": 10293,
+      "source_count": 4
+    },
+    {
+      "id": "b291",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10221,
+      "prepared_bytes": 10536,
+      "source_count": 4
+    },
+    {
+      "id": "b292",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10012,
+      "prepared_bytes": 10156,
+      "source_count": 4
+    },
+    {
+      "id": "b293",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [
+        "EV-004"
+      ],
+      "original_bytes": 10282,
+      "prepared_bytes": 10216,
+      "source_count": 4
+    },
+    {
+      "id": "b294",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 8356,
+      "prepared_bytes": 8603,
+      "source_count": 4
+    },
+    {
+      "id": "b295",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10086,
+      "prepared_bytes": 10278,
+      "source_count": 4
+    },
+    {
+      "id": "b296",
+      "source": "选购指南.txt",
+      "original_anchor_present": false,
+      "prepared_anchor_present": false,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10419,
+      "prepared_bytes": 10905,
+      "source_count": 4
+    },
+    {
+      "id": "b297",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10311,
+      "prepared_bytes": 10626,
+      "source_count": 4
+    },
+    {
+      "id": "b298",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 10105,
+      "prepared_bytes": 10297,
+      "source_count": 4
+    },
+    {
+      "id": "b299",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9316,
+      "prepared_bytes": 9460,
+      "source_count": 4
+    },
+    {
+      "id": "b300",
+      "source": "选购指南.txt",
+      "original_anchor_present": true,
+      "prepared_anchor_present": true,
+      "target_review_excluded": false,
+      "excluded_reviews": [],
+      "original_bytes": 9124,
+      "prepared_bytes": 9316,
+      "source_count": 4
+    }
+  ]
+}

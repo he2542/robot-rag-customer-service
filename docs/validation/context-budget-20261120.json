@@ -1,0 +1,172 @@
+{
+  "stage": "context-boundaries-and-evaluation-budget",
+  "parent_report": "partial-answer-coverage-20261120.json",
+  "parent_report_sha256": "457762cffb4cb9c05793764f17c6f2682d03a528c3d864d5bc4a95133adfebd6",
+  "source_sha256": {
+    "services/backend/src/services/answer_policy.py": "d23a394cacfa462f5f8a54bf86dea6684121e76a04c577637122efc60dd5a6d5",
+    "services/backend/evaluation/budget.py": "ca09b254296ee5b7d9204afdf2e493536f4a334eb982e0ca9aca8a13b97990ba",
+    "services/backend/evaluation/benchmark.py": "2200b0f50f551eefd21fece2d15b35bbabe6b67284c20758ebbd54d06c0c0522",
+    "services/backend/evaluation/evaluate.py": "8e868b9a06343128c046f42e9214e367d84e96511c1cb5cebc450c5a83c1305d",
+    "services/backend/tests/test_answer_coverage.py": "2bb4085bee8e7da90c77afed34a63fb9472b5982e8b6e9cab314cd645e4eb309",
+    "services/backend/tests/test_evaluation_budget.py": "3f383ba0457aa836e1274b9d93884e1e7a9961455769e60a54ca6da7af2450fd",
+    "services/backend/pyproject.toml": "26ff38e8bcb1ada901e42230742df0cb9842625364e3338c82c1361aee8def7c"
+  },
+  "boundary_cases": {
+    "n": 9,
+    "before_pass": 2,
+    "after_pass": 9,
+    "baseline_policy_sha256": "1de7f05884d3371d1f2f8617a6210452c05883b5143704d3c05a361eb14f29fb",
+    "cases": [
+      {
+        "id": "synonym-enable",
+        "question": "该怎么处理？",
+        "claim": "启用防缠绕功能，替换防缠绕主刷，清除缠绕物。",
+        "quote": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。",
+        "expected": "启用防缠绕功能，替换防缠绕主刷，清除缠绕物。 [S1]",
+        "before": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。 [S1]",
+        "after": "启用防缠绕功能，替换防缠绕主刷，清除缠绕物。 [S1]",
+        "before_pass": false,
+        "after_pass": true
+      },
+      {
+        "id": "synonym-open",
+        "question": "该怎么处理？",
+        "claim": "打开防缠绕功能，更换防缠绕主刷，清理缠绕物。",
+        "quote": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。",
+        "expected": "打开防缠绕功能，更换防缠绕主刷，清理缠绕物。 [S1]",
+        "before": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。 [S1]",
+        "after": "打开防缠绕功能，更换防缠绕主刷，清理缠绕物。 [S1]",
+        "before_pass": false,
+        "after_pass": true
+      },
+      {
+        "id": "missing-restart-target",
+        "question": "怎么处理？",
+        "claim": "重新启动路由器。",
+        "quote": "故障现象：断网；检测：网络状态；修复：重启路由器，重启机器人。",
+        "expected": "故障现象：断网；检测：网络状态；修复：重启路由器，重启机器人。 [S1]",
+        "before": "故障现象：断网；检测：网络状态；修复：重启路由器，重启机器人。 [S1]",
+        "after": "故障现象：断网；检测：网络状态；修复：重启路由器，重启机器人。 [S1]",
+        "before_pass": true,
+        "after_pass": true
+      },
+      {
+        "id": "user-forbids",
+        "question": "不要更换主刷，该怎么处理？",
+        "claim": "请先清理缠绕物。",
+        "quote": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。",
+        "expected": "请先清理缠绕物。 [S1]",
+        "before": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。 [S1]",
+        "after": "请先清理缠绕物。 [S1]",
+        "before_pass": false,
+        "after_pass": true
+      },
+      {
+        "id": "user-completed",
+        "question": "主刷已经换过，该怎么处理？",
+        "claim": "请先清理缠绕物。",
+        "quote": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。",
+        "expected": "请先清理缠绕物。 [S1]",
+        "before": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。 [S1]",
+        "after": "请先清理缠绕物。 [S1]",
+        "before_pass": false,
+        "after_pass": true
+      },
+      {
+        "id": "user-declines",
+        "question": "不想更换主刷，怎么处理？",
+        "claim": "请先清理缠绕物。",
+        "quote": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。",
+        "expected": "请先清理缠绕物。 [S1]",
+        "before": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。 [S1]",
+        "after": "请先清理缠绕物。 [S1]",
+        "before_pass": false,
+        "after_pass": true
+      },
+      {
+        "id": "answer-completed",
+        "question": "怎么处理？",
+        "claim": "功能已开启，主刷已更换，仍卡住时清理缠绕物。",
+        "quote": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。",
+        "expected": "功能已开启，主刷已更换，仍卡住时清理缠绕物。 [S1]",
+        "before": "功能已开启，主刷已更换，仍卡住时清理缠绕物。 [S1]",
+        "after": "功能已开启，主刷已更换，仍卡住时清理缠绕物。 [S1]",
+        "before_pass": true,
+        "after_pass": true
+      },
+      {
+        "id": "answer-unnecessary",
+        "question": "怎么处理？",
+        "claim": "无需更换主刷，只清理缠绕物。",
+        "quote": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。",
+        "expected": "无需更换主刷，只清理缠绕物。 [S1]",
+        "before": "故障现象：缠绕停机；检测：是否开启防缠绕；修复：开启防缠绕功能，更换防缠绕主刷，清理缠绕物。 [S1]",
+        "after": "无需更换主刷，只清理缠绕物。 [S1]",
+        "before_pass": false,
+        "after_pass": true
+      },
+      {
+        "id": "synonym-adjust",
+        "question": "如何处理水印？",
+        "claim": "调低出水量。",
+        "quote": "故障现象：水印；检测：出水量；修复：调小出水量。",
+        "expected": "调低出水量。 [S1]",
+        "before": "故障现象：水印；检测：出水量；修复：调小出水量。 [S1]",
+        "after": "调低出水量。 [S1]",
+        "before_pass": false,
+        "after_pass": true
+      }
+    ]
+  },
+  "frozen_replay": {
+    "questions": 300,
+    "network": "blocked",
+    "paid_calls": 0,
+    "changed_ids": [
+      "b038",
+      "b136",
+      "b157",
+      "b160",
+      "b187"
+    ],
+    "risk_changed_ids": [],
+    "model_input_parity": 300,
+    "source_parity": 300,
+    "history_parity": 300
+  },
+  "comparison_to_parent": {
+    "same_answers": 300,
+    "changed_ids": [],
+    "risk_answers_unchanged": 10
+  },
+  "tests": {
+    "passed": 200,
+    "skipped_database": 10,
+    "new_boundary_cases": 9,
+    "budget_cases": 38
+  },
+  "paid_calls": 0,
+  "runtime_dependencies": {
+    "httpx": "0.28.1",
+    "requests": "2.34.2",
+    "urllib3": "2.8.0",
+    "aiohttp": "3.14.3",
+    "dashscope": "1.27.7",
+    "langchain-community": "0.4.2",
+    "langchain-core": "1.6.6"
+  },
+  "budget_scope": {
+    "entrypoints": [
+      "evaluation.evaluate",
+      "evaluation.benchmark"
+    ],
+    "wire_clients": [
+      "requests",
+      "httpx"
+    ],
+    "input_unit": "serialized UTF-8 bytes plus allowance",
+    "output_unit": "reserved max_tokens",
+    "cost": "reservation at approved model rates, not account bill",
+    "live_provider_validation": false
+  }
+}

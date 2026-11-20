@@ -19,6 +19,9 @@ dependencies = [
   "python-dotenv",
   "pytest",
   "httpx",
+  "requests",
+  "aiohttp",
+  "urllib3",
   "pydantic",
   "jieba",
   "rank-bm25"
