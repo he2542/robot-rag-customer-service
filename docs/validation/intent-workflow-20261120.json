@@ -1,0 +1,88 @@
+{
+  "version": "intent-workflow-preflight-v1",
+  "date": "2026-11-20",
+  "baseline_commit": "3897dd4",
+  "factor": "system workflow only; same candidates, evidence, output policy and empty history",
+  "local_tests": {
+    "passed": 206,
+    "database_skipped": 10
+  },
+  "prepared": {
+    "questions": 20,
+    "messages": 40,
+    "source_parity": 20,
+    "baseline_archive_message_parity": 20,
+    "max_message_bytes": 16384,
+    "total_message_bytes": 588670
+  },
+  "audit": {
+    "dataset_sha256": "76fb82394d5997cdb12005abf3cd01beb6fc76cee5004b4d8fdfecc6a96382c5",
+    "questions": 300,
+    "source_counts": {
+      "扫地机器人100问2.txt": 60,
+      "扫拖一体机器人100问.txt": 60,
+      "故障排除.txt": 60,
+      "维护保养.txt": 60,
+      "选购指南.txt": 60
+    },
+    "eligible_anchors": 254,
+    "retained_anchors": 254,
+    "lost_eligible_ids": [],
+    "review_excluded_ids": [
+      "b022",
+      "b090",
+      "b148",
+      "b174"
+    ],
+    "removed_duplicate_units": 252,
+    "budget_omitted_units": 8,
+    "max_input_bytes": 16382,
+    "total_input_bytes": 4398848,
+    "max_evidence_bytes": 12250,
+    "total_evidence_bytes": 3159182
+  },
+  "postprocess_replay": {
+    "questions": 300,
+    "network": "blocked",
+    "paid_calls": 0,
+    "prompt_source": "archived",
+    "changed_ids": [
+      "b038",
+      "b136",
+      "b157",
+      "b160",
+      "b187"
+    ],
+    "risk_changed_ids": [],
+    "model_input_parity": 300,
+    "source_parity": 300,
+    "history_parity": 300
+  },
+  "postprocess_same_as_previous_stage": 300,
+  "new_paid_calls": 0,
+  "new_generation_results": 0,
+  "generation_quality": "pending paired live generation",
+  "feature_default": false,
+  "protocol_sha256": "53b247277ae98fb03fede0ac0fd3f72301c13713944d795e4262bc7604e303bf",
+  "inputs_manifest_sha256": "cba72f4c8e0bfbcc1c3cf58c3279c1beaee101a7a0c708f0b9617953c783b111",
+  "source_hashes": {
+    "services/backend/src/services/rag.py": "391c0f160b8dca1bc1243bac14b50f3dd89fa5b8593f177c5013490750dedae9",
+    "services/backend/src/services/prompts.py": "40bc6dab0311b39f00ac0c272d9d47f1890fe621db921b91ccdb45f148ac25a5",
+    "services/backend/src/services/context.py": "7150442880c58f064161ee2a75c076f3975909d4b771b13bc035ffbd85930760",
+    "services/backend/src/services/answer_policy.py": "d23a394cacfa462f5f8a54bf86dea6684121e76a04c577637122efc60dd5a6d5",
+    "services/backend/src/services/prompt_context.py": "d1dd17123b7abb5040b496020ba8edcb4b398b8e903fcfa7a4eb3773c69d806a",
+    "services/backend/src/services/evidence_review.py": "4ccc9bc78a071f6a9486095388715b8cd8c83214d56305474a810e34c70c5b53",
+    "services/backend/evaluation/intent_workflow.py": "2a200c23ed79c583b0a7113fe9a3f8493869e347253e2251b2594ab7e4344a51",
+    "services/backend/evaluation/budget.py": "ca09b254296ee5b7d9204afdf2e493536f4a334eb982e0ca9aca8a13b97990ba",
+    "knowledge/robot/扫地机器人100问2.txt": "57ae8d6f93bbca9a4df5bfdd0a5fb301874404a611af33e5fcce3127d5cf0a0b",
+    "knowledge/robot/扫拖一体机器人100问.txt": "ad8af64df453a7bf3d614473cd66ce530ce707f4cacf549b90cb447889dccebc",
+    "knowledge/robot/故障排除.txt": "a954122a615861d62c74909d84a2f3a61f157d9bf5affa3c5f8ecd28998b84ad",
+    "knowledge/robot/维护保养.txt": "a5159f149789988fb6bb1dd619f0060a84f436746fc32fafb0a2e0e3a39fa23a",
+    "knowledge/robot/选购指南.txt": "e06bb351f6ade02ba52590d98867a6a39a9882524413150b2cc207ace270f726"
+  },
+  "artifact": {
+    "file": "intent-workflow-20261120-v1.tar.gz",
+    "sha256": "2a13049a825b29b6d28cc06e455a401b19941b46db23a144c4c6490edcd3e197",
+    "members": 62
+  }
+}

@@ -8,7 +8,7 @@ import tarfile
 from unittest.mock import patch
 
 
-def replay(archive_path):
+def replay(archive_path, *, archived_prompt=False):
     from langchain_core.chat_history import InMemoryChatMessageHistory
     from langchain_core.documents import Document
     from langchain_core.runnables import RunnableLambda
@@ -54,6 +54,7 @@ def replay(archive_path):
                 history = InMemoryChatMessageHistory()
                 service = RagService(Retriever(), RunnableLambda(model), lambda _: history,
                     context_entries_enabled=True,
+                    context_system_prompt=frozen["messages"][0]["content"] if archived_prompt else None,
                     context_builder=EvidenceContextBuilder(lambda: load_internal_files(repo / "knowledge/robot")))
                 events = list(service.stream_answer(q["query"], "offline-" + q["id"]))
                 answer = "".join(e.get("content", "") for e in events)
@@ -63,6 +64,7 @@ def replay(archive_path):
                 rows.append({"id":q["id"], "query":q["query"], "risk":q["safety_expected"],
                              "before":old["answer"], "after":answer, "changed":answer != old["answer"]})
     return {"questions":len(rows), "network":"blocked", "paid_calls":0,
+            "prompt_source":"archived" if archived_prompt else "current",
             "changed_ids":[r["id"] for r in rows if r["changed"]],
             "risk_changed_ids":[r["id"] for r in rows if r["risk"] and r["changed"]],
             "model_input_parity":len(rows), "source_parity":len(rows),
@@ -73,10 +75,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--archive", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--archived-prompt", action="store_true", help="Replay post-processing using the original generation's system prefix")
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError(args.output)
-    result = replay(args.archive)
+    result = replay(args.archive, archived_prompt=args.archived_prompt)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x", encoding="utf-8") as handle:
         json.dump(result, handle, ensure_ascii=False, indent=2)

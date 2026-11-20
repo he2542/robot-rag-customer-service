@@ -35,7 +35,7 @@ def filter_citations(text, allowed):
 
 class RagService:
     def __init__(self, retriever=None, chat_model=None, history_factory=internal_history,
-                 *, context_builder=None, context_entries_enabled=None):
+                 *, context_builder=None, context_entries_enabled=None, context_system_prompt=None):
         self.retriever = retriever if retriever is not None else InternalKnowledgeRetriever(
             DashScopeEmbeddings(model=config.embedding_model_name)
         )
@@ -46,7 +46,8 @@ class RagService:
         self.context_entries_enabled = (config.context_entries_enabled if context_entries_enabled is None
                                         else context_entries_enabled)
         self.context_builder = context_builder if context_builder is not None else EvidenceContextBuilder()
-        self.prompt_context = PromptContextBuilder(CONTEXT_SYSTEM_PROMPT)
+        self.context_system_prompt = CONTEXT_SYSTEM_PROMPT if context_system_prompt is None else context_system_prompt
+        self.prompt_context = PromptContextBuilder(self.context_system_prompt)
         prompt = ChatPromptTemplate.from_messages([
             ("system", SYSTEM_PROMPT), MessagesPlaceholder("history"),
             ("human", "{request_payload}"),
@@ -69,7 +70,7 @@ class RagService:
                     diagnostic["input_bytes"], diagnostic["evidence_bytes"],
                     diagnostic["history_messages"], diagnostic["history_dropped"])
         prompt = ChatPromptTemplate.from_messages([
-            SystemMessage(content=CONTEXT_SYSTEM_PROMPT), MessagesPlaceholder("history"),
+            SystemMessage(content=self.context_system_prompt), MessagesPlaceholder("history"),
             ("human", "{request_payload}"),
         ]).invoke(prepared)
         options = {"response_format": {"type": "json_object"}} if isinstance(self.chat_model, ChatTongyi) else {}

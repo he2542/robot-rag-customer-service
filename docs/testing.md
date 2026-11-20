@@ -33,7 +33,7 @@
 - 允许必要的少量真实调用，在已批准的次数和费用额度内自主安排；尚无明确额度时，先列明用途、模型、小样本数量、含重试的总调用上限、输入/输出上限及预计费用并取得预算。批量脚本未提供预算时不自动发送付费请求。
 - 生成、评审、Embedding、rerank统一计数；SDK自动重试和失败请求占用调用额度，取消请求不假定免费。预算按输入上限、输出上限、最大尝试次数及运行时价格估算。
 - 调用前核对剩余额度，达到调用、Token或费用上限即停止；不自动扩样、续跑缺项或增加模型复评。成功结果保存为检查点，后续只处理获准的缺项。
-- `evaluation.evaluate`和`evaluation.benchmark`的付费阶段已接入请求级预算：必须同时传入`--allow-paid`和`--budget FILE`。缺少任一项时在执行付费阶段前退出；直接调用付费函数也需要有效预算上下文。下文付费命令用于有预算的专项复现，不作为日常回归步骤。
+- `evaluation.evaluate`、`evaluation.benchmark`和`evaluation.intent_workflow answer`已接入请求级预算：必须同时传入`--allow-paid`和`--budget FILE`。缺少任一项时在执行付费阶段前退出；直接调用付费函数也需要有效预算上下文。下文付费命令用于有预算的专项复现，不作为日常回归步骤。
 
 ### 请求级预算
 
@@ -48,7 +48,7 @@
 | `max_estimated_cost_cny` | 按下面的批准价格累计预留的预计人民币金额 |
 | `models` | 允许模型，以及每百万输入/输出Token的批准单价 |
 
-输入字节作为保守Token代理参与费用预留，输出按请求上限计费预留，失败不返还额度，也不预扣缓存折扣。该金额是本次请求的估算配额；精确输入Token和真实账单另行核对。当前支持中国内地域名`dashscope.aliyuncs.com`上的同步文本生成、文本Embedding和精排；未知模型、其他地址、富媒体、工具调用及异步请求拒绝执行。它只约束这两个评测入口，不修改正常业务服务。
+输入字节作为保守Token代理参与费用预留，输出按请求上限计费预留，失败不返还额度，也不预扣缓存折扣。该金额是本次请求的估算配额；精确输入Token和真实账单另行核对。当前支持中国内地域名`dashscope.aliyuncs.com`上的同步文本生成、文本Embedding和精排；未知模型、其他地址、富媒体、工具调用及异步请求拒绝执行。它只约束上述评测入口，不修改正常业务服务。
 
 获得本轮授权后，使用新的预算文件。下面的价格和模型名为待填写字段，未替换会被拒绝；数值仅示范结构：
 
@@ -121,14 +121,37 @@ python -m evaluation.audit_phase1 --repo ../.. --output evaluation/results/phase
 
 ```bash
 python -m pytest tests/test_answer_coverage.py -q
-python -m evaluation.replay_answers --archive ../../docs/validation/phase1-context-300-20261116-v1.tar.gz --output evaluation/results/answer-coverage-01.json
+python -m evaluation.replay_answers --archive ../../docs/validation/phase1-context-300-20261116-v1.tar.gz --output evaluation/results/answer-coverage-01.json --archived-prompt
 ```
 
 回放从证据包读取300份新版原始生成，通过当前实际`RagService`处理；Embedding、召回和生成使用冻结资料与测试替身，并在执行期间阻断socket连接。程序校验所读成员的SHA-256、全部模型消息与来源一致性，以及保存历史等于可见回答；输出逐题前后文本、改动题号与风险题变化，既有输出不覆盖。
 
+提示版本改变后，`--archived-prompt`明确使用原始生成对应的系统规则，只验证当前后处理。未传该参数时检查当前提示与原生成消息完全相同；不同就拒绝将旧输出用于新提示的验证。
+
 结果用于验证生成后处理，没有重新生成或沿用旧评分给新答案打分。[步骤覆盖回归报告](validation/answer-coverage-20261120.md)记录已确认恢复的要点和保持不变的风险用例。
 
 增量修改还覆盖部分动作遗漏、重复动作的不同对象、跨结论动作已齐全、条件已满足或存在禁止语句，以及相邻动作词的空对象误判。对比上一阶段的逐题可见回答，而非沿用旧评分；[部分步骤增量回归](validation/partial-answer-coverage-20261120.md)保留父报告哈希及全部前后文本。
+
+### 20题生成流程对照
+
+此实验只改变第一阶段系统提示的回答流程；候选、来源构建、后处理、模型参数和空历史一致。每文件4题，覆盖遗漏、条件、风险、参数与长度问题；基线与优化版交替先生成，避免固定先后顺序。
+
+先离线冻结40份消息及来源、20题审读要点、协议和源码哈希：
+
+```bash
+python -m evaluation.intent_workflow prepare --archive ../../docs/validation/phase1-context-300-20261116-v1.tar.gz --root evaluation/results/intent-20 --baseline-ref 3897dd4
+python -m evaluation.intent_workflow validate --root evaluation/results/intent-20
+```
+
+准备阶段需本地Git中存在指定基线提交，历史提示通过AST提取，不执行历史代码。基线20份消息还须匹配原证据包，两个版本来源逐题相同。改动源码或冻结输入后，验证会拒绝继续。
+
+取得本轮预算后才运行真实生成：
+
+```bash
+python -m evaluation.intent_workflow answer --root evaluation/results/intent-20 --allow-paid --budget approved-intent-20.json
+```
+
+预案为20题×两版，最多40次尝试；Qwen-Plus非思考，输出上限1024。保持每份结果独立空历史，记录原始JSON、可见回答、用量、结束原因、耗时和消息/协议哈希。已完成的有效检查点复用，失败记录保留，不追加付费评审、Embedding或精排。原始结论的要点覆盖与最终可见回答分别按冻结要点核对，超长截断计入未完成。准备及效果记录见[生成流程验证](validation/intent-workflow-20261120.md)。
 
 ### 数据库集成测试
 
