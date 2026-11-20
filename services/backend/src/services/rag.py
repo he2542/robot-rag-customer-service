@@ -1,6 +1,7 @@
 """Grounded robot customer-service answers over a managed internal corpus."""
 
 import json
+import logging
 import re
 
 from langchain_community.embeddings import DashScopeEmbeddings
@@ -8,24 +9,22 @@ from langchain_community.chat_models.tongyi import ChatTongyi
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import RunnableLambda, RunnableWithMessageHistory
+from langchain_core.messages import SystemMessage
 
 from src import config
 from src.history import FileChatMessageHistory
 from src.services.retrieval import InternalKnowledgeRetriever
 
-from .prompts import SYSTEM_PROMPT
+from .prompts import SYSTEM_PROMPT, CONTEXT_SYSTEM_PROMPT
+from .context import EvidenceContextBuilder
+from .prompt_context import PromptContextBuilder, source_items
+from .answer_policy import render_context_answer
 
+logger = logging.getLogger(__name__)
 
 
 def internal_history(session_id):
     return FileChatMessageHistory(session_id, str(config.DATA_ROOT / "chat_history" / "robot_internal_v1"))
-
-
-def source_items(documents):
-    return [{"id": f"S{index}", "filename": str(document.metadata.get("source", "内置资料")),
-             "chunk_index": document.metadata.get("chunk_index", 0),
-             "excerpt": document.page_content}
-            for index, document in enumerate(documents, 1)]
 
 
 def filter_citations(text, allowed):
@@ -35,7 +34,8 @@ def filter_citations(text, allowed):
 
 
 class RagService:
-    def __init__(self, retriever=None, chat_model=None, history_factory=internal_history):
+    def __init__(self, retriever=None, chat_model=None, history_factory=internal_history,
+                 *, context_builder=None, context_entries_enabled=None):
         self.retriever = retriever if retriever is not None else InternalKnowledgeRetriever(
             DashScopeEmbeddings(model=config.embedding_model_name)
         )
@@ -43,6 +43,10 @@ class RagService:
             model=config.chat_model_name, max_retries=1,
             model_kwargs={"enable_thinking": False, "max_tokens": 1024},
         )
+        self.context_entries_enabled = (config.context_entries_enabled if context_entries_enabled is None
+                                        else context_entries_enabled)
+        self.context_builder = context_builder if context_builder is not None else EvidenceContextBuilder()
+        self.prompt_context = PromptContextBuilder(CONTEXT_SYSTEM_PROMPT)
         prompt = ChatPromptTemplate.from_messages([
             ("system", SYSTEM_PROMPT), MessagesPlaceholder("history"),
             ("human", "{request_payload}"),
@@ -55,8 +59,29 @@ class RagService:
             }, ensure_ascii=False),
         }) | prompt | self.chat_model | StrOutputParser()
         self.chain = RunnableWithMessageHistory(
-            chain, history_factory, input_messages_key="input", history_messages_key="history",
+            RunnableLambda(self._generate_context_answer) if self.context_entries_enabled else chain, history_factory, input_messages_key="input", history_messages_key="history",
         )
+
+    def _generate_context_answer(self, value):
+        prepared, diagnostic = self.prompt_context.messages(
+            value["input"], value["documents"], value.get("history", []))
+        logger.info("Prompt context bytes=%d evidence_bytes=%d history_messages=%d history_dropped=%d",
+                    diagnostic["input_bytes"], diagnostic["evidence_bytes"],
+                    diagnostic["history_messages"], diagnostic["history_dropped"])
+        prompt = ChatPromptTemplate.from_messages([
+            SystemMessage(content=CONTEXT_SYSTEM_PROMPT), MessagesPlaceholder("history"),
+            ("human", "{request_payload}"),
+        ]).invoke(prepared)
+        options = {"response_format": {"type": "json_object"}} if isinstance(self.chat_model, ChatTongyi) else {}
+        response = self.chat_model.invoke(prompt, **options)
+        usage = getattr(response, "response_metadata", {}).get("token_usage", {})
+        if isinstance(usage, dict):
+            logger.info("Generation usage input_tokens=%s output_tokens=%s cached_tokens=%s",
+                        usage.get("input_tokens"), usage.get("output_tokens"),
+                        usage.get("prompt_tokens_details", {}).get("cached_tokens")
+                        if isinstance(usage.get("prompt_tokens_details"), dict) else None)
+        result = StrOutputParser().invoke(response)
+        return render_context_answer(result, source_items(value["documents"]), value["input"])
 
     def stream_answer(self, query: str, session_id: str):
         risk_terms = ("鼓包", "冒烟", "烧焦", "起火", "漏电", "短接", "带电维修", "拆电池")
@@ -65,6 +90,14 @@ class RagService:
             yield {"content": "涉及电池、电气或起火风险，请停止使用和充电，在确保自身安全的前提下远离设备，联系专业售后；不要自行拆修或继续测试。"}
             return
         documents = self.retriever.invoke(query)
+        if self.context_entries_enabled:
+            context = self.context_builder.build(documents)
+            packed = self.prompt_context.evidence(query, context.documents)
+            documents = list(packed.documents)
+            logger.info("Evidence duplicates=%d omitted_units=%d serialized_bytes=%d",
+                        packed.duplicates, packed.dropped_units, packed.evidence_bytes)
+            logger.info("Evidence entries=%d reviews=%s fallback_count=%d",
+                        context.entry_count, context.excluded_reviews, len(context.fallback_reasons))
         yield {"sources": source_items(documents)}
         if not documents:
             yield {"content": "当前内置知识库没有找到可用资料，无法据此确认。请补充型号或问题细节，必要时联系对应品牌售后。"}
