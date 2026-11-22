@@ -157,6 +157,8 @@ python -m evaluation.intent_workflow answer --root evaluation/results/intent-20 
 
 ### 离线汇总20题结果
 
+操作边界修改优先运行`python -m pytest tests/test_operation_boundaries.py -q`，再用原40份和300份输出回放。比较完整消息、来源、可见回答及保存历史，逐项审读所有变化；只更新本次实际验证的行为，不沿用旧质量分数。[操作边界回归](validation/operation-boundaries-20261122.md)记录当前结果。
+
 20题真实生成的固定要点评审可完全离线汇总：
 
 ```bash

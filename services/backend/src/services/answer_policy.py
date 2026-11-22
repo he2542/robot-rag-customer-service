@@ -16,7 +16,10 @@ _BOUNDARY = re.compile(r"不要|不可|不得|不能|不建议|请勿|切勿|禁
 SAFETY_ANSWER = "涉及内部电机、排线、电池连接或安全保护的检查与处理，请停止相关操作并联系专业售后，不要自行拆修或继续测试。"
 UNSUPPORTED_ANSWER = "当前无法提供有可靠证据支持的结论。请补充具体型号和故障现象，必要时联系对应品牌售后。"
 _NEGATION = re.compile(r"不要|不可|不得|不能|不建议|请勿|切勿|禁止")
-_ELECTRICAL_SYMPTOM = re.compile(r"电池.{0,6}(?:故障|异常|报警)|烫手|烫得|异常发热|发热严重|过热|(?:开机|一开机).{0,12}报警|潮湿.{0,12}停机")
+_ELECTRICAL_SYMPTOM = re.compile(r"电池.{0,6}(?:故障|异常|报警)|烫手|烫得|异常发热|发热严重|(?:开机|一开机).{0,12}报警|潮湿.{0,12}停机")
+_REPORTED_OVERHEAT = re.compile(r"(?:已经|正在|现在|出现|发生|运行时|工作时|工作中).{0,10}过热|过热了"
+                                r"|(?:触发|进入|启动).{0,8}过热保护|过热保护.{0,8}(?:报警|停机|故障|坏了)")
+_LUBRICATE = re.compile(r"(?:滴|加注|加|注入|涂抹).{0,8}(?:润滑油|润滑脂|专用油|油脂)")
 _RETRY = re.compile(r"充满|充电(?!座|触点|时|异常|过程|接口|状态|故障|电流|电压|器|电源)|重试|继续使用|开机测试|重新开机|更换.{0,6}电池")
 _ASK_ACTION = re.compile(r"怎么办|咋办|怎么.{0,6}(?:处理|解决|调|恢复|排查|做|弄)|如何|处理|解决|恢复|调回|步骤|排查|办法|措施")
 _REPAIR_FIELD = re.compile(r"(?:修复|处理方法|解决方法)[：:]")
@@ -84,8 +87,32 @@ def complete_action_quote(text, quote, question, covered_text=None):
     return re.sub(r"^\s*\d+[.、]\s*", "", quote.strip())
 
 
+def electrical_symptom(question):
+    if _ELECTRICAL_SYMPTOM.search(question) or _REPORTED_OVERHEAT.search(question):
+        return True
+    # A protection feature alone does not report an active overheating fault.
+    return '过热' in question and not re.search(r'过热.{0,16}保护|保护.{0,16}过热',question)
+
+
+def unsafe_lubrication(text):
+    # Carry the named component across commas/semicolons within one sentence.
+    # A later warning does not authorize an earlier user operation.
+    for sentence in re.split(r'[。！？\n]',text):
+        internal_target=False
+        for clause in re.split(r'[，,；;]|但|而是|而应',sentence):
+            if re.search(r'电机|轴承',clause):
+                internal_target=True
+            action=_LUBRICATE.search(clause)
+            if internal_target and action:
+                prefix=clause[:action.start()]
+                professional=re.search(r'(?:专业售后|专业人员|售后人员|售后工程师).{0,10}$',prefix)
+                if not _NEGATION.search(prefix) and not professional:
+                    return True
+    return False
+
+
 def operation_boundary(question):
-    if _ELECTRICAL_SYMPTOM.search(question):
+    if electrical_symptom(question):
         return "请先停止使用和充电，联系专业售后；不要自行拆修或继续通电测试。"
     if re.search(r"电线|排线", question) and re.search(r"安全|注意|检查|保养|维护|损坏|破损|松动|看看", question):
         return "先断电，仅目视检查无需拆机即可看到的外露电源线；内部排线和插接件的检查交由专业售后，不要拉扯、插拔或自行拆机。"
@@ -125,6 +152,8 @@ def normalize_citations(text, allowed):
 
 def finalize_answer(text, allowed):
     # A later disclaimer cannot undo an earlier explicit action recommendation.
+    if unsafe_lubrication(text):
+        return SAFETY_ANSWER
     for clause in re.split(r"[，,。；;！？\n]", text):
         if _ACTION.search(clause) and not _BOUNDARY.search(clause):
             return SAFETY_ANSWER
@@ -179,7 +208,7 @@ def render_context_answer(raw, references, question=""):
             # Ignore embedded citation syntax; only the separately validated IDs count.
             clean = re.sub(r"\[[^\]\n]*S\s*\d[^\]\n]*\]", "", text)
             clean = re.sub(r"(?<![A-Za-z0-9])S\d+[-－]\d+", "", clean).strip()
-            if _ELECTRICAL_SYMPTOM.search(question) and _positive_actions(clean, _RETRY):
+            if electrical_symptom(question) and _positive_actions(clean, _RETRY):
                 # Keep only an independently stated cause, never charging/retry steps.
                 clean = "；".join(part for part in re.split(r"[；;。]", clean)
                                  if re.search(r"可能|原因|导致", part)
@@ -190,7 +219,7 @@ def render_context_answer(raw, references, question=""):
             candidate = finalize_answer(clean + " " + f"[{matches[0]}]", allowed)
             if candidate == SAFETY_ANSWER:
                 actions = _positive_actions(clean, _ACTION)
-                if actions and all(m.group().startswith(("检查", "检测")) for m in actions):
+                if actions and all(m.group().startswith(("检查", "检测")) for m in actions) and not unsafe_lubrication(clean):
                     paragraphs.append("专业售后检查项：" + clean + f" [{matches[0]}]")
                 else:
                     safety_rejected = True
