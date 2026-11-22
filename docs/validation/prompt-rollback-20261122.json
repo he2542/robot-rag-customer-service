@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-22",
+  "restored_prompt_commit": "3897dd4",
+  "prompt_file_normalized_sha256": "ef3103611f0d2a3e4dd9aebc8284293345e355f8f6d6f975f7586dfebc617860",
+  "baseline_prompt_sha256": "6729b184b392b056a5143681720d070a249c7c8b780c30d8748087e9863d23d0",
+  "twenty_baseline_ids": [
+    "b022",
+    "b030",
+    "b038",
+    "b044",
+    "b074",
+    "b090",
+    "b099",
+    "b106",
+    "b126",
+    "b136",
+    "b157",
+    "b160",
+    "b187",
+    "b196",
+    "b215",
+    "b233",
+    "b252",
+    "b260",
+    "b280",
+    "b295"
+  ],
+  "baseline_message_source_answer_history_parity": 20,
+  "three_hundred_message_source_answer_history_parity": 300,
+  "risk_answer_changes": [],
+  "network": "blocked",
+  "paid_calls": 0,
+  "local_tests": {
+    "passed": 211,
+    "database_skipped": 10
+  },
+  "source_archive_sha256": "ce1eecb67f83765c66053b43f707c7a0412b41f63981d74d01ae0b854bcf4999",
+  "feature_default": false
+}

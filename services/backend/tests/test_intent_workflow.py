@@ -15,6 +15,35 @@ from src.services.context import EvidenceContextBuilder
 from src.services.rag import RagService
 
 
+@pytest.fixture
+def archived_workflow_prompt(monkeypatch):
+    from src.services import prompts
+    archive=Path(__file__).resolve().parents[3]/'docs/validation/intent-workflow-20261120-v1.tar.gz'
+    with tarfile.open(archive) as tf:
+        systems=json.load(tf.extractfile('experiment/prompts.json'))
+    monkeypatch.setattr(prompts,'CONTEXT_SYSTEM_PROMPT',systems['optimized'])
+    return systems
+
+
+def test_default_prompt_restored_to_archived_baseline():
+    from src.services.prompts import CONTEXT_SYSTEM_PROMPT
+    archive=Path(__file__).resolve().parents[3]/'docs/validation/intent-workflow-20261120-v1.tar.gz'
+    with tarfile.open(archive) as tf:
+        systems=json.load(tf.extractfile('experiment/prompts.json'))
+    assert CONTEXT_SYSTEM_PROMPT==systems['baseline']
+    assert CONTEXT_SYSTEM_PROMPT!=systems['optimized']
+
+
+def test_prepare_refuses_an_identical_prompt_without_creating_run(tmp_path,monkeypatch):
+    from src.services.prompts import CONTEXT_SYSTEM_PROMPT
+    source=('CONTEXT_SYSTEM_PROMPT='+repr(CONTEXT_SYSTEM_PROMPT)).encode('utf-8')
+    monkeypatch.setattr(experiment.subprocess,'check_output',lambda *a,**kw:source)
+    root=tmp_path/'identical'
+    with pytest.raises(ValueError,match='identical'):
+        experiment.prepare(root,tmp_path/'not-read.tar.gz','3897dd4')
+    assert not root.exists()
+
+
 def test_prompt_versions_do_not_change_user_data_sources_or_history():
     class Retriever:
         def invoke(self,query):return [Document(page_content='请重启APP。',metadata={'source':'手册.txt'})]
@@ -40,7 +69,7 @@ def test_historical_prompt_is_parsed_without_executing_code():
     with pytest.raises(ValueError):experiment.extract_prompt('CONTEXT_SYSTEM_PROMPT=__import__("os").getcwd()')
 
 
-def test_prepare_freezes_twenty_paired_inputs_without_network(tmp_path,monkeypatch):
+def test_prepare_freezes_twenty_paired_inputs_without_network(tmp_path,monkeypatch,archived_workflow_prompt):
     archive=Path(__file__).resolve().parents[3]/'docs/validation/phase1-context-300-20261116-v1.tar.gz'
     with tarfile.open(archive) as tf:source=tf.extractfile('backend/src/services/prompts.py').read()
     monkeypatch.setattr(experiment.subprocess,'check_output',lambda *a,**kw:source)
@@ -72,7 +101,7 @@ def test_source_changes_invalidate_a_prepared_run(tmp_path,monkeypatch):
     with pytest.raises(AssertionError,match='Source changed'):experiment.checked(tmp_path)
 
 
-def test_answer_records_both_arms_and_resumes_only_matching_checkpoints(tmp_path,monkeypatch):
+def test_answer_records_both_arms_and_resumes_only_matching_checkpoints(tmp_path,monkeypatch,archived_workflow_prompt):
     from langchain_community.chat_models import tongyi
     from langchain_core.messages import AIMessage
     from langchain_core.outputs import ChatGeneration, ChatResult
