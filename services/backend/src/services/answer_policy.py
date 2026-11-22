@@ -136,6 +136,43 @@ def quote_in_source(quote, source):
     return len(canonical) >= 6 and (quote in source or canonical in plain(source))
 
 
+def verified_claim_entries(claims, references, question):
+    """Recover only separately located complete numbered source lines.
+
+    The generated merged assertion is discarded; source conditions are copied.
+    """
+    def plain(line):
+        return re.sub(r'\s+',' ',line.replace('**','')).strip()
+    for claim in claims:
+        if not isinstance(claim,dict):
+            continue
+        text,quote=claim.get('text'),claim.get('quote')
+        if (not isinstance(text,str) or not text.strip() or len(text)>4000
+                or not isinstance(quote,str) or not 6<=len(quote.strip())<=400):
+            continue
+        if any(quote_in_source(quote.strip(),s['excerpt']) for s in references):
+            yield {'text':text,'quote':quote,'extractive':False}
+            continue
+        # Restriction questions benefit from separate original conditions. Do
+        # not add procedures to troubleshooting answers from stitched quotes.
+        if not re.search(r'使用限制|哪些限制|什么限制|注意事项|适用条件|使用要求|维护.{0,8}要求',question):
+            continue
+        lines=quote.strip().splitlines()
+        if not 2<=len(lines)<=4:
+            continue
+        recovered=[]
+        for line in lines:
+            if not re.fullmatch(r'\d+[.、]\s*\S[^\n]*[。！？]',line.strip()):
+                break
+            matches=[s for s in references if any(plain(line)==plain(original) for original in s['excerpt'].splitlines())]
+            if len(matches)!=1:
+                break
+            original=next(original for original in matches[0]['excerpt'].splitlines() if plain(line)==plain(original))
+            recovered.append({'text':re.sub(r'^\s*\d+[.、]\s*','',original),'quote':original,'extractive':True})
+        else:
+            yield from recovered
+
+
 def normalize_citations(text, allowed):
     def replace(match):
         body = match.group(1).strip()
@@ -190,8 +227,8 @@ def render_context_answer(raw, references, question=""):
         claims = value.get("claims")
         if decision not in {"answer", "conflict"} or not isinstance(claims, list) or not 1 <= len(claims) <= 20:
             return UNSUPPORTED_ANSWER
-        paragraphs, safety_rejected = [], False
-        for claim in claims:
+        paragraphs, safety_rejected, recovered_used = [], False, False
+        for claim in verified_claim_entries(claims,references,question):
             if not isinstance(claim, dict):
                 continue
             text, quote = claim.get("text"), claim.get("quote")
@@ -201,7 +238,11 @@ def render_context_answer(raw, references, question=""):
             matches = [item["id"] for item in references if quote_in_source(quote.strip(), item["excerpt"])]
             if not matches:
                 continue
-            if decision == "answer":
+            if claim['extractive'] and (_positive_actions(text,re.compile(r'拆卸|拆解|拆机|拆开|拉扯|插拔'))
+                                        or _positive_actions(text,_LUBRICATE) or unsafe_lubrication(text)):
+                safety_rejected=True
+                continue
+            if decision == "answer" and not claim['extractive']:
                 covered_text = "\n".join(c["text"] for c in claims if isinstance(c, dict)
                                          and c.get("quote") == quote and isinstance(c.get("text"), str))
                 text = complete_action_quote(text, quote, question, covered_text)
@@ -225,12 +266,15 @@ def render_context_answer(raw, references, question=""):
                     safety_rejected = True
             elif candidate != UNSUPPORTED_ANSWER:
                 paragraphs.append(candidate)
+                recovered_used = recovered_used or claim['extractive']
         if not paragraphs:
             return with_boundary(SAFETY_ANSWER if safety_rejected else UNSUPPORTED_ANSWER)
         paragraphs = list(dict.fromkeys(paragraphs))
         if safety_rejected:
             paragraphs.append(SAFETY_ANSWER)
         prefix = "资料中的适用条件或说明存在差异：\n\n" if decision == "conflict" else ""
+        if recovered_used and not prefix:
+            prefix="部分内容按资料原文分别列出，请保留各自适用条件：\n\n"
         return with_boundary(prefix + "\n\n".join(paragraphs))
     except (ValueError, TypeError):
         return UNSUPPORTED_ANSWER
