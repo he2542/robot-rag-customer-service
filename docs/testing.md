@@ -123,6 +123,15 @@ python -m evaluation.audit_phase1 --repo ../.. --output evaluation/results/phase
 
 后处理的正确率验证以最近有效评分版本为起点，查找累计受影响答案，对新旧可见回答按同一标准复核后汇总。仅在答案和评分标准均未改变时复用原标签；评分来源有变化时明确标记。完整示例与离线复算包见[维护周期效果对照](validation/maintenance-quality-20261124.md)。
 
+新问题的统一模型验收使用 `evaluation.postprocess_validation`：固定问题、必要要点、完整证据和两版后处理，Qwen-Plus每题生成一次，Qwen-Max隐藏版本逐份评分；本轮完全相同评分输入按请求哈希共享，旧标签不参与。50题结果为39/50→39/50，调用与逐题证据见[独立对照报告](validation/maintenance-independent-50-20261124.md)。
+
+```bash
+python -m evaluation.postprocess_validation --help
+python -m pytest tests/test_postprocess_validation.py -q
+```
+
+入口分为 `prepare`、`validate`、`run`、`summarize`。准备阶段冻结数据、消息、代码与评分标准；付费运行需要显式 `--allow-paid --budget`，有效检查点按哈希复用，预算耗尽即停止。证据包内的 `recompute.py` 使用标准库离线重算，不产生模型用量。
+
 ```bash
 python -m pytest tests/test_answer_coverage.py -q
 python -m evaluation.replay_answers --archive ../../docs/validation/phase1-context-300-20261116-v1.tar.gz --output evaluation/results/answer-coverage-01.json --archived-prompt

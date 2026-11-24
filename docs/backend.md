@@ -152,6 +152,7 @@ human：本轮问题和参考资料组成的 JSON
 
 - [300 题上下文评测](validation/phase1-context-300-20261116.md)
 - [提示词对照评测](validation/intent-workflow-live-20-20261121.md)与[回退验证](validation/prompt-rollback-20261122.md)
+- [维护周期50题独立对照](validation/maintenance-independent-50-20261124.md)：自动通过率39/50→39/50，1题改善、1题退化，完整条目功能保持默认关闭。
 - [步骤补全](validation/partial-answer-coverage-20261120.md)、[操作风险](validation/operation-boundaries-20261122.md)、[限制条目恢复](validation/quote-recovery-20261122.md)和[维护周期校验](validation/maintenance-cycles-20261123.md)
 
 当前支持单轮证据整理和近期完整对话筛选；追问改写、结构化会话状态和历史摘要尚未实现。测试命令和离线复现方式见[测试与评测](testing.md)。

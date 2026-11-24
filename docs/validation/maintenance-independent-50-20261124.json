@@ -1,0 +1,467 @@
+{
+  "questions": 50,
+  "per_question": [
+    {
+      "id": "n001",
+      "category": "ordinary",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n002",
+      "category": "ordinary",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n003",
+      "category": "ordinary",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n004",
+      "category": "ordinary",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n005",
+      "category": "ordinary",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n006",
+      "category": "ordinary",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n007",
+      "category": "ordinary",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n008",
+      "category": "ordinary",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n009",
+      "category": "ordinary",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n010",
+      "category": "ordinary",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n011",
+      "category": "maintenance",
+      "changed": true,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n012",
+      "category": "maintenance",
+      "changed": true,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n013",
+      "category": "maintenance",
+      "changed": true,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n014",
+      "category": "maintenance",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n015",
+      "category": "maintenance",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n016",
+      "category": "maintenance",
+      "changed": true,
+      "pre": true,
+      "post": false
+    },
+    {
+      "id": "n017",
+      "category": "maintenance",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n018",
+      "category": "maintenance",
+      "changed": true,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n019",
+      "category": "maintenance",
+      "changed": true,
+      "pre": false,
+      "post": true
+    },
+    {
+      "id": "n020",
+      "category": "maintenance",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n021",
+      "category": "conditions",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n022",
+      "category": "conditions",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n023",
+      "category": "conditions",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n024",
+      "category": "conditions",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n025",
+      "category": "conditions",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n026",
+      "category": "conditions",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n027",
+      "category": "conditions",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n028",
+      "category": "conditions",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n029",
+      "category": "conditions",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n030",
+      "category": "conditions",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n031",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n032",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n033",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n034",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n035",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n036",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n037",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n038",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n039",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n040",
+      "category": "unanswerable",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n041",
+      "category": "risk",
+      "changed": false,
+      "pre": false,
+      "post": false
+    },
+    {
+      "id": "n042",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n043",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n044",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n045",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n046",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n047",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n048",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n049",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    },
+    {
+      "id": "n050",
+      "category": "risk",
+      "changed": false,
+      "pre": true,
+      "post": true
+    }
+  ],
+  "statistics": {
+    "n": 50,
+    "before_correct": 39,
+    "after_correct": 39,
+    "before_rate": 0.78,
+    "after_rate": 0.78,
+    "delta_pp": 0.0,
+    "relative_improvement": 0.0,
+    "delta_95_cluster_bootstrap_pp": [
+      -6.000000000000001,
+      6.000000000000001
+    ],
+    "before_95_wilson_iid": [
+      0.6475845041874634,
+      0.8724608402978559
+    ],
+    "after_95_wilson_iid": [
+      0.6475845041874634,
+      0.8724608402978559
+    ],
+    "wins": 1,
+    "losses": 1,
+    "both_correct": 38,
+    "both_wrong": 10,
+    "strata": 5,
+    "clusters": 50,
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20261124,
+    "mcnemar_exact_iid_sensitivity_p": 1.0
+  },
+  "by_category": {
+    "conditions": {
+      "n": 10,
+      "pre_pass": 6,
+      "post_pass": 6
+    },
+    "maintenance": {
+      "n": 10,
+      "pre_pass": 8,
+      "post_pass": 8
+    },
+    "ordinary": {
+      "n": 10,
+      "pre_pass": 6,
+      "post_pass": 6
+    },
+    "risk": {
+      "n": 10,
+      "pre_pass": 9,
+      "post_pass": 9
+    },
+    "unanswerable": {
+      "n": 10,
+      "pre_pass": 10,
+      "post_pass": 10
+    }
+  },
+  "changed": [
+    "n011",
+    "n012",
+    "n013",
+    "n016",
+    "n018",
+    "n019"
+  ],
+  "paid_generation_calls": 48,
+  "unique_scoring_calls": 56,
+  "pre_pass": 39,
+  "post_pass": 39,
+  "wins": [
+    "n019"
+  ],
+  "losses": [
+    "n016"
+  ],
+  "usage": {
+    "stages": [
+      {
+        "stage": "generation",
+        "calls": 48,
+        "input_tokens": 57557,
+        "output_tokens": 3597,
+        "estimated_original_price_cny": "0.0532396"
+      },
+      {
+        "stage": "primary_judge",
+        "calls": 56,
+        "input_tokens": 54531,
+        "output_tokens": 2238,
+        "estimated_original_price_cny": "0.1523592"
+      },
+      {
+        "stage": "verification_judge",
+        "calls": 9,
+        "input_tokens": 9417,
+        "output_tokens": 353,
+        "estimated_original_price_cny": "0.0259896"
+      }
+    ],
+    "total_calls": 113,
+    "estimated_original_price_cny": "0.2315884",
+    "reserved_calls": 113,
+    "reserved_input_bytes": 523266,
+    "reserved_output_tokens": 82432,
+    "reserved_estimated_cost_cny": "1.2646496"
+  },
+  "artifact_sha256": "142f71fe5f67241d79746b85c606d36b4731798f9c9e47af08510e617bd76ce1",
+  "dataset_sha256": "2c22647b5c8ff9129cf51bb8ba52d93dcb872bf373dbd35fe2abb28d41076f50",
+  "inputs_manifest_sha256": "ba96d9e243e03e818414359ffde5ecf7cadb91d1cfcbc8eecdbde21255bb6e07",
+  "primary_scores_overridden": false,
+  "repeat_labels": 10,
+  "repeat_changed_labels": 0
+}
