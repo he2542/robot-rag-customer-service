@@ -136,23 +136,48 @@ def quote_in_source(quote, source):
     return len(canonical) >= 6 and (quote in source or canonical in plain(source))
 
 
-def maintenance_cycle_fallback(text, quote, references, question):
-    """Use a complete source entry when a maintenance claim invents cycles."""
-    if not re.search(r'耗材|维护.{0,8}(?:周期|频率|节奏)|(?:更换|清洗|清理).{0,5}周期',question):
+def maintenance_entries(text, quote, references, question):
+    """Copy uniquely located complete cycle entries, preserving their conditions.
+
+    None means this claim is outside the cycle policy; an empty list rejects
+    an incomplete or ambiguous cycle quote without retaining the generated text.
+    """
+    if not re.search(r'耗材|维护.{0,8}(?:周期|频率|节奏)|(?:更换|清洗|清理).{0,5}周期', question):
         return None
-    def cycles(value):
-        value=re.sub(r'\s+','',value).replace('至','-').replace('～','-').replace('—','-')
-        return set(re.findall(r'每(?:日|天|周|月|次)|半个月|\d+(?:\.\d+)?(?:-\d+(?:\.\d+)?)?(?:个)?(?:月|周|天|小时)',value))
-    if cycles(text)<=cycles(quote):
+    if not re.search(r'每(?:日|天|周|月|次)|半个月|\d+(?:\.\d+)?(?:个)?(?:月|周|天|小时)', text + quote):
         return None
-    def plain(line):return re.sub(r'\s+',' ',line.replace('**','')).strip()
-    if not re.fullmatch(r'\d+[.、]\s*\S[^\n]*[。！？]',quote.strip()):
-        return None
-    matches=[line for source in references for line in source['excerpt'].splitlines() if plain(line)==plain(quote)]
-    if len(matches)!=1:
-        return None
-    original=matches[0]
-    return {'text':re.sub(r'^\s*\d+[.、]\s*','',original),'quote':original,'extractive':True}
+    marker = re.compile(r'(?m)^\d+[.、][ \t]*')
+    def blocks(value):
+        starts = list(marker.finditer(value.strip()))
+        value = value.strip()
+        if not starts or starts[0].start() != 0:
+            return []
+        return [value[m.start():starts[i + 1].start() if i + 1 < len(starts) else len(value)].strip()
+                for i, m in enumerate(starts)]
+    requested = blocks(quote)
+    if not 1 <= len(requested) <= 4:
+        return []
+    def plain(line):
+        return re.sub(r'\s+', ' ', line.replace('**', '')).strip()
+    entries = []
+    originals = []
+    for source in references:
+        # Headings delimit sections; a question and all its answer lines remain
+        # one entry. A shortened question/answer cannot match the full block.
+        for section in re.split(r'(?m)^#{1,6}[ \t]+[^\n]*\n?', source['excerpt']):
+            numbered = marker.search(section)
+            if numbered:
+                originals.extend(blocks(section[numbered.start():]))
+    for entry in requested:
+        if not entry.replace('**', '').rstrip().endswith(('。', '！', '？')):
+            return []
+        matches = [original for original in originals if plain(original) == plain(entry)]
+        if len(matches) != 1:
+            return []
+        original = matches[0]
+        entries.append({'text': re.sub(r'^\s*\d+[.、]\s*', '', original),
+                        'quote': original, 'extractive': True})
+    return entries
 
 
 def verified_claim_entries(claims, references, question):
@@ -169,8 +194,12 @@ def verified_claim_entries(claims, references, question):
         if (not isinstance(text,str) or not text.strip() or len(text)>4000
                 or not isinstance(quote,str) or not 6<=len(quote.strip())<=400):
             continue
+        maintenance = maintenance_entries(text, quote, references, question)
+        if maintenance is not None:
+            yield from maintenance
+            continue
         if any(quote_in_source(quote.strip(),s['excerpt']) for s in references):
-            yield maintenance_cycle_fallback(text,quote,references,question) or {'text':text,'quote':quote,'extractive':False}
+            yield {'text':text,'quote':quote,'extractive':False}
             continue
         # Restriction questions benefit from separate original conditions. Do
         # not add procedures to troubleshooting answers from stitched quotes.

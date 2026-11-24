@@ -119,6 +119,8 @@ python -m evaluation.audit_phase1 --repo ../.. --output evaluation/results/phase
 
 ### 原始回答的离线回放
 
+维护周期条目使用 `python -m pytest tests/test_maintenance_cycles.py -q` 验证，覆盖部件与条件混用、完整问答、来源歧义、重复条目及危险操作过滤。回放结果见[维护周期完整条目测试](validation/maintenance-entries-20261124.md)。
+
 ```bash
 python -m pytest tests/test_answer_coverage.py -q
 python -m evaluation.replay_answers --archive ../../docs/validation/phase1-context-300-20261116-v1.tar.gz --output evaluation/results/answer-coverage-01.json --archived-prompt
