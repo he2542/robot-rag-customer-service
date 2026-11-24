@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-24",
+  "runtime_pre": "295405e",
+  "runtime_post": "7b14975",
+  "method": "Incremental audit: 300 unchanged labels retain archived two-round intersection, affected labels use single coding-assistant source review; 20 retains frozen same-assistant point criteria. Not a new full model judging run.",
+  "paid_calls": 0,
+  "reviewed_union_300": [
+    "b038",
+    "b099",
+    "b136",
+    "b157",
+    "b160",
+    "b187",
+    "b196",
+    "b197",
+    "b220",
+    "b295"
+  ],
+  "latest_changed_300": [
+    "b099",
+    "b220"
+  ],
+  "incremental_300": {
+    "n": 300,
+    "pre_pass": 250,
+    "post_pass": 251,
+    "pre_percent": 83.3333,
+    "post_percent": 83.6667,
+    "delta_pp": 0.3333,
+    "wins": [
+      "b099"
+    ],
+    "losses": []
+  },
+  "reviewed_union_subset": {
+    "n": 10,
+    "pre_pass": 6,
+    "post_pass": 7,
+    "pre_percent": 60.0,
+    "post_percent": 70.0,
+    "delta_pp": 10.0,
+    "wins": [
+      "b099"
+    ],
+    "losses": []
+  },
+  "default_prompt_20": {
+    "n": 20,
+    "pre_pass": 13,
+    "post_pass": 13,
+    "pre_percent": 65.0,
+    "post_percent": 65.0,
+    "delta_pp": 0.0,
+    "wins": [],
+    "losses": []
+  },
+  "archived_experimental_prompt_20": {
+    "n": 20,
+    "pre_pass": 12,
+    "post_pass": 12,
+    "pre_percent": 60.0,
+    "post_percent": 60.0,
+    "delta_pp": 0.0,
+    "wins": [],
+    "losses": []
+  }
+}
