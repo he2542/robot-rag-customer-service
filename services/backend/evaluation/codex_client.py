@@ -3,25 +3,31 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
 import time
 
 
-VERSION = "codex-eval-v1"
+VERSION = "codex-eval-v2"
+INSTRUCTIONS = "Evaluate only the supplied task and evidence. Return exactly the requested JSON. Do not use tools."
+TOOL_METADATA = {"tool_mode": "direct", "multi_agent_version": "disabled",
+                 "shell_type": "disabled", "apply_patch_tool_type": None,
+                 "experimental_supported_tools": [], "supports_search_tool": False}
 SETTINGS = {
-    "model_provider": "openai", "forced_login_method": "chatgpt",
+    "forced_login_method": "chatgpt",
     "model_reasoning_effort": "low", "approval_policy": "never",
     "project_doc_max_bytes": 0, "skills.include_instructions": False,
     "include_apps_instructions": False, "mcp_servers": {}, "plugins": {},
     "web_search": "disabled", "tools.update_plan.enabled": False,
+    "tools.experimental_request_user_input.enabled": False,
 }
 for _feature in (
     "shell_tool", "unified_exec", "apps", "browser_use", "browser_use_external",
     "computer_use", "multi_agent", "code_mode", "code_mode_host", "view_image",
     "sleep_tool", "workspace_dependencies", "remote_plugin", "skill_search",
-    "skill_mcp_dependency_install", "unbounded_connection_retries",
+    "skill_mcp_dependency_install", "unbounded_connection_retries", "plugins", "image_generation",
 ):
     SETTINGS["features." + _feature] = False
 
@@ -102,6 +108,8 @@ def parse_events(raw):
         model = event.get("model", model)
         if kind and kind.startswith("item."):
             item = event.get("item", {})
+            if item.get("type") == "error":
+                raise CodexError("CLI diagnostic prevented acceptance: " + item.get("message", "unknown"))
             if item.get("type") not in {"agent_message", "reasoning"}:
                 raise CodexError("Unexpected tool or action event")
             if kind == "item.completed" and item.get("type") == "agent_message":
@@ -194,14 +202,39 @@ class CodexClient:
             raise CodexError("Use the native Codex executable, not a shell launcher")
         self.model = model
         self.identity = None
+        self.catalog = None
+        self.overrides = {}
 
-    def arguments(self):
+    def arguments(self, catalog_path=None, instructions_path=None):
+        settings = {**SETTINGS, **self.overrides}
+        if self.model:
+            settings["model"] = self.model
+        if catalog_path is not None:
+            settings["model_catalog_json"] = str(catalog_path)
+        if instructions_path is not None:
+            settings["model_instructions_file"] = str(instructions_path)
         return [self.executable, "--no-daemon"] + [
-            part for key, value in SETTINGS.items() for part in ("-c", key + "=" + json.dumps(value))
+            part for key, value in settings.items() for part in ("-c", key + "=" + json.dumps(value))
         ]
 
+    @staticmethod
+    def global_instructions():
+        home = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex")))
+        for filename in ("AGENTS.override.md", "AGENTS.md"):
+            path = home / filename
+            if path.is_file():
+                return path.read_text(encoding="utf-8").replace("\r\n", "\n").strip()
+        return ""
+
+    def write_runtime_files(self, cwd):
+        catalog = Path(cwd) / "model-catalog.json"
+        instructions = Path(cwd) / "instructions.txt"
+        catalog.write_text(json.dumps(self.catalog), encoding="utf-8")
+        instructions.write_text(INSTRUCTIONS, encoding="utf-8")
+        return catalog, instructions
+
     def preflight(self):
-        """No generation. Refuse tools/inherited instructions before reserving tasks."""
+        """No generation. Prove zero tools; fingerprint the user's global rules."""
         env = clean_environment()
         with tempfile.TemporaryDirectory(prefix="rag-codex-check-") as cwd:
             def inspect(args):
@@ -217,16 +250,29 @@ class CodexClient:
                                         env=env, capture_output=True, timeout=30)
                 if result.returncode or b"ChatGPT" not in result.stdout + result.stderr:
                     raise CodexError("ChatGPT subscription login required")
-            prompt = json.loads(inspect(self.arguments() + ["debug", "prompt-input", "EVALUATION_PREFLIGHT"]))
-            inherited_tools = [tool.get("name", "unknown") for item in prompt
-                               for tool in item.get("tools", [])]
-            if inherited_tools:
-                raise CodexError("Isolation preflight failed: model-visible tools remain: " + ", ".join(inherited_tools))
-            if any(item.get("role") == "user" and "AGENTS.md instructions" in json.dumps(item)
-                   for item in prompt):
-                raise CodexError("Isolation preflight failed: inherited user instructions remain")
-            catalog = json.loads(inspect(self.arguments() + ["debug", "models"]))["models"]
-            available = [m for m in catalog if m.get("visibility", "list") == "list"]
+            startup = json.loads(inspect(self.arguments() + ["app-server", "--print-startup-config"]))
+            requirements = startup.get("configRequirements", {}).get("requirements", {})
+            provider = requirements.get("modelProvider") or "openai"
+            if not re.fullmatch(r"[A-Za-z0-9_-]+", provider):
+                raise CodexError("Unsupported effective provider identity")
+            if provider != "openai":
+                from urllib.parse import urlsplit
+                info = requirements.get("modelProviders", {}).get(provider, {})
+                if (urlsplit(info.get("base_url", "")).hostname != "chatgpt.com"
+                        or info.get("requires_openai_auth") is not True or info.get("env_key")):
+                    raise CodexError("Provider is not verified for ChatGPT subscription authentication")
+            self.overrides["model_provider"] = provider
+            # Empty tables merge with existing settings; explicitly disable every server.
+            servers = json.loads(inspect([self.executable, "mcp", "list", "--json"]))
+            for server in servers:
+                name = server["name"]
+                if not re.fullmatch(r"[A-Za-z0-9_-]+", name):
+                    raise CodexError("MCP server name cannot be safely overridden")
+                self.overrides["mcp_servers." + name + ".enabled"] = False
+                # A complete disabled transport is required even for ignored user config.
+                self.overrides["mcp_servers." + name + ".command"] = "codex-evaluation-disabled"
+            source_catalog = json.loads(inspect(self.arguments() + ["debug", "models"]))
+            available = [m for m in source_catalog["models"] if m.get("visibility", "list") == "list"]
             if not available:
                 raise CodexError("No account model available")
             selected = (next((m for m in available if m["slug"] == self.model), None)
@@ -234,8 +280,33 @@ class CodexClient:
             if selected is None:
                 raise CodexError("Requested model unavailable; no automatic fallback")
             self.model = selected["slug"]
+            self.catalog = {"models": [{**selected, **TOOL_METADATA}]}
+            catalog_path, instructions_path = self.write_runtime_files(cwd)
+            prompt = json.loads(inspect(self.arguments(catalog_path, instructions_path)
+                                        + ["debug", "prompt-input", "EVALUATION_PREFLIGHT"]))
+            inherited_tools = [tool.get("name", "unknown") for item in prompt
+                               for tool in item.get("tools", [])]
+            if inherited_tools:
+                raise CodexError("Isolation preflight failed: model-visible tools remain: " + ", ".join(inherited_tools))
+            expected_instructions = self.global_instructions()
+            rule_blocks = [part["text"] for item in prompt if item.get("role") == "user"
+                           for part in item.get("content", []) if part.get("type") == "input_text"
+                           and part.get("text", "").startswith("# AGENTS.md instructions")]
+            if len(rule_blocks) != bool(expected_instructions):
+                raise CodexError("Unexpected inherited instruction blocks")
+            if rule_blocks:
+                actual = rule_blocks[0].split("<INSTRUCTIONS>\n", 1)[-1].rsplit("</INSTRUCTIONS>", 1)[0]
+                if actual.replace("\r\n", "\n").strip() != expected_instructions:
+                    raise CodexError("Inherited instructions do not match the user's global rules")
             self.identity = {"adapter": VERSION, "cli_version": version, "model": self.model,
-                             "effort": "low", "settings": SETTINGS,
+                             "effort": "low", "settings": {**SETTINGS, **self.overrides},
+                             "effective_provider": provider,
+                             "catalog_sha256": fingerprint(self.catalog),
+                             "source_model_sha256": fingerprint(selected),
+                             "global_instructions_sha256": fingerprint(expected_instructions),
+                             "global_instructions_bytes": len(expected_instructions.encode("utf-8")),
+                             "base_instructions_sha256": fingerprint(INSTRUCTIONS),
+                             "model_visible_tools": [],
                              "executable_sha256": hashlib.sha256(Path(self.executable).read_bytes()).hexdigest(),
                              "adapter_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
         return self.identity
@@ -243,6 +314,9 @@ class CodexClient:
     def invoke(self, stage, prompt, schema, output, budget):
         if self.identity is None:
             raise CodexError("Isolation preflight must pass first")
+        if (self.identity.get("global_instructions_sha256") != fingerprint(self.global_instructions())
+                or self.identity.get("catalog_sha256") != fingerprint(self.catalog)):
+            raise CodexError("Isolation configuration changed after preflight")
         binding = {"identity": self.identity, "stage": stage, "prompt": prompt, "schema": schema}
         key = fingerprint(binding)
         path = Path(output) / (key + ".json")
@@ -255,17 +329,24 @@ class CodexClient:
             if any(parsed[k] != cached[k] for k in ("text", "usage", "thread_id", "event_model")):
                 raise CodexError("Cached answer differs from raw CLI events")
             return cached
-        attempt = budget.reserve(stage, len(prompt.encode("utf-8")), key)
+        input_bytes = (len(prompt.encode("utf-8")) + self.identity["global_instructions_bytes"]
+                       + len(INSTRUCTIONS.encode("utf-8")))
+        attempt = budget.reserve(stage, input_bytes, key)
         started = time.monotonic()
+        diagnostic = {}
         try:
             with tempfile.TemporaryDirectory(prefix="rag-codex-task-") as cwd:
                 schema_path = Path(cwd) / "output-schema.json"
                 schema_path.write_text(json.dumps(schema), encoding="utf-8")
-                args = self.arguments() + ["exec", "--ignore-user-config", "--ephemeral", "--skip-git-repo-check",
+                catalog_path, instructions_path = self.write_runtime_files(cwd)
+                args = self.arguments(catalog_path, instructions_path) + ["exec", "--ignore-user-config", "--ephemeral", "--skip-git-repo-check",
                     "--sandbox", "read-only", "--json", "--color", "never", "--model", self.model,
                     "--output-schema", str(schema_path), "-"]
                 result = subprocess.run(args, input=prompt.encode("utf-8"), cwd=cwd,
                     env=clean_environment(), capture_output=True, timeout=budget.config["timeout_seconds"])
+                diagnostic = {"exit_code": result.returncode,
+                              "stdout": result.stdout.decode("utf-8", errors="replace")[:65536],
+                              "stderr": result.stderr.decode("utf-8", errors="replace")[:16384]}
                 if result.returncode:
                     raise CodexError("Codex exited unsuccessfully; inspect local CLI authentication or quota")
                 if len(result.stdout) > 2 * 1024 * 1024:
@@ -285,6 +366,7 @@ class CodexClient:
         except (Exception, KeyboardInterrupt) as error:
             reason = "timeout" if isinstance(error, subprocess.TimeoutExpired) else type(error).__name__
             save(path, {"status": "failed", "binding": binding, "failure_type": reason,
+                        "diagnostic": diagnostic, "error": str(error),
                         "elapsed_seconds": time.monotonic() - started})
             budget.finish(attempt, "failed", failure_type=reason, elapsed_seconds=time.monotonic() - started)
             raise CodexError("Task stopped: " + reason) from None

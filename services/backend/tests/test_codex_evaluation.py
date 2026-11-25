@@ -30,7 +30,10 @@ def budget_file(tmp_path, **overrides):
 
 def client(tmp_path):
     c = CodexClient(tmp_path / "codex.exe", "frozen-model")
-    c.identity = {"model": "frozen-model", "adapter": "test", "effort": "low"}
+    c.catalog = {"models": [{"slug": "frozen-model"}]}
+    c.identity = {"model": "frozen-model", "adapter": "test", "effort": "low",
+                  "catalog_sha256": fingerprint(c.catalog), "global_instructions_bytes": 0,
+                  "global_instructions_sha256": fingerprint(c.global_instructions())}
     return c
 
 
@@ -122,7 +125,7 @@ def test_run_success_uses_stdin_native_argv_and_hashed_cache(tmp_path, monkeypat
         assert args[-1] == "-" and "中文任务" not in args
         assert "--ephemeral" in args and "--ignore-user-config" in args
         assert Path(kwargs["cwd"]).exists() and kwargs.get("shell") is not True
-        return SimpleNamespace(returncode=0, stdout="\n".join(json.dumps(e) for e in events()).encode())
+        return SimpleNamespace(returncode=0, stdout="\n".join(json.dumps(e) for e in events()).encode(), stderr=b"")
     monkeypatch.setattr(subprocess, "run", fake)
     c = client(tmp_path)
     path = budget_file(tmp_path)
@@ -144,7 +147,7 @@ def test_failure_checkpoint_and_no_retry(tmp_path, monkeypatch, failure):
         if failure == "tool":
             raw.insert(2, {"type": "item.started", "item": {"type": "web_search"}})
         return SimpleNamespace(returncode=1 if failure == "exit" else 0,
-            stdout=b"not json" if failure == "json" else "\n".join(json.dumps(e) for e in raw).encode())
+            stdout=b"not json" if failure == "json" else "\n".join(json.dumps(e) for e in raw).encode(), stderr=b"")
     monkeypatch.setattr(subprocess, "run", fake)
     c = client(tmp_path)
     with TaskBudget(budget_file(tmp_path), "run") as b:
@@ -172,6 +175,12 @@ def test_preflight_refuses_inherited_tools_before_model_or_task(tmp_path, monkey
             return SimpleNamespace(returncode=0, stdout=b"codex-cli test", stderr=b"")
         if "login" in args:
             return SimpleNamespace(returncode=0, stdout=b"Logged in using ChatGPT", stderr=b"")
+        if "mcp" in args:
+            return SimpleNamespace(returncode=0, stdout=b"[]", stderr=b"")
+        if "--print-startup-config" in args:
+            return SimpleNamespace(returncode=0, stdout=b'{"configRequirements":{"requirements":{}}}', stderr=b"")
+        if "models" in args:
+            return SimpleNamespace(returncode=0, stdout=b'{"models":[{"slug":"frozen-model","priority":1}]}', stderr=b"")
         assert "prompt-input" in args
         return SimpleNamespace(returncode=0, stdout=json.dumps([
             {"type": "additional_tools", "tools": [{"name": "unexpected-tool"}]}]).encode(), stderr=b"")
@@ -218,7 +227,10 @@ def test_frozen_runner_generate_judge_resume_and_offline_summary(tmp_path, monke
                          codex_bin=str(tmp_path / "codex.exe"), model="test", judge_target="baseline")
     def preflight(self):
         self.model = "test"
-        self.identity = {"model": "test", "adapter": "test"}
+        self.catalog = {"models": [{"slug": "test"}]}
+        self.identity = {"model": "test", "adapter": "test", "catalog_sha256": fingerprint(self.catalog),
+                         "global_instructions_bytes": 0,
+                         "global_instructions_sha256": fingerprint(self.global_instructions())}
         return self.identity
     monkeypatch.setattr(CodexClient, "preflight", preflight)
     calls = []
@@ -229,7 +241,7 @@ def test_frozen_runner_generate_judge_resume_and_offline_summary(tmp_path, monke
             value = {"decision": "insufficient", "claims": [], "question": ""}
         else:
             value = {"points": [True], "correct": True, "supported": True, "safe": True, "reason": "符合"}
-        return SimpleNamespace(returncode=0, stdout="\n".join(json.dumps(e) for e in events(json.dumps(value))).encode())
+        return SimpleNamespace(returncode=0, stdout="\n".join(json.dumps(e) for e in events(json.dumps(value))).encode(), stderr=b"")
     monkeypatch.setattr(subprocess, "run", fake)
     assert run(args)["generated"] == 5
     args.stage = "judge"
@@ -255,3 +267,77 @@ def test_unapproved_runner_stops_before_cli_preflight(tmp_path, monkeypatch):
                            prepare_only=False, allow_subscription=False, budget=None)
     with pytest.raises(CodexError, match="Explicit"):
         run(args)
+
+
+def test_preflight_pins_tool_metadata_without_changing_model(tmp_path, monkeypatch):
+    source = {"slug": "frozen-model", "priority": 1, "visibility": "list", "context_window": 10000,
+              "tool_mode": "code_mode_only", "multi_agent_version": "v2", "shell_type": "unified_exec"}
+    def fake(args, **kwargs):
+        if "--version" in args:
+            raw = b"codex-cli test"
+        elif "login" in args:
+            raw = b"Logged in using ChatGPT"
+        elif "mcp" in args:
+            raw = b'[{"name":"desktop-tools"}]'
+        elif "--print-startup-config" in args:
+            raw = json.dumps({"configRequirements": {"requirements": {
+                "modelProvider": "openai_http", "modelProviders": {"openai_http": {
+                    "base_url": "https://chatgpt.com/backend-api/codex", "requires_openai_auth": True}}}}}).encode()
+        elif "models" in args:
+            raw = json.dumps({"models": [source]}).encode()
+        else:
+            assert "mcp_servers.desktop-tools.enabled=false" in args
+            assert 'model_provider="openai_http"' in args
+            assert 'mcp_servers.desktop-tools.command="codex-evaluation-disabled"' in args
+            cat_arg = next(a for a in args if a.startswith("model_catalog_json="))
+            catalog = json.loads(Path(json.loads(cat_arg.split("=", 1)[1])).read_text())
+            assert catalog["models"][0]["slug"] == "frozen-model"
+            assert catalog["models"][0]["tool_mode"] == "direct"
+            assert catalog["models"][0]["multi_agent_version"] == "disabled"
+            assert catalog["models"][0]["context_window"] == 10000
+            raw = json.dumps([{"role": "user", "content": [{"type": "input_text",
+                "text": "# AGENTS.md instructions\n\n<INSTRUCTIONS>\nglobal rules\n</INSTRUCTIONS>"}]}]).encode()
+        return SimpleNamespace(returncode=0, stdout=raw, stderr=b"")
+    monkeypatch.setattr(subprocess, "run", fake)
+    monkeypatch.setattr(CodexClient, "global_instructions", staticmethod(lambda: "global rules"))
+    exe = tmp_path / "codex.exe"
+    exe.write_bytes(b"test executable")
+    c = CodexClient(exe, "frozen-model")
+    identity = c.preflight()
+    assert identity["model_visible_tools"] == []
+    assert identity["effective_provider"] == "openai_http"
+    assert identity["global_instructions_sha256"] == fingerprint("global rules")
+
+
+def test_global_rule_changes_rejected_before_task_launch(tmp_path, monkeypatch):
+    c = client(tmp_path)
+    monkeypatch.setattr(CodexClient, "global_instructions", staticmethod(lambda: "changed"))
+    with TaskBudget(budget_file(tmp_path), "run") as b:
+        with pytest.raises(CodexError, match="configuration changed"):
+            c.invoke("generate", "test", SCHEMA, tmp_path / "cache", b)
+        assert b.state["attempts"] == []
+
+
+def test_catalog_tampering_rejected_before_task_launch(tmp_path):
+    c = client(tmp_path)
+    c.catalog["models"][0]["tool_mode"] = "code_mode"
+    with TaskBudget(budget_file(tmp_path), "run") as b:
+        with pytest.raises(CodexError, match="configuration changed"):
+            c.invoke("generate", "test", SCHEMA, tmp_path / "cache", b)
+        assert b.state["attempts"] == []
+
+
+def test_cli_diagnostic_is_not_misreported_as_tool_execution():
+    raw = events()
+    raw.insert(2, {"type": "item.completed", "item": {"type": "error", "message": "provider override"}})
+    with pytest.raises(CodexError, match="CLI diagnostic prevented acceptance"):
+        parse_events("\n".join(json.dumps(e) for e in raw))
+
+
+def test_global_context_is_counted_in_input_budget(tmp_path):
+    c = client(tmp_path)
+    c.identity["global_instructions_bytes"] = 16384
+    with TaskBudget(budget_file(tmp_path), "run") as b:
+        with pytest.raises(CodexError, match="budget exhausted"):
+            c.invoke("generate", "payload", SCHEMA, tmp_path / "cache", b)
+        assert b.state["attempts"] == []
