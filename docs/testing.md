@@ -123,6 +123,47 @@ python -m evaluation.audit_phase1 --repo ../.. --output evaluation/results/phase
 
 后处理的正确率验证以最近有效评分版本为起点，查找累计受影响答案，对新旧可见回答按同一标准复核后汇总。仅在答案和评分标准均未改变时复用原标签；评分来源有变化时明确标记。完整示例与离线复算包见[维护周期效果对照](validation/maintenance-quality-20261124.md)。
 
+### Codex订阅离线评测
+
+`evaluation.codex_validation` 提供 `generate`、`judge`、`summarize`，通过本机原生Codex CLI复用ChatGPT登录。该入口独立于线上服务和LangChain集成，不安装Python SDK，不调用阿里云接口。[CLI非交互调用](https://learn.chatgpt.com/docs/non-interactive-mode)支持标准输入、JSONL事件和JSON Schema输出。
+
+安装官方CLI并执行 `codex login`；Windows的 `--codex-bin` 必须指向原生 `codex.exe`，不能指向 `.cmd`、`.bat` 或 `.ps1` 启动器。实现探测过桌面内置 `0.169.0-alpha.11.1` 和独立 `0.172.0`；两者在当前宿主下均未通过工具隔离预检，真实生成与评分尚未验收，见[接入验证](validation/codex-offline-integration-20261125.md)。自动测试使用替代进程，不需要CLI或登录。
+
+在 `services/backend` 执行，`evidence/independent50` 为已解压的[50题证据包](validation/maintenance-independent-50-20261124.md)：
+
+```bash
+python -m evaluation.codex_validation generate --source evidence/independent50 --output evaluation/results/codex20 --prepare-only
+python -m pytest tests/test_codex_evaluation.py -q
+```
+
+准备操作验证源文件哈希，按类别和题号各取4题，冻结20题。生成器只收到原问题消息与资料，不包含答案要点或旧答案。判分默认评审已有Qwen基线回答，可按需用 `--judge-target generated` 评审生成结果；后者属于同模型自评，汇总单独计数。
+
+订阅任务预算文件示例（需为本次运行明确批准额度）：
+
+```json
+{
+  "max_tasks": 10,
+  "max_input_bytes": 163840,
+  "max_input_bytes_per_task": 16384,
+  "timeout_seconds": 120,
+  "stages": {"generate": 5, "judge": 5}
+}
+```
+
+```bash
+python -m evaluation.codex_validation generate --source evidence/independent50 --output evaluation/results/codex20 --ids n001,n011,n021,n031,n041 --allow-subscription --budget evaluation/results/subscription-budget.json --codex-bin /path/to/codex
+python -m evaluation.codex_validation judge --source evidence/independent50 --output evaluation/results/codex20 --ids n001,n011,n021,n031,n041 --allow-subscription --budget evaluation/results/subscription-budget.json --codex-bin /path/to/codex
+python -m evaluation.codex_validation summarize --output evaluation/results/codex20
+```
+
+真实任务前检查订阅登录、隔离后的模型可见输入与可用模型。存在额外工具或继承的用户指令时停止，保存预检失败，任务计数为0；不要为通过检查而删除隔离约束。模型取账户目录中优先级最高的可用项，或使用显式 `--model` 固定型号；low推理强度与实际模型、CLI二进制及适配器哈希绑定。未指定模型时也不会在任务失败后自动更换。
+
+每个任务使用临时工作目录和独立临时会话，评测脚本串行执行，默认不重试。任务在启动前预留额度；失败、超时或中断不退还，随后停止。预算旁生成 `.usage.json` 和运行期间的排他 `.lock`；完整成功检查点可在同配置下继续使用，未完成预留按失败处理。异常退出遗留锁时先确认旧进程已结束，再人工处理，程序不会自动抢锁。
+
+缓存绑定完整任务输入、输出Schema、任务类型、模型、推理配置和版本；汇总校验原始CLI事件与最终结果。`summarize` 完全离线，分别报告生成数量、旧答案评分一致性与同模型自评数量。不同评审对同一答案的通过率差异属于评分差异，回答质量提升需要独立评审。
+
+这里的输入字节限额只覆盖脚本提交的任务正文；CLI仍有固定指令开销。最终输出超过16 KiB、事件输出超过2 MiB时拒绝作为有效结果，这些是验收边界，不是底层Token硬限额。账本记录可取得的Token、缓存Token、时长和结果字节；订阅任务可能含多次底层请求或CLI内部重试。评测层不重试、不切换API Key、不购买额度、不回退Qwen。阿里云费用和Codex订阅用量分别记账。
+
 新问题的统一模型验收使用 `evaluation.postprocess_validation`：固定问题、必要要点、完整证据和两版后处理，Qwen-Plus每题生成一次，Qwen-Max隐藏版本逐份评分；本轮完全相同评分输入按请求哈希共享，旧标签不参与。50题结果为39/50→39/50，调用与逐题证据见[独立对照报告](validation/maintenance-independent-50-20261124.md)。
 
 ```bash
