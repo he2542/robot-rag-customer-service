@@ -164,6 +164,18 @@ python -m evaluation.codex_validation summarize --output evaluation/results/code
 
 输入字节限额覆盖任务正文、用户全局规则及固定评测基础指令；CLI消息封装另有开销。最终输出超过16 KiB、事件输出超过2 MiB时拒绝作为有效结果，这些是验收边界，不是底层Token硬限额。账本记录可取得的Token、缓存Token、时长和结果字节；订阅任务可能含多次底层请求或CLI内部重试。评测层不重试、不切换API Key、不购买额度、不回退Qwen。阿里云费用和Codex订阅用量分别记账。
 
+### 独立回答质量比较
+
+`evaluation.codex_quality`以同后处理策略的已有Qwen回答为基线，用Qwen-Max独立评分Codex生成；Codex对旧答案的评分一致性单列。准备时核验基线资料、策略及原评分输入哈希；评分与汇总要求完整20题，缺题、输入变化、截断和非法判分会停止。单次失败保存记录，禁止自动重试。
+
+```bash
+python -m evaluation.codex_quality prepare --source evaluation/results/codex20 --baseline-source evidence/independent50 --root evaluation/results/codex20-quality
+python -m evaluation.codex_quality judge --root evaluation/results/codex20-quality --allow-paid --budget evaluation/results/qwen-judge-budget.json
+python -m evaluation.codex_quality summarize --root evaluation/results/codex20-quality
+```
+
+评分沿用Qwen-Max、固定seed、每次512输出Token及16 KiB输入，付费阶段使用已有`evaluation.budget`，需单独批准额度。生成模型变化的比较复用原基线评分，报告注明评分时段；本轮执行结果见[20题质量比较](validation/codex-quality-20-20261126.md)。
+
 新问题的统一模型验收使用 `evaluation.postprocess_validation`：固定问题、必要要点、完整证据和两版后处理，Qwen-Plus每题生成一次，Qwen-Max隐藏版本逐份评分；本轮完全相同评分输入按请求哈希共享，旧标签不参与。50题结果为39/50→39/50，调用与逐题证据见[独立对照报告](validation/maintenance-independent-50-20261124.md)。
 
 ```bash

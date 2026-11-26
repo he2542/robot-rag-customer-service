@@ -1,0 +1,27 @@
+{
+  "status": "stopped_on_subscription_timeout",
+  "planned_questions": 20,
+  "generated_total": 12,
+  "reused_generation": 3,
+  "new_generation": 9,
+  "reused_baseline_judgments": 5,
+  "new_baseline_judgments": 0,
+  "subscription_tasks_attempted": 10,
+  "subscription_tasks_success": 9,
+  "subscription_tasks_failed": 1,
+  "failed_id": "n003",
+  "failure_type": "timeout",
+  "timeout_seconds": 120,
+  "input_bytes_reserved": 144003,
+  "known_new_usage": {
+    "input_tokens": 44338,
+    "output_tokens": 1075
+  },
+  "unknown_usage_tasks": 1,
+  "aliyun_requests": 0,
+  "quality_comparison": null,
+  "frozen_sha256": "df03e9e09dac904d2aec49e4660934f1ddcb2a3e93f424e32a5c986044786414",
+  "same_policy_baseline_verified": 20,
+  "elapsed_seconds": 226.59400000001187,
+  "artifact_sha256": "d11c70902b9d8aeb6c6251659bca628723c840b830d8c40ee621cef7f5030556"
+}
