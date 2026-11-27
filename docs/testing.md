@@ -325,3 +325,6 @@ python -m evaluation.summarize_benchmark --root evaluation/results/run-300 --out
 `prepare / generate / validate / freeze` 用于创建新题集，不属于复现既有分数的必要步骤。它们会生成新问题与参考答案，需要先检查标签并冻结，再运行系统；禁止看过结果后调整标签以提升报告数值。原始模型检查说明也可能不准确，不能当作人工审校记录。
 
 并列提问补全使用 `python -m pytest tests/test_answer_coverage.py -q` 验证，70份真实输出的离线效果见[并列问答补全验证](validation/multipart-qa-20261127.md)。
+
+
+上下文提示词的定向筛查、双轮配对评分及人工敏感性复核见[20题提示词筛查](validation/context-prompt-screen-20-20261127.md)。候选仅用于评测，完整证据包支持离线复算。
