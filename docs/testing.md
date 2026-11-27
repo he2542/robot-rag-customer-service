@@ -174,7 +174,7 @@ python -m evaluation.codex_quality judge --root evaluation/results/codex20-quali
 python -m evaluation.codex_quality summarize --root evaluation/results/codex20-quality
 ```
 
-评分沿用Qwen-Max、固定seed、每次512输出Token及16 KiB输入，付费阶段使用已有`evaluation.budget`，需单独批准额度。生成模型变化的比较复用原基线评分，报告注明评分时段；本轮执行结果见[20题质量比较](validation/codex-quality-20-20261126.md)。
+评分沿用Qwen-Max、固定seed、每次512输出Token及16 KiB输入，付费阶段使用已有`evaluation.budget`，需单独批准额度。生成模型变化的比较复用原基线评分，报告注明评分时段；完整结果见[20题独立质量比较](validation/codex-quality-20-20261127.md)：13/20→16/20，评分一致性13/20；维护类退化与评分争议单列。
 
 新问题的统一模型验收使用 `evaluation.postprocess_validation`：固定问题、必要要点、完整证据和两版后处理，Qwen-Plus每题生成一次，Qwen-Max隐藏版本逐份评分；本轮完全相同评分输入按请求哈希共享，旧标签不参与。50题结果为39/50→39/50，调用与逐题证据见[独立对照报告](validation/maintenance-independent-50-20261124.md)。
 
