@@ -145,13 +145,18 @@ def unsafe_battery_handling(text):
     return False
 
 
-def operation_boundary(question):
+def operation_boundary(question, *, include_physical=False):
     if electrical_symptom(question):
         return "请先停止使用和充电，联系专业售后；不要自行拆修或继续通电测试。"
     if re.search(r"电线|排线", question) and re.search(r"安全|注意|检查|保养|维护|损坏|破损|松动|看看", question):
         return "先断电，仅目视检查无需拆机即可看到的外露电源线；内部排线和插接件的检查交由专业售后，不要拉扯、插拔或自行拆机。"
     if re.search(r"电机.{0,15}(?:响|故障|异常|卡顿)|轴承.{0,12}(?:保养|润滑|卡顿|检查)|(?:检查|检测|维修|拆).{0,8}(?:电机|轴承)|拖布.{0,12}(?:咔咔|异响|怪声)", question):
         return "请先停止异常运行；内部电机、轴承的检查由专业售后执行，不要自行拆修或润滑。"
+    physical = re.search(r"(?:机器人|机器|主刷|边刷|轮组|轮子|拖布|运行|工作).{0,15}(异响|卡住|卡顿)", question)
+    digital = re.search(r"(?:APP|app|手机|界面|页面).{0,4}(?:卡住|卡顿)", question)
+    if (include_physical and physical and _ASK_ACTION.search(question) and not digital
+            and not re.search(r"不|没|无|未", question[max(0, physical.start(1)-3):physical.start(1)])):
+        return "请先停止异常运行，切勿强行继续使用，以免故障扩大。涉及内部部件的检查请联系专业售后。"
     return ""
 
 
@@ -290,11 +295,11 @@ def finalize_answer(text, allowed):
     return cleaned if cited or clarification else UNSUPPORTED_ANSWER
 
 
-def render_context_answer(raw, references, question=""):
+def render_context_answer(raw, references, question="", *, extractive_quotes=False):
     """Locate literal supporting quotes and allocate citations in application code."""
     references = references if isinstance(references, list) else []
     allowed = {item["id"] for item in references}
-    boundary = operation_boundary(question)
+    boundary = operation_boundary(question, include_physical=extractive_quotes)
     def with_boundary(answer):
         return boundary + "\n\n" + answer if boundary and boundary not in answer else answer
     try:
@@ -330,6 +335,10 @@ def render_context_answer(raw, references, question=""):
                                         or _positive_actions(text,_LUBRICATE) or unsafe_lubrication(text)):
                 safety_rejected=True
                 continue
+            if (extractive_quotes and not claim['extractive']
+                    and not _NEGATION.search(question) and not _QUALIFIED_ACTION.search(question)
+                    and not _INSTRUCTION.search(quote)):
+                text = re.sub(r"^\s*\d+[.、]\s*", "", quote.strip())
             if decision == "answer" and not claim['extractive']:
                 covered_text = "\n".join(c["text"] for c in claims if isinstance(c, dict)
                                          and c.get("quote") == quote and isinstance(c.get("text"), str))
@@ -345,11 +354,17 @@ def render_context_answer(raw, references, question=""):
                 safety_rejected = True
                 if not clean:
                     continue
+            if extractive_quotes:
+                inspection = re.search(r"(?:检测|检查)[：:](.*?)(?:修复|处理方法|解决方法)[：:]", clean, re.S)
+                if (inspection and re.search(r"电机|轴承|排线|电池|内部电路|安全保护", inspection.group(1))
+                        and not clean.startswith("专业售后检查项：")):
+                    clean = "专业售后检查项：" + clean
             candidate = finalize_answer(clean + " " + f"[{matches[0]}]", allowed)
             if candidate == SAFETY_ANSWER:
                 actions = _positive_actions(clean, _ACTION)
                 if actions and all(m.group().startswith(("检查", "检测")) for m in actions) and not unsafe_lubrication(clean):
-                    paragraphs.append("专业售后检查项：" + clean + f" [{matches[0]}]")
+                    label = "" if extractive_quotes and clean.startswith("专业售后检查项：") else "专业售后检查项："
+                    paragraphs.append(label + clean + f" [{matches[0]}]")
                 else:
                     safety_rejected = True
             elif candidate != UNSUPPORTED_ANSWER:

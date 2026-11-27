@@ -24,6 +24,8 @@
 | `RAG_RERANK_MODEL` | `qwen3-rerank`，已验证的排序模型 |
 | `RAG_RERANK_TIMEOUT` | `3` 秒，HTTP 阶段超时，范围大于 0 且不超过 30 |
 | `RAG_CONTEXT_ENTRIES_ENABLED` | `false`；设为 `true` 启用第一阶段上下文构建：完整条目、去重、预算与回答流程 |
+| `RAG_CONTEXT_NAVIGATION_ENABLED` | `false`；在完整参考资料旁提供原文条目定位，需要启用上下文构建 |
+| `RAG_CONTEXT_EXTRACTIVE_QUOTES` | `false`；展示已经校验的完整原句，保留部件、条件与前置操作，需要启用上下文构建 |
 | `RAG_RERANK_URL` | 默认北京地域 DashScope 原生文本排序接口；须与密钥地域匹配 |
 | `RAG_SERVE_FRONTEND` | 设为 `1` 时托管已构建的前端 |
 
@@ -148,7 +150,9 @@ human：本轮问题和参考资料组成的 JSON
 
 ### 验证与适用范围
 
-上下文构建默认关闭。300 题对照中，引用支持与风险用例改善，回答自动通过率下降；后续提示词实验也出现最终回答通过数下降，已恢复基线提示。完整方法、结果和复现数据见：
+上下文构建默认关闭。最新完整首轮300题中，回答通过261→257，引用支持177→281；候选未达到整体质量要求。原文展示模式当前用于离线评测，已知问题包括APP语境误判、能力问句约束和原文操作范围审校。完整方法、结果和复现数据见：
+
+- [最新300题验收记录](validation/context-phase1-acceptance-20261128.md)
 
 - [300 题上下文评测](validation/phase1-context-300-20261116.md)
 - [提示词对照评测](validation/intent-workflow-live-20-20261121.md)与[回退验证](validation/prompt-rollback-20261122.md)
@@ -180,3 +184,5 @@ human：本轮问题和参考资料组成的 JSON
 ## 实验条目导航
 
 构造 RagService 时可传入 context_entries_enabled=True、context_navigation_enabled=True，在模型输入中加入来源ID、excerpt行号与条目标题导航；完整参考资料和公开sources保持原样。导航默认关闭，仍使用结构化引句回答；导航、资料与历史共同受输入字节预算约束。验证方法和适用范围见[验证报告](validation/context-guard-navigation-20261127.md)。
+
+原文展示模式可通过 `RAG_CONTEXT_EXTRACTIVE_QUOTES=true` 启用；条目导航通过 `RAG_CONTEXT_NAVIGATION_ENABLED=true` 启用。两者均依赖 `RAG_CONTEXT_ENTRIES_ENABLED=true`，默认关闭。构造器同名布尔参数可覆盖配置，便于独立对照。

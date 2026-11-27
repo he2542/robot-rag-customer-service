@@ -58,7 +58,9 @@ class EvaluationBudget:
     """Reserve full request bounds before sending; failed calls are not refunded.
 
     Input uses serialized UTF-8 bytes plus protocol allowance as a conservative
-    billing proxy. Cost is a reservation at user-supplied rates, not a bill.
+    billing proxy. Optional validated usage receipts reconcile successful task
+    money reservations; attempt, input and output limits remain cumulative.
+    Amounts use user-supplied prices and are estimates rather than a bill.
     """
     def __init__(self, path):
         self.path = Path(path)
@@ -68,6 +70,9 @@ class EvaluationBudget:
             raise BudgetError("Budget file cannot be read") from None
         try:
             cfg = json.loads(raw)
+            self.settle_usage = cfg.get("settle_successful_usage", False)
+            if type(self.settle_usage) is not bool:
+                raise BudgetError("Usage settlement must be a boolean")
             self.calls_limit = _integer(cfg["max_calls"], "max_calls", 1)
             self.input_limit = _integer(cfg["max_input_bytes"], "max_input_bytes", 1)
             self.output_limit = _integer(cfg["max_output_tokens"], "max_output_tokens")
@@ -94,6 +99,13 @@ class EvaluationBudget:
                  "input_bytes_reserved":self.input_bytes, "output_tokens_reserved":self.output_tokens,
                  "estimated_cost_cny_reserved":str(self.cost), "stopped":self.stopped,
                  "events":self.events}
+        if self.settle_usage:
+            value["estimated_cost_cny_exposure"] = str(self.cost)
+            value["estimated_cost_cny_reservation_sum"] = str(sum(
+                (Decimal(e["estimated_cost_cny"]) for e in self.events), Decimal(0)))
+            value["estimated_cost_cny_settled"] = str(sum(
+                (Decimal(e["estimated_usage_cost_cny"]) for e in self.events if e.get("settled")), Decimal(0)))
+            value["settle_successful_usage"] = True
         temporary = self.ledger.with_name(self.ledger.name + ".tmp")
         with temporary.open("w", encoding="utf-8") as handle:
             json.dump(value, handle, indent=2)
@@ -116,6 +128,8 @@ class EvaluationBudget:
                 model, inputs = body["model"], body["input"]
                 if model not in self.rates or not isinstance(inputs, dict):
                     raise BudgetError("Model or input is not covered by this budget")
+                if self.settle_usage and "messages" not in inputs:
+                    raise BudgetError("Usage settlement supports text generation only")
                 params = body.get("parameters", {})
                 if not isinstance(params, dict) or any(k in params for k in ("tools","functions")):
                     raise BudgetError("Unsupported evaluation parameters")
@@ -163,7 +177,47 @@ class EvaluationBudget:
             self.cost += cost
             self.events.append({"attempt":self.calls,"model":model,"input_bytes":size,
                                 "output_tokens":output,"estimated_cost_cny":str(cost)})
+            if self.settle_usage:
+                self.events[-1]["input_sha256"] = hashlib.sha256(
+                    json.dumps(body, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
             self._save()
+            return self.calls
+
+    def settle_successful_result(self, result):
+        """Release unused money only after a validated successful task.
+
+        Calls, bytes and output ceilings remain cumulative; failures retain
+        their full reservation. Prices ignore discounts and are not a bill.
+        """
+        if not self.settle_usage:
+            return
+        with self.lock:
+            try:
+                ticket = _integer(result.get("budget_attempt"), "receipt attempt", 1)
+                if ticket > len(self.events):
+                    raise BudgetError("Unknown usage receipt")
+                event = self.events[ticket - 1]
+                if event.get("settled") or result.get("input_sha256") != event["input_sha256"]:
+                    raise BudgetError("Duplicate or mismatched usage receipt")
+                usage = result["usage"]
+                input_tokens = _integer(usage["input_tokens"], "receipt input tokens")
+                output_tokens = _integer(usage["output_tokens"], "receipt output tokens")
+                if input_tokens > event["input_bytes"] or output_tokens > event["output_tokens"]:
+                    raise BudgetError("Usage exceeds reserved request bounds")
+                rate_in, rate_out = self.rates[event["model"]]
+                actual = (input_tokens * rate_in + output_tokens * rate_out) / 1_000_000
+                reserved = Decimal(event["estimated_cost_cny"])
+                if actual > reserved or result.get("finish_reason") != "stop":
+                    raise BudgetError("Only complete valid responses can settle")
+                self.cost += actual - reserved
+                event.update({"settled": True, "input_tokens": input_tokens,
+                              "actual_output_tokens": output_tokens,
+                              "estimated_usage_cost_cny": str(actual)})
+                self._save()
+            except (KeyError, TypeError, ValueError, AttributeError, BudgetError):
+                self.stopped = True
+                self._save()
+                raise BudgetError("Invalid usage receipt; retained reservation and stopped") from None
 
     def __enter__(self):
         global _active
@@ -188,8 +242,11 @@ class EvaluationBudget:
             pool = getattr(transport, "_pool", None)
             if getattr(pool, "_retries", 0):
                 raise BudgetError("HTTP transport retries must be disabled")
-            budget.reserve(request.url, request.method, request.content)
-            return original_httpx(client, request, **kwargs)
+            ticket = budget.reserve(request.url, request.method, request.content)
+            response = original_httpx(client, request, **kwargs)
+            if budget.settle_usage:
+                response.extensions["evaluation_budget_attempt"] = ticket
+            return response
 
         def requests_send(session, request, **kwargs):
             # SDK-level retries pass this boundary again; transport retries are off.

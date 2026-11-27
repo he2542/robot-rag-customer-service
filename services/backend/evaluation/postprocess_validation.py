@@ -162,9 +162,12 @@ def call(client, model, messages, tokens, seed, limit):
     choice=data['output']['choices'][0]
     content=choice['message']['content']
     if not isinstance(content,str):raise ValueError('Non-text response')
-    return {'text':content,'finish_reason':choice['finish_reason'],'usage':data.get('usage',{}),
+    result = {'text':content,'finish_reason':choice['finish_reason'],'usage':data.get('usage',{}),
             'request_id':data.get('request_id'),'elapsed_ms':(time.perf_counter()-started)*1000,
             'input_sha256':hash_value(body)}
+    if 'evaluation_budget_attempt' in response.extensions:
+        result['budget_attempt'] = response.extensions['evaluation_budget_attempt']
+    return result
 
 
 def run(root):

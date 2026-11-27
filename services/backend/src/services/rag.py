@@ -15,7 +15,7 @@ from src import config
 from src.history import FileChatMessageHistory
 from src.services.retrieval import InternalKnowledgeRetriever
 
-from .prompts import SYSTEM_PROMPT, CONTEXT_SYSTEM_PROMPT, NAVIGATION_CONTEXT_SYSTEM_PROMPT
+from .prompts import SYSTEM_PROMPT, CONTEXT_SYSTEM_PROMPT, NAVIGATION_CONTEXT_SYSTEM_PROMPT, EXTRACTIVE_CONTEXT_SYSTEM_PROMPT
 from .context import EvidenceContextBuilder
 from .prompt_context import PromptContextBuilder, source_items
 from .answer_policy import render_context_answer
@@ -35,7 +35,7 @@ def filter_citations(text, allowed):
 
 class RagService:
     def __init__(self, retriever=None, chat_model=None, history_factory=internal_history,
-                 *, context_builder=None, context_entries_enabled=None, context_system_prompt=None, context_navigation_enabled=False):
+                 *, context_builder=None, context_entries_enabled=None, context_system_prompt=None, context_navigation_enabled=None, context_extractive_quotes=None):
         self.retriever = retriever if retriever is not None else InternalKnowledgeRetriever(
             DashScopeEmbeddings(model=config.embedding_model_name)
         )
@@ -46,7 +46,13 @@ class RagService:
         self.context_entries_enabled = (config.context_entries_enabled if context_entries_enabled is None
                                         else context_entries_enabled)
         self.context_builder = context_builder if context_builder is not None else EvidenceContextBuilder()
-        default_prompt = NAVIGATION_CONTEXT_SYSTEM_PROMPT if context_navigation_enabled else CONTEXT_SYSTEM_PROMPT
+        context_navigation_enabled = (config.context_navigation_enabled if context_navigation_enabled is None
+                                      else context_navigation_enabled)
+        context_extractive_quotes = (config.context_extractive_quotes if context_extractive_quotes is None
+                                     else context_extractive_quotes)
+        self.context_extractive_quotes = context_extractive_quotes
+        default_prompt = (EXTRACTIVE_CONTEXT_SYSTEM_PROMPT if context_extractive_quotes else
+                          NAVIGATION_CONTEXT_SYSTEM_PROMPT if context_navigation_enabled else CONTEXT_SYSTEM_PROMPT)
         self.context_system_prompt = default_prompt if context_system_prompt is None else context_system_prompt
         self.prompt_context = PromptContextBuilder(self.context_system_prompt, navigation_enabled=context_navigation_enabled)
         prompt = ChatPromptTemplate.from_messages([
@@ -83,6 +89,8 @@ class RagService:
                         usage.get("prompt_tokens_details", {}).get("cached_tokens")
                         if isinstance(usage.get("prompt_tokens_details"), dict) else None)
         result = StrOutputParser().invoke(response)
+        if self.context_extractive_quotes:
+            return render_context_answer(result, source_items(value["documents"]), value["input"], extractive_quotes=True)
         return render_context_answer(result, source_items(value["documents"]), value["input"])
 
     def stream_answer(self, query: str, session_id: str):

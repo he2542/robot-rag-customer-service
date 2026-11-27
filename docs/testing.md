@@ -330,3 +330,17 @@ python -m evaluation.summarize_benchmark --root evaluation/results/run-300 --out
 上下文提示词的定向筛查、双轮配对评分及人工敏感性复核见[20题提示词筛查](validation/context-prompt-screen-20-20261127.md)。候选仅用于评测，完整证据包支持离线复算。
 
 电池操作边界与原文条目导航的完整回放、预算和被否定方案对照见[电池边界与导航验证](validation/context-guard-navigation-20261127.md)。导航默认关闭，新的模型输入须完成真实生成效果验证。
+
+
+### 成功任务的Token费用核算
+
+纯文本评测预算可显式设置 `settle_successful_usage: true`。发送前仍预留整次请求；驱动校验成功输出后调用 `budget.settle_successful_result(result)`，以API返回的input/output Token和预算约定单价核算，释放未使用的金额预留。失败或未完成任务保留完整预留，调用数、输入字节及输出Token上限始终累计。
+
+收据绑定请求尝试编号和完整请求哈希，拒绝重复收据、异常用量和不匹配的输入。账本分别保存当前金额占用、历次预留总和及已核算金额；缓存折扣不扣减，结果按原价估算，与实际账单分别记录。未启用此选项时保持原预算行为。
+
+价格依据：[Qwen-Plus模型信息](https://help.aliyun.com/zh/model-studio/qwen-plus)、[Qwen-Max模型信息](https://help.aliyun.com/zh/model-studio/qwen-max)。
+
+
+### 上下文候选300题验收
+
+[最新验收记录](validation/context-phase1-acceptance-20261128.md)比较原主分支真实回答与条目导航、完整原句展示候选：首轮261→257/300，引用支持177→281/300。交换顺序复评返回237份、有效236份，随后HTTP 500按无重试约定停止。原始标签、无效格式、风险审读、费用收据和标准库复算均随证据保存；该候选未达到合并条件。

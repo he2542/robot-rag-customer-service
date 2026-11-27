@@ -84,3 +84,20 @@ def test_battery_context_does_not_block_prohibitions_professionals_or_other_part
 ])
 def test_remote_battery_and_reconnecting_device_are_not_internal_battery_removal(text):
     assert render(text, '遥控没反应怎么处理？') != SAFETY_ANSWER
+
+@pytest.mark.parametrize('question', [
+    '机器人运行时发出异响或卡住，该怎么处理？',
+    '轮组卡顿，如何恢复？',
+    '机器人被地毯卡住，有什么办法？',
+])
+def test_reported_physical_jam_requires_stop_before_remedies(question):
+    assert operation_boundary(question, include_physical=True).startswith('请先停止异常运行，切勿强行继续使用')
+
+
+@pytest.mark.parametrize('question', [
+    '机器人APP卡住了怎么办？',
+    '机器人卡住后会自动脱困吗？',
+    '机器人没有卡住，只想问如何设置时间？',
+])
+def test_digital_jam_feature_queries_and_negated_symptoms_are_not_active_jams(question):
+    assert operation_boundary(question, include_physical=True)==''
