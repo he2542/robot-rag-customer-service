@@ -56,13 +56,25 @@ def repair_actions_covered(remedy, text):
         target and target in plain_text for target in objects)) for verb, objects in targets.items())
 
 
-def complete_action_quote(text, quote, question, covered_text=None):
+def complete_qa_answer(quote, references):
+    """Locate a whole single-line answer under a numbered question, uniquely."""
+    pattern = re.compile(r'(?m)^\d+[.、][^\n]*[？?](?:\*\*)?[ \t]*\n(?P<answer>[-*][ \t]+[^\n]+[。！？])[ \t]*(?=\n|$)')
+    plain = lambda value: re.sub(r'\s+', ' ', value.replace('**', '')).strip()
+    matches = [m.group('answer').strip() for source in references
+               for m in pattern.finditer(source['excerpt'])
+               if plain(quote) in {plain(m.group()), plain(m.group('answer')),
+                                   plain(m.group('answer')[2:])}]
+    return re.sub(r'^[-*][ \t]+', '', matches[0]) if len(matches) == 1 else None
+
+
+def complete_action_quote(text, quote, question, covered_text=None, references=()):
     """Restore a complete quoted repair entry only for routine action questions.
 
     Called after literal-source validation. Return the entire quote, retaining
     its conditions, rather than splice an isolated repair step into a new claim.
     """
-    if (not _ASK_ACTION.search(question) or operation_boundary(question)
+    multipart = len(re.findall(r'是否|什么|哪(?:里|些|种)|如何|怎么|多少', question)) >= 2
+    if ((not _ASK_ACTION.search(question) and not multipart) or operation_boundary(question)
             or _NEGATION.search(question) or _QUALIFIED_ACTION.search(question)
             or _REPAIR_RISK.search(question + quote) or _INSTRUCTION.search(quote)
             or _positive_actions(quote, _ACTION) or not quote.rstrip().endswith(("。", "！", "？"))):
@@ -73,9 +85,10 @@ def complete_action_quote(text, quote, question, covered_text=None):
     structured = (len(repairs) == 1 and "故障现象" in quote and "检测" in quote
                   and bool(quote[repairs[0].end():].strip(" 。")))
     conditional = not repairs and bool(re.search(r"若[^。！？\n]+[，,]可", quote))
-    if not (structured or conditional):
+    qa_answer = complete_qa_answer(quote, references) if multipart else None
+    if not (structured or conditional or qa_answer):
         return text
-    remedy = quote[repairs[0].end():] if structured else quote[quote.index("若"):]
+    remedy = qa_answer if qa_answer else (quote[repairs[0].end():] if structured else quote[quote.index("若"):])
     covered = text if covered_text is None else covered_text
     if (not _REPAIR_VERB.search(remedy) or repair_actions_covered(remedy, covered)
             or _NEGATION.search(covered) or _QUALIFIED_ACTION.search(covered)):
@@ -84,7 +97,7 @@ def complete_action_quote(text, quote, question, covered_text=None):
     condition = re.search(r"如果|若|仅限|仅在|当|型号|适用于", covered)
     if condition and covered[condition.start():].strip() not in quote:
         return text
-    return re.sub(r"^\s*\d+[.、]\s*", "", quote.strip())
+    return qa_answer if qa_answer else re.sub(r"^\s*\d+[.、]\s*", "", quote.strip())
 
 
 def electrical_symptom(question):
@@ -299,7 +312,7 @@ def render_context_answer(raw, references, question=""):
             if decision == "answer" and not claim['extractive']:
                 covered_text = "\n".join(c["text"] for c in claims if isinstance(c, dict)
                                          and c.get("quote") == quote and isinstance(c.get("text"), str))
-                text = complete_action_quote(text, quote, question, covered_text)
+                text = complete_action_quote(text, quote, question, covered_text, references)
             # Ignore embedded citation syntax; only the separately validated IDs count.
             clean = re.sub(r"\[[^\]\n]*S\s*\d[^\]\n]*\]", "", text)
             clean = re.sub(r"(?<![A-Za-z0-9])S\d+[-－]\d+", "", clean).strip()

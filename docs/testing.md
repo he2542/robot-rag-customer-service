@@ -323,3 +323,5 @@ python -m evaluation.summarize_benchmark --root evaluation/results/run-300 --out
 程序按条目保存成功结果，同一个结果目录可续跑，既有题目、回答和分数不会被替换。中断写入造成的损坏文件需要先保留原件并核对，不应当作已完成结果；不要在同一目录并行运行两个相同阶段。
 
 `prepare / generate / validate / freeze` 用于创建新题集，不属于复现既有分数的必要步骤。它们会生成新问题与参考答案，需要先检查标签并冻结，再运行系统；禁止看过结果后调整标签以提升报告数值。原始模型检查说明也可能不准确，不能当作人工审校记录。
+
+并列提问补全使用 `python -m pytest tests/test_answer_coverage.py -q` 验证，70份真实输出的离线效果见[并列问答补全验证](validation/multipart-qa-20261127.md)。

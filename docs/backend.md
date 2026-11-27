@@ -174,3 +174,5 @@ human：本轮问题和参考资料组成的 JSON
 设计见 [模型精排](specs/rerank_design.md)，效果与用量见 [精排评测](validation/rerank-20261111.md)。
 
 缺编号维护条目的修复及离线增量效果见[维护条目恢复验证](validation/maintenance-numberless-20261127.md)。
+
+并列提问支持从唯一完整问答恢复遗漏动作与参数，窄问题保持原回答，见[并列问答补全验证](validation/multipart-qa-20261127.md)。

@@ -149,3 +149,34 @@ def test_parameters_are_not_erased_when_normalizing_action_words():
     from src.services.answer_policy import repair_actions_covered
     assert repair_actions_covered("调小出水量。", "调低出水量。")
     assert not repair_actions_covered("重启A设备1，重启B设备2。", "重新启动A设备1。")
+
+
+@pytest.mark.parametrize('question,text,quote', [
+    ('旧地图是否保留，重新建图前做什么？', '旧地图需要删除。', '- 清理环境中反光物和移动障碍物，删除旧地图，让机器人重新建图。'),
+    ('在哪里选择顺序，哪些参数能自定义？', '在APP中选择先扫后拖。', '- 打开APP，在【自定义清扫】中选择“先扫后拖”模式，可自定义扫地吸力、拖地出水量。'),
+])
+def test_multi_part_question_restores_unique_complete_qa_answer(question,text,quote):
+    source = '9. **操作应该怎么办？**\n' + quote
+    assert answer(question,text,quote,excerpt=source) == quote[2:] + ' [S1]'
+
+
+def test_narrow_mode_question_does_not_gain_unrequested_steps():
+    quote='- 确认手机和机器人连接正常，退出APP重新进入，检查机器人是否处于“自动清扫”模式，切换为“手动模式”。'
+    text='检查自动清扫模式并切换为手动模式。'
+    assert answer('手机已经连接，还要检查哪种模式？',text,quote,excerpt='9. **手动遥控无反应怎么办？**\n'+quote) == text+' [S1]'
+
+
+@pytest.mark.parametrize('excerpt', [
+    '9. **操作应该怎么办？**\n- 清理反光物，删除旧地图，重新建图。',
+    '9. **操作应该怎么办？**\n- 删除旧地图。\n10. **然后做什么？**\n- 重新建图。',
+])
+def test_partial_or_multiple_qa_answer_cannot_expand(excerpt):
+    text='删除旧地图。'
+    assert '重新建图' not in answer('旧地图是否保留，之前做什么？',text,'删除旧地图。',excerpt=excerpt)
+
+
+def test_duplicate_qa_sources_do_not_expand():
+    quote='- 清理反光物，删除旧地图，重新建图。'
+    raw=json.dumps({'decision':'answer','claims':[{'text':'删除旧地图。','quote':quote}]},ensure_ascii=False)
+    refs=[{'id':id,'excerpt':'9. **操作应该怎么办？**\n'+quote} for id in ['S1','S2']]
+    assert render_context_answer(raw,refs,'旧地图是否保留，之前做什么？')=='删除旧地图。 [S1]'
