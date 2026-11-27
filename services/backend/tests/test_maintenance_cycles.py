@@ -99,3 +99,40 @@ def test_partial_question_answer_cannot_drop_later_condition():
     full = '1. 拖布多久更换？\n- 正常使用3-6个月更换。\n- 宠物环境1-2个月更换。'
     raw = json.dumps({'decision':'answer','claims':[{'text':'所有环境3-6个月更换。','quote':full.split('\n- 宠物')[0]}]},ensure_ascii=False)
     assert render_context_answer(raw,[{'id':'S1','excerpt':full}],'耗材维护周期怎样？') == UNSUPPORTED_ANSWER
+
+
+@pytest.mark.parametrize('quote', [QUOTE[3:], QUOTE[3:].replace('拖布', '**拖布**')])
+def test_complete_entry_without_number_is_restored_from_unique_source(quote):
+    raw = json.dumps({'decision': 'answer', 'claims': [{'text': '所有部件每月换。', 'quote': quote}]}, ensure_ascii=False)
+    out = render_context_answer(raw, [{'id': 'S1', 'excerpt': QUOTE}], '耗材维护周期怎样？')
+    assert QUOTE[3:] + ' [S1]' in out
+    assert '所有部件' not in out
+
+
+@pytest.mark.parametrize('original', [
+    '1. A型滤网不得水洗，每月更换。',
+    '57. 水箱密封圈多久更换？\n- 每6-12个月更换，开裂立即更换。',
+])
+def test_unnumbered_full_entry_keeps_negation_and_multiline_conditions(original):
+    quote = original.split('. ', 1)[1]
+    raw = json.dumps({'decision': 'answer', 'claims': [{'text': '错误摘要每月换。', 'quote': quote}]}, ensure_ascii=False)
+    out = render_context_answer(raw, [{'id': 'S2', 'excerpt': original}], '耗材维护周期怎样？')
+    assert quote + ' [S2]' in out and '错误摘要' not in out
+
+
+def test_unnumbered_dangerous_entry_still_rejected():
+    full = '1. 主刷轴承每月滴专用润滑油。'
+    raw = json.dumps({'decision': 'answer', 'claims': [{'text': '每月滴润滑油。', 'quote': full[3:]}]}, ensure_ascii=False)
+    out = render_context_answer(raw, [{'id': 'S1', 'excerpt': full}], '耗材维护周期怎样？')
+    assert '每月滴' not in out and '专业售后' in out
+
+
+@pytest.mark.parametrize('quote, originals', [
+    (QUOTE[3:], QUOTE + '\n6. ' + QUOTE[3:]),
+    ('拖布正常使用3-6个月更换。', QUOTE),
+    ('6. ' + QUOTE[3:], QUOTE),
+])
+def test_missing_number_does_not_allow_ambiguity_partial_or_wrong_number(quote, originals):
+    from src.services.answer_policy import UNSUPPORTED_ANSWER
+    raw = json.dumps({'decision': 'answer', 'claims': [{'text': '每月更换。', 'quote': quote}]}, ensure_ascii=False)
+    assert render_context_answer(raw, [{'id': 'S1', 'excerpt': originals}], '耗材维护周期怎样？') == UNSUPPORTED_ANSWER

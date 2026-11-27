@@ -155,6 +155,11 @@ def maintenance_entries(text, quote, references, question):
         return [value[m.start():starts[i + 1].start() if i + 1 < len(starts) else len(value)].strip()
                 for i, m in enumerate(starts)]
     requested = blocks(quote)
+    # A model may copy the whole entry without its list number. Match only
+    # that complete body, then restore the original numbered source entry.
+    without_number = not requested and not marker.search(quote.strip())
+    if without_number:
+        requested = [quote.strip()]
     if not 1 <= len(requested) <= 4:
         return []
     def plain(line):
@@ -171,7 +176,8 @@ def maintenance_entries(text, quote, references, question):
     for entry in requested:
         if not entry.replace('**', '').rstrip().endswith(('。', '！', '？')):
             return []
-        matches = [original for original in originals if plain(original) == plain(entry)]
+        matches = [original for original in originals
+                   if plain(marker.sub('', original, count=1) if without_number else original) == plain(entry)]
         if len(matches) != 1:
             return []
         original = matches[0]

@@ -119,7 +119,7 @@ python -m evaluation.audit_phase1 --repo ../.. --output evaluation/results/phase
 
 ### 原始回答的离线回放
 
-维护周期条目使用 `python -m pytest tests/test_maintenance_cycles.py -q` 验证，覆盖部件与条件混用、完整问答、来源歧义、重复条目及危险操作过滤。回放结果见[维护周期完整条目测试](validation/maintenance-entries-20261124.md)。
+维护周期条目使用 `python -m pytest tests/test_maintenance_cycles.py -q` 验证，覆盖部件与条件混用、完整问答、来源歧义、重复条目及危险操作过滤。回放结果见[维护周期完整条目测试](validation/maintenance-entries-20261124.md)；缺编号正文恢复及70份离线增量复核见[维护条目恢复验证](validation/maintenance-numberless-20261127.md)。
 
 后处理的正确率验证以最近有效评分版本为起点，查找累计受影响答案，对新旧可见回答按同一标准复核后汇总。仅在答案和评分标准均未改变时复用原标签；评分来源有变化时明确标记。完整示例与离线复算包见[维护周期效果对照](validation/maintenance-quality-20261124.md)。
 
