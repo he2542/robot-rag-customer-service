@@ -176,3 +176,7 @@ human：本轮问题和参考资料组成的 JSON
 缺编号维护条目的修复及离线增量效果见[维护条目恢复验证](validation/maintenance-numberless-20261127.md)。
 
 并列提问支持从唯一完整问答恢复遗漏动作与参数，窄问题保持原回答，见[并列问答补全验证](validation/multipart-qa-20261127.md)。
+
+## 实验条目导航
+
+构造 RagService 时可传入 context_entries_enabled=True、context_navigation_enabled=True，在模型输入中加入来源ID、excerpt行号与条目标题导航；完整参考资料和公开sources保持原样。导航默认关闭，仍使用结构化引句回答；导航、资料与历史共同受输入字节预算约束。验证方法和适用范围见[验证报告](validation/context-guard-navigation-20261127.md)。

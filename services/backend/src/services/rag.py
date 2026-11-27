@@ -15,7 +15,7 @@ from src import config
 from src.history import FileChatMessageHistory
 from src.services.retrieval import InternalKnowledgeRetriever
 
-from .prompts import SYSTEM_PROMPT, CONTEXT_SYSTEM_PROMPT
+from .prompts import SYSTEM_PROMPT, CONTEXT_SYSTEM_PROMPT, NAVIGATION_CONTEXT_SYSTEM_PROMPT
 from .context import EvidenceContextBuilder
 from .prompt_context import PromptContextBuilder, source_items
 from .answer_policy import render_context_answer
@@ -35,7 +35,7 @@ def filter_citations(text, allowed):
 
 class RagService:
     def __init__(self, retriever=None, chat_model=None, history_factory=internal_history,
-                 *, context_builder=None, context_entries_enabled=None, context_system_prompt=None):
+                 *, context_builder=None, context_entries_enabled=None, context_system_prompt=None, context_navigation_enabled=False):
         self.retriever = retriever if retriever is not None else InternalKnowledgeRetriever(
             DashScopeEmbeddings(model=config.embedding_model_name)
         )
@@ -46,8 +46,9 @@ class RagService:
         self.context_entries_enabled = (config.context_entries_enabled if context_entries_enabled is None
                                         else context_entries_enabled)
         self.context_builder = context_builder if context_builder is not None else EvidenceContextBuilder()
-        self.context_system_prompt = CONTEXT_SYSTEM_PROMPT if context_system_prompt is None else context_system_prompt
-        self.prompt_context = PromptContextBuilder(self.context_system_prompt)
+        default_prompt = NAVIGATION_CONTEXT_SYSTEM_PROMPT if context_navigation_enabled else CONTEXT_SYSTEM_PROMPT
+        self.context_system_prompt = default_prompt if context_system_prompt is None else context_system_prompt
+        self.prompt_context = PromptContextBuilder(self.context_system_prompt, navigation_enabled=context_navigation_enabled)
         prompt = ChatPromptTemplate.from_messages([
             ("system", SYSTEM_PROMPT), MessagesPlaceholder("history"),
             ("human", "{request_payload}"),

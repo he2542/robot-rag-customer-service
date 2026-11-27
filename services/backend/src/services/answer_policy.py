@@ -124,6 +124,27 @@ def unsafe_lubrication(text):
     return False
 
 
+def unsafe_battery_handling(text):
+    """Retain the battery subject across clauses, never across sentences."""
+    action = re.compile(r"拆卸|拆下|拆解|取出|拔出|拔下|插拔|重新连接")
+    other_target = re.compile(r"^(?:滤网|尘盒|水箱|拖布|主刷|边刷|轮组|毛发|杂物|设备|机器人|APP|手机)")
+    for sentence in re.split(r"[。！？\n]", text):
+        battery = False
+        for clause in re.split(r"[，,；;]", sentence):
+            for match in action.finditer(clause):
+                prefix = clause[:match.start()]
+                suffix = clause[match.end():].lstrip()
+                active = battery or re.search(r"(?<!遥控器)电池", prefix) or suffix.startswith("电池")
+                if not active or other_target.search(suffix):
+                    continue
+                if (_NEGATION.search(prefix)
+                        or re.search(r"(?:专业售后|专业人员|售后人员|售后工程师).{0,12}$", prefix)):
+                    continue
+                return True
+            battery = battery or bool(re.search(r"(?<!遥控器)电池", clause))
+    return False
+
+
 def operation_boundary(question):
     if electrical_symptom(question):
         return "请先停止使用和充电，联系专业售后；不要自行拆修或继续通电测试。"
@@ -256,7 +277,7 @@ def normalize_citations(text, allowed):
 
 def finalize_answer(text, allowed):
     # A later disclaimer cannot undo an earlier explicit action recommendation.
-    if unsafe_lubrication(text):
+    if unsafe_lubrication(text) or unsafe_battery_handling(text):
         return SAFETY_ANSWER
     for clause in re.split(r"[，,。；;！？\n]", text):
         if _ACTION.search(clause) and not _BOUNDARY.search(clause):

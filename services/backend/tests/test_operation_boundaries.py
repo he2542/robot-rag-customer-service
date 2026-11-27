@@ -55,3 +55,32 @@ def test_feature_question_does_not_claim_an_existing_fault(question):
 ])
 def test_actual_fault_wins_over_feature_wording(question):
     assert '停止使用和充电' in operation_boundary(question)
+
+@pytest.mark.parametrize('text', [
+    '电池长时间不用时，应充至50%-70%后拆卸存放，每1-2个月补电一次。',
+    '电池长时间不用，充到一半后拆卸存放。',
+    '电池异常，先取出，之后联系专业售后。',
+    '把电池拆下，之后联系售后。',
+    '电池故障，不要重启，先拆卸存放。',
+])
+def test_reject_battery_removal_with_subject_in_previous_clause(text):
+    assert render(text, '长期不用怎么存放？') == SAFETY_ANSWER
+
+
+@pytest.mark.parametrize('text', [
+    '不要拆卸电池，联系专业售后。',
+    '电池异常，由专业售后拆卸检查。',
+    '电池正常，取出滤网清理。',
+    '电池无需处理。取出滤网清理。',
+    '电池每月补电一次，取出尘盒清理。',
+])
+def test_battery_context_does_not_block_prohibitions_professionals_or_other_parts(text):
+    assert render(text, '怎么保养？') != SAFETY_ANSWER
+
+@pytest.mark.parametrize('text', [
+    '检测手机与机器人连接是否正常，是否切换至手动模式，遥控器（若有）是否没电；修复方法包括重新连接设备、切换手动模式、更换遥控器电池。',
+    '电池正常，可以重新连接设备。',
+    '取出遥控器电池，检查后装回。',
+])
+def test_remote_battery_and_reconnecting_device_are_not_internal_battery_removal(text):
+    assert render(text, '遥控没反应怎么处理？') != SAFETY_ANSWER

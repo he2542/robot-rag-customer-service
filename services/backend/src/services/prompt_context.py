@@ -11,6 +11,7 @@ from langchain_core.messages import AIMessage, HumanMessage
 
 from .context import _merge_spans
 from .keyword import tokenize
+from .evidence_navigation import navigation
 
 
 def encode(value):
@@ -145,22 +146,28 @@ def recent_turns(messages, limit):
 
 
 class PromptContextBuilder:
-    def __init__(self, system, limits=ContextLimits()):
+    def __init__(self, system, limits=ContextLimits(), *, navigation_enabled=False):
         self.system, self.limits = system, limits
+        self.navigation_enabled = navigation_enabled
+
+    def _payload(self, question, documents):
+        payload = {"question": question, "references": source_items(documents)}
+        if self.navigation_enabled:
+            payload["entry_navigation"] = navigation(question, payload["references"])
+        return payload
 
     def evidence(self, question, documents):
-        fixed = byte_size(_wire_messages(self.system, [], {"question": question, "references": []}))
+        fixed = byte_size(_wire_messages(self.system, [], self._payload(question, [])))
         # Escaping the nested JSON reference payload can cost twice its own bytes.
         available = min(self.limits.evidence, max(0, (self.limits.total - fixed) // 2))
         result = pack_evidence(documents, question, available)
-        while result.documents and byte_size(_wire_messages(self.system, [], {
-                "question": question, "references": source_items(result.documents)})) > self.limits.total:
+        while result.documents and byte_size(_wire_messages(self.system, [], self._payload(question, result.documents))) > self.limits.total:
             available = max(0, available - 256)
             result = pack_evidence(documents, question, available)
         return result
 
     def messages(self, question, documents, history):
-        payload = {"question": question, "references": source_items(documents)}
+        payload = self._payload(question, documents)
         selected = recent_turns(history, self.limits.history)
         while selected and byte_size(_wire_messages(self.system, selected, payload)) > self.limits.total:
             selected = selected[2:]

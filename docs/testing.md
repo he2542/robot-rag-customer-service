@@ -328,3 +328,5 @@ python -m evaluation.summarize_benchmark --root evaluation/results/run-300 --out
 
 
 上下文提示词的定向筛查、双轮配对评分及人工敏感性复核见[20题提示词筛查](validation/context-prompt-screen-20-20261127.md)。候选仅用于评测，完整证据包支持离线复算。
+
+电池操作边界与原文条目导航的完整回放、预算和被否定方案对照见[电池边界与导航验证](validation/context-guard-navigation-20261127.md)。导航默认关闭，新的模型输入须完成真实生成效果验证。
