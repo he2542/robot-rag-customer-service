@@ -33,7 +33,7 @@ def connect():
             if _pool is not None:
                 _pool.close()
             _pool = ConnectionPool(
-                conninfo, min_size=0, max_size=8, timeout=5,
+                conninfo, min_size=0, max_size=8, timeout=5, open=True,
                 kwargs={"connect_timeout": 5, "options": "-c statement_timeout=15000"},
                 check=ConnectionPool.check_connection,
             )
