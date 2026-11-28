@@ -1,0 +1,26 @@
+{
+  "before_commit": "45d4e55",
+  "method": "Offline paired replay; unchanged answers reuse previous labels, all changes reviewed pointwise by the coding assistant in both display orders",
+  "new_model_calls": 0,
+  "new_tests": 6,
+  "backend_passed": 333,
+  "db_skipped": 10,
+  "codex20": {
+    "n": 20,
+    "before_pass": 19,
+    "after_pass": 19,
+    "changed": [],
+    "risk_changed": []
+  },
+  "qwen50": {
+    "n": 50,
+    "before_pass": 40,
+    "after_pass": 42,
+    "changed": [
+      "n002",
+      "n007"
+    ],
+    "risk_changed": []
+  },
+  "artifact_sha256": "da92f32036fa48dabd1773a7eec7310586ae466830ccb4dbcff87a330c8945d8"
+}

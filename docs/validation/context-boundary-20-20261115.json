@@ -1,0 +1,1742 @@
+{
+  "dataset_version": "context-boundary-diagnostic-20-20261115-v1",
+  "dataset_sha256": "02c9874390f2eda944e89e50546a4381a66bc404bab72f8736ea7aaae4b93e11",
+  "old_commit": "75d9898",
+  "new_commit": "2c0129773ca20710948cf194aa7a49fe747077c0",
+  "questions": 20,
+  "source_counts": {
+    "扫地机器人100问2.txt": 4,
+    "扫拖一体机器人100问.txt": 4,
+    "故障排除.txt": 4,
+    "维护保养.txt": 4,
+    "选购指南.txt": 4
+  },
+  "quality": {
+    "judgments": {
+      "n": 20,
+      "before_correct": 16,
+      "after_correct": 18,
+      "before_rate": 0.8,
+      "after_rate": 0.9,
+      "delta_pp": 10.0,
+      "relative_improvement": 0.125,
+      "delta_95_cluster_bootstrap_pp": [
+        0.0,
+        20.0
+      ],
+      "before_95_wilson_iid": [
+        0.5839825677481064,
+        0.919342337420202
+      ],
+      "after_95_wilson_iid": [
+        0.6989663547715128,
+        0.9721335187862319
+      ],
+      "wins": 2,
+      "losses": 0,
+      "both_correct": 16,
+      "both_wrong": 2,
+      "strata": 5,
+      "clusters": 17,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261115,
+      "mcnemar_exact_iid_sensitivity_p": 0.5
+    },
+    "judge_swapped": {
+      "n": 20,
+      "before_correct": 17,
+      "after_correct": 18,
+      "before_rate": 0.85,
+      "after_rate": 0.9,
+      "delta_pp": 5.0,
+      "relative_improvement": 0.058823529411764705,
+      "delta_95_cluster_bootstrap_pp": [
+        0.0,
+        15.000000000000002
+      ],
+      "before_95_wilson_iid": [
+        0.6395811352592431,
+        0.9476312541037835
+      ],
+      "after_95_wilson_iid": [
+        0.6989663547715128,
+        0.9721335187862319
+      ],
+      "wins": 1,
+      "losses": 0,
+      "both_correct": 17,
+      "both_wrong": 2,
+      "strata": 5,
+      "clusters": 17,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261115,
+      "mcnemar_exact_iid_sensitivity_p": 1.0
+    },
+    "both_rounds": {
+      "n": 20,
+      "before_correct": 16,
+      "after_correct": 18,
+      "before_rate": 0.8,
+      "after_rate": 0.9,
+      "delta_pp": 10.0,
+      "relative_improvement": 0.125,
+      "delta_95_cluster_bootstrap_pp": [
+        0.0,
+        20.0
+      ],
+      "before_95_wilson_iid": [
+        0.5839825677481064,
+        0.919342337420202
+      ],
+      "after_95_wilson_iid": [
+        0.6989663547715128,
+        0.9721335187862319
+      ],
+      "wins": 2,
+      "losses": 0,
+      "both_correct": 16,
+      "both_wrong": 2,
+      "strata": 5,
+      "clusters": 17,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261115,
+      "mcnemar_exact_iid_sensitivity_p": 0.5
+    }
+  },
+  "citation_support": {
+    "judgments": {
+      "n": 20,
+      "before_correct": 0,
+      "after_correct": 7,
+      "before_rate": 0.0,
+      "after_rate": 0.35,
+      "delta_pp": 35.0,
+      "relative_improvement": null,
+      "delta_95_cluster_bootstrap_pp": [
+        18.0,
+        56.666666666666664
+      ],
+      "before_95_wilson_iid": [
+        0.0,
+        0.16112515805281938
+      ],
+      "after_95_wilson_iid": [
+        0.18119182410108206,
+        0.5671457233147638
+      ],
+      "wins": 7,
+      "losses": 0,
+      "both_correct": 0,
+      "both_wrong": 13,
+      "strata": 5,
+      "clusters": 17,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261115,
+      "mcnemar_exact_iid_sensitivity_p": 0.015625
+    },
+    "judge_swapped": {
+      "n": 20,
+      "before_correct": 2,
+      "after_correct": 7,
+      "before_rate": 0.1,
+      "after_rate": 0.35,
+      "delta_pp": 25.0,
+      "relative_improvement": 2.5,
+      "delta_95_cluster_bootstrap_pp": [
+        9.0,
+        46.666666666666664
+      ],
+      "before_95_wilson_iid": [
+        0.027866481213768224,
+        0.3010336452284873
+      ],
+      "after_95_wilson_iid": [
+        0.18119182410108206,
+        0.5671457233147638
+      ],
+      "wins": 5,
+      "losses": 0,
+      "both_correct": 2,
+      "both_wrong": 13,
+      "strata": 5,
+      "clusters": 17,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261115,
+      "mcnemar_exact_iid_sensitivity_p": 0.0625
+    },
+    "both_rounds": {
+      "n": 20,
+      "before_correct": 0,
+      "after_correct": 7,
+      "before_rate": 0.0,
+      "after_rate": 0.35,
+      "delta_pp": 35.0,
+      "relative_improvement": null,
+      "delta_95_cluster_bootstrap_pp": [
+        18.0,
+        56.666666666666664
+      ],
+      "before_95_wilson_iid": [
+        0.0,
+        0.16112515805281938
+      ],
+      "after_95_wilson_iid": [
+        0.18119182410108206,
+        0.5671457233147638
+      ],
+      "wins": 7,
+      "losses": 0,
+      "both_correct": 0,
+      "both_wrong": 13,
+      "strata": 5,
+      "clusters": 17,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261115,
+      "mcnemar_exact_iid_sensitivity_p": 0.015625
+    }
+  },
+  "citation_support_raw_model": {
+    "judgments": {
+      "n": 20,
+      "before_correct": 8,
+      "after_correct": 13,
+      "before_rate": 0.4,
+      "after_rate": 0.65,
+      "delta_pp": 25.0,
+      "relative_improvement": 0.625,
+      "delta_95_cluster_bootstrap_pp": [
+        10.0,
+        45.00000000000001
+      ],
+      "before_95_wilson_iid": [
+        0.21880653237281705,
+        0.6134184992377469
+      ],
+      "after_95_wilson_iid": [
+        0.43285427668523624,
+        0.818808175898918
+      ],
+      "wins": 5,
+      "losses": 0,
+      "both_correct": 8,
+      "both_wrong": 7,
+      "strata": 5,
+      "clusters": 17,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261115,
+      "mcnemar_exact_iid_sensitivity_p": 0.0625
+    },
+    "judge_swapped": {
+      "n": 20,
+      "before_correct": 9,
+      "after_correct": 12,
+      "before_rate": 0.45,
+      "after_rate": 0.6,
+      "delta_pp": 15.0,
+      "relative_improvement": 0.3333333333333333,
+      "delta_95_cluster_bootstrap_pp": [
+        0.0,
+        33.333333333333336
+      ],
+      "before_95_wilson_iid": [
+        0.2581978582556243,
+        0.6579146575496577
+      ],
+      "after_95_wilson_iid": [
+        0.3865815007622531,
+        0.781193467627183
+      ],
+      "wins": 3,
+      "losses": 0,
+      "both_correct": 9,
+      "both_wrong": 8,
+      "strata": 5,
+      "clusters": 17,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261115,
+      "mcnemar_exact_iid_sensitivity_p": 0.25
+    }
+  },
+  "citation_false_positives_without_markers": {
+    "judgments": {
+      "old": [
+        "b001",
+        "b060",
+        "b090",
+        "b104",
+        "b148",
+        "b195",
+        "b249",
+        "b252"
+      ],
+      "new": [
+        "b060",
+        "b090",
+        "b148",
+        "b195",
+        "b249",
+        "b252"
+      ]
+    },
+    "judge_swapped": {
+      "old": [
+        "b060",
+        "b126",
+        "b148",
+        "b182",
+        "b195",
+        "b243",
+        "b252"
+      ],
+      "new": [
+        "b060",
+        "b126",
+        "b148",
+        "b195",
+        "b252"
+      ]
+    }
+  },
+  "risk_quality_raw_model": {
+    "judgments": {
+      "n": 5,
+      "old": 3,
+      "new": 4
+    },
+    "judge_swapped": {
+      "n": 5,
+      "old": 3,
+      "new": 4
+    },
+    "both_rounds": {
+      "n": 5,
+      "old": 3,
+      "new": 4
+    }
+  },
+  "audit": {
+    "primary_scores_overridden": false,
+    "citation_rule": "A response must actually contain a valid bracketed source marker before model citation support can pass; absence deterministically fails under the frozen rubric.",
+    "known_primary_false_positive": "b022-new: both judges pass despite an explicit battery-unplug/replug instruction. See qualitative-review.json; do not interpret the raw quality delta as confirmed correctness uplift.",
+    "risk_review_file": "qualitative-review.json",
+    "model_token_callback": "No first-model-token event was captured. Report first application content latency, not model TTFT.",
+    "interval_scope": "Purposive diagnostic set; source-stratified cluster bootstrap describes this set, not population accuracy. No inferential interval is reported for the five risk cases."
+  },
+  "judge_agreement": {
+    "old": 19,
+    "new": 20,
+    "total_agree": 39,
+    "total": 40
+  },
+  "judge_disagreement_ids": [
+    "b038"
+  ],
+  "reference_invalid": [],
+  "by_source_first_round": {
+    "扫地机器人100问2.txt": {
+      "old": 2,
+      "new": 4
+    },
+    "扫拖一体机器人100问.txt": {
+      "old": 4,
+      "new": 4
+    },
+    "故障排除.txt": {
+      "old": 3,
+      "new": 3
+    },
+    "维护保养.txt": {
+      "old": 4,
+      "new": 4
+    },
+    "选购指南.txt": {
+      "old": 3,
+      "new": 3
+    }
+  },
+  "performance": {
+    "old": {
+      "n": 20,
+      "input_tokens": 53106,
+      "output_tokens": 3356,
+      "cached_tokens": 0,
+      "raw_usage_examples": [
+        {
+          "input_tokens": 2863,
+          "output_tokens": 222,
+          "total_tokens": 3085,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        {
+          "input_tokens": 2869,
+          "output_tokens": 123,
+          "total_tokens": 2992,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "elapsed_ms": {
+        "n_observed": 20,
+        "median": 3409.925906918943,
+        "p95": 7069.481180841107,
+        "mean": 4130.00771147199
+      },
+      "first_content_ms": {
+        "n_observed": 20,
+        "median": 3409.588465001434,
+        "p95": 7069.144930178303,
+        "mean": 4129.62816148065
+      },
+      "first_model_token_ms": {
+        "n_observed": 0,
+        "median": null,
+        "p95": null,
+        "mean": null
+      },
+      "citation_ids_valid": 20,
+      "has_citations": 3,
+      "all_finish_stop": true
+    },
+    "new": {
+      "n": 20,
+      "input_tokens": 57919,
+      "output_tokens": 3804,
+      "cached_tokens": 1024,
+      "raw_usage_examples": [
+        {
+          "input_tokens": 3100,
+          "output_tokens": 188,
+          "total_tokens": 3288,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        {
+          "input_tokens": 3111,
+          "output_tokens": 198,
+          "total_tokens": 3309,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      ],
+      "elapsed_ms": {
+        "n_observed": 20,
+        "median": 4405.733880586922,
+        "p95": 9297.57768562995,
+        "mean": 4736.818242259324
+      },
+      "first_content_ms": {
+        "n_observed": 20,
+        "median": 4405.41696595028,
+        "p95": 9297.266017412769,
+        "mean": 4736.495688604191
+      },
+      "first_model_token_ms": {
+        "n_observed": 0,
+        "median": null,
+        "p95": null,
+        "mean": null
+      },
+      "citation_ids_valid": 20,
+      "has_citations": 7,
+      "all_finish_stop": true
+    }
+  },
+  "target_hit_at4": {
+    "old": 17,
+    "new": 17,
+    "n": 20
+  },
+  "judge_usage": {
+    "input_tokens": 236658,
+    "output_tokens": 7491,
+    "total_tokens": 244149
+  },
+  "failed_attempts": 0,
+  "per_question": [
+    {
+      "id": "b001",
+      "source": "扫地机器人100问2.txt",
+      "cluster": "ad7b4346-9330-5c7d-80cd-88a70860cc34",
+      "query": "机器人无法找到充电座，应如何操作？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理充电座周围障碍物、将机器人放回充电座附近并重启回充的必要要点，且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理充电座周围障碍物、将机器人放回充电座附近并重启回充的必要要点，且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理充电座周围障碍物、将机器人放回充电座附近并重启回充等必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中没有使用行内引用"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理充电座周围障碍物、将机器人放回充电座附近并重启回充等必要要点，没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用的邻接断言都被所指片段支持"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b022",
+      "source": "扫地机器人100问2.txt",
+      "cluster": "1d583c76-6c4a-521c-a438-41c6e14ae04e",
+      "query": "机器人报‘电池故障’该怎么排查？",
+      "safety_expected": true,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": false,
+            "supported": false,
+            "context_sufficient": true,
+            "reason": "建议用户自行检查电池是否损坏、鼓包，这与参考答案中的不建议用户自行插拔、拆修电池相矛盾。",
+            "citation_supported": false,
+            "citation_reason": "引用[S2]支持了电池鼓包时应立即停止使用并更换原装电池，但未支持自行检查电池损坏和鼓包。"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了关闭设备、联系专业售后检测、不自行插拔或拆修电池的要点，并且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用[S2]支持了电池鼓包时应立即停止使用并更换原装电池，符合通用安全规则。"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了关闭设备、联系专业售后检测、不自行插拔或拆修电池等必要要点，且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S2]支持了安全建议。"
+          },
+          "old": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "虽然提到了关闭电源和联系售后，但未明确指出不建议用户自行插拔或拆修电池，存在安全隐患。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S2]支持了电池鼓包时应立即停止使用并更换原装电池。"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": false,
+          "judge_swapped": false
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": false,
+        "new": true
+      }
+    },
+    {
+      "id": "b038",
+      "source": "扫地机器人100问2.txt",
+      "cluster": "284f6e08-c1a3-5dd4-9dcc-26aa2d95e87c",
+      "query": "静音模式下吸力好像变弱了，正常吗？怎么调回来？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了静音模式降低吸力、关闭静音模式和选择标准或大吸力的要点，没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用[S1]支持了所有断言。"
+          },
+          "old": {
+            "correct": true,
+            "supported": false,
+            "context_sufficient": true,
+            "reason": "回答涵盖了静音模式降低吸力、关闭静音模式和选择标准或大吸力的要点，但引用[S4]不支持这些断言。",
+            "citation_supported": false,
+            "citation_reason": "引用[S4]不支持回答中的断言。"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答正确，涵盖了静音模式降低吸力、关闭静音模式和选择标准或大吸力的要点。没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用[S4]支持了静音模式会默认降低吸力以减少噪音的事实"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答正确，涵盖了静音模式降低吸力、关闭静音模式和选择标准或大吸力的要点。没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用[S1]支持了静音模式会默认降低吸力以减少噪音的事实"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": false,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": false,
+        "new": true
+      }
+    },
+    {
+      "id": "b060",
+      "source": "扫地机器人100问2.txt",
+      "cluster": "1d62351b-7a13-5aad-9b61-b9afa755cbd4",
+      "query": "机器人吸灰尘越来越没劲儿了，该从哪些地方着手检查？",
+      "safety_expected": false,
+      "target_hit_at4": false,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理尘盒、滤网、滚刷、吸口，更换磨损的主刷和边刷，校准电机等要点，并提供了详细的检查步骤。没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理尘盒、滤网、风道、吸口，检查主刷与滚刷仓，边刷与边角吸入路径，出风口与散热等要点，并提供了详细的检查步骤。没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理尘盒、滤网、滚刷、吸口，更换磨损的主刷和边刷，校准电机等要点，并且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理尘盒、滤网、滚刷、吸口，更换磨损的主刷和边刷，校准电机等要点，并且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b064",
+      "source": "扫拖一体机器人100问.txt",
+      "cluster": "685fe4d2-2138-594e-a105-24297c78258b",
+      "query": "能不能只用它来拖地，不吸尘？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理尘盒、安装水箱和拖布、在APP中选择“仅拖地”模式并调整出水量的要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理尘盒、安装水箱和拖布、在APP中选择“仅拖地”模式并调整出水量的要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理尘盒、安装水箱和拖布、在APP中选择“仅拖地”模式并调整出水量的要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了清理尘盒、安装水箱和拖布、在APP中选择“仅拖地”模式并调整出水量的要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b075",
+      "source": "扫拖一体机器人100问.txt",
+      "cluster": "56e13135-1844-537e-bd05-ad2dbeb1c911",
+      "query": "当系统提示清洁仓里的脏水装满了，接下来该怎么做？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了倾倒污水、清洗污水仓和过滤网、避免污水回流的必要要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中没有引用编号"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了倾倒污水、清洗污水仓和过滤网、避免污水回流的必要要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中没有引用编号"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了倾倒污水、清洗污水仓和过滤网、避免污水回流等必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了倾倒污水、清洗污水仓和过滤网、避免污水回流等必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b090",
+      "source": "扫拖一体机器人100问.txt",
+      "cluster": "89956e66-d030-5460-999c-c8014ab20f25",
+      "query": "拖布转着转着就发出‘咔咔’声，可能是什么原因，怎么处理？",
+      "safety_expected": true,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查拖布支架杂物和电机轴承疑似异常时联系售后的必要要点，没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用了正确的片段支持断言"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查拖布支架杂物和电机轴承疑似异常时联系售后的必要要点，没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用了正确的片段支持断言"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查拖布支架杂物和电机轴承疑似异常时联系售后的必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查拖布支架杂物和电机轴承疑似异常时联系售后的必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b104",
+      "source": "扫拖一体机器人100问.txt",
+      "cluster": "e80f3586-6070-53a7-9ad1-241d69ccd9e1",
+      "query": "刚装修完，家里全是水泥灰和小石子，这时候能直接用扫拖机器人打扫吗？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答直接满足问题的信息需求，涵盖了参考答案的必要要点，没有实质错误。提到了不建议立即使用、杂物易损伤设备和地面、须先人工开荒再启用等关键信息。",
+            "citation_supported": true,
+            "citation_reason": "引用[S1]支持了手动开荒后再使用机器人的建议"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答直接满足问题的信息需求，涵盖了参考答案的必要要点，没有实质错误。提到了不建议立即使用、杂物易损伤设备和地面、须先人工开荒再启用等关键信息。",
+            "citation_supported": true,
+            "citation_reason": "引用[S1]支持了手动开荒后再使用机器人的建议"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答直接满足问题的信息需求，涵盖了参考答案的必要要点，没有实质错误、无资料支持的具体断言或危险拆修建议。",
+            "citation_supported": false,
+            "citation_reason": "回答中没有引用编号"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答直接满足问题的信息需求，涵盖了参考答案的必要要点，没有实质错误、无资料支持的具体断言或危险拆修建议。",
+            "citation_supported": true,
+            "citation_reason": "回答中的引用编号[S1]正确指向了支持其断言的片段"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b121",
+      "source": "故障排除.txt",
+      "cluster": "68c7bb5e-72f9-542b-acc9-fd47fcddb799",
+      "query": "吸力明显下降时，应检查并清理哪些部位？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查尘盒、滤网、风道堵塞情况，检查主刷是否缠绕毛发并清理，确认吸口未被异物遮挡的必要要点，且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持邻接的断言"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查尘盒、滤网、风道堵塞情况，检查主刷是否缠绕毛发并清理，确认吸口未被异物遮挡的必要要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "缺少具体引用编号"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查尘盒、滤网、风道堵塞情况，检查主刷是否缠绕毛发并清理，确认吸口未被异物遮挡等必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查尘盒、滤网、风道堵塞情况，检查主刷是否缠绕毛发并清理，确认吸口未被异物遮挡等必要要点，没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b126",
+      "source": "故障排除.txt",
+      "cluster": "e599ede3-a10b-56fc-a616-d517c20c7714",
+      "query": "机器运行时外壳烫手还有一股怪味，资料里提示要关注哪些潜在问题？",
+      "safety_expected": true,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了问题所需的信息，包括立即关机冷却、检查风道和联系售后检测电机和电池。同时提供了额外的潜在问题分析，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "虽然有引用标记，但未具体引用支持每个断言的片段"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了问题所需的信息，包括立即关机冷却、检查风道和联系售后检测电机和电池。同时提供了额外的预防性要求，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "虽然有引用标记，但未具体引用支持每个断言的片段"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了问题所需的信息，包括立即关机冷却、清理风道和联系售后检测电机和电池。没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S3]支持了故障现象和修复建议"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了问题所需的信息，包括立即关机冷却、清理风道和联系售后检测电机和电池。没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S3]支持了故障现象和修复建议"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b148",
+      "source": "故障排除.txt",
+      "cluster": "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+      "query": "机器人碰到拖鞋就停了，怎么让它别这么‘敏感’？",
+      "safety_expected": true,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "建议关闭过度碰撞保护，不符合安全要求。",
+            "citation_supported": true,
+            "citation_reason": "引用支持了调低避障灵敏度和设置虚拟墙的建议。"
+          },
+          "new": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "建议关闭过度碰撞保护，不符合安全要求。",
+            "citation_supported": true,
+            "citation_reason": "引用支持了调低避障灵敏度和设置虚拟墙的建议。"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "建议关闭过度碰撞保护，这与参考答案中的不关闭或绕过安全保护相矛盾。",
+            "citation_supported": true,
+            "citation_reason": "引用的片段支持了调低避障灵敏度和设置虚拟墙等措施。"
+          },
+          "old": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "建议关闭过度碰撞保护，这与参考答案中的不关闭或绕过安全保护相矛盾。",
+            "citation_supported": true,
+            "citation_reason": "引用的片段支持了调低避障灵敏度和设置虚拟墙等措施。"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": false,
+          "judge_swapped": false
+        },
+        "new": {
+          "judgments": false,
+          "judge_swapped": false
+        }
+      },
+      "both_pass": {
+        "old": false,
+        "new": false
+      }
+    },
+    {
+      "id": "b149",
+      "source": "故障排除.txt",
+      "cluster": "283cc3ed-b75b-5ab4-9a78-6528d6efe941",
+      "query": "扫地机器人自己找不到充电座，得我抱回去才能充上电，咋办？",
+      "safety_expected": false,
+      "target_hit_at4": false,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了擦拭传感器、调整充电座位置和检测信号的必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了擦拭传感器、调整充电座位置和检测信号的必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了擦拭传感器、调整充电座位置和检测信号的必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中未使用行内引用"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了擦拭传感器、调整充电座位置和检测信号的必要要点，没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中未使用行内引用"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b182",
+      "source": "维护保养.txt",
+      "cluster": "9438de20-d582-5788-bbf8-d997bf74a5fc",
+      "query": "机器人不打算用一阵子了，充电充到多少放着比较安全呀？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了存放前充至80%-90%电量、避免亏电存放和防止电池损坏的要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了存放前充至80%-90%电量、避免亏电存放和防止电池损坏的要点，且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用支持了所有断言"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了存放前充至80%-90%电量、避免亏电存放和防止电池损坏的要点，没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了存放前充至80%-90%电量、避免亏电存放和防止电池损坏的要点，没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用均支持其邻接的断言"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b195",
+      "source": "维护保养.txt",
+      "cluster": "9438de20-d582-5788-bbf8-d997bf74a5fc",
+      "query": "机器人该放在什么样的环境里长期存放才合适？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了所有必要要点，包括温度、湿度和远离易燃易爆腐蚀性物品。额外的建议也得到了context的支持。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S1]支持了阴凉、干燥、通风的环境要求，[S7]支持了温度和湿度的具体数值，[S8]支持了断开充电座连接的建议。"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了所有必要要点，包括温度、湿度和远离易燃易爆腐蚀性物品。额外的建议也得到了context的支持。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S1]支持了阴凉、干燥、通风的环境要求，[S7]支持了温度和湿度的具体数值，[S8]支持了断开充电座连接的建议。"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了所有必要要点，包括温度、湿度和远离易燃易爆腐蚀性物品的要求。额外的建议也符合安全存放的一般原则。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S1]支持了阴凉、干燥、通风的环境要求，[S7]支持了温度和湿度的具体数值，[S8]支持了断开充电座连接的建议。"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了所有必要要点，包括温度、湿度和远离易燃易爆腐蚀性物品的要求。额外的建议也符合安全存放的一般原则。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S1]支持了阴凉、干燥、通风的环境要求，[S7]支持了温度和湿度的具体数值，[S8]支持了断开充电座连接的建议。"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b215",
+      "source": "维护保养.txt",
+      "cluster": "9a96df3d-b408-5d24-94f8-1b156dd05548",
+      "query": "电线和排线用了一阵子，平时咋看看它还安不安全？",
+      "safety_expected": true,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查电线和排线的安全性方法，包括断电后检查外露电线的破损或松动，以及内部排线应由专业人员检查。没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "虽然有引用，但引用内容并未直接支持回答中的具体断言"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了检查电线和排线的安全性方法，包括断电后检查外露电线的破损或松动，以及内部排线应由专业人员检查。没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "虽然有引用，但引用内容并未直接支持回答中的具体断言"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了外露电线破损或松动的检查须断电、内部排线检查交由专业人员等关键点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中未使用行内引用"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了外露电线破损或松动的检查须断电、内部排线检查交由专业人员等关键点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中未使用行内引用"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b228",
+      "source": "维护保养.txt",
+      "cluster": "63a9e499-4d57-5abc-a502-d24e0c5d779f",
+      "query": "换集尘袋的时候，为防止漏灰，操作前要先做什么？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答正确，涵盖了更换集尘袋前需先关闭电源的要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答正确，涵盖了更换集尘袋前需先关闭电源的要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答正确，涵盖了更换集尘袋前需先关闭电源的要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答正确，涵盖了更换集尘袋前需先关闭电源的要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b243",
+      "source": "选购指南.txt",
+      "cluster": "0b51ae3b-141c-59e6-bc4a-389c97bfa1f3",
+      "query": "按课程资料的选购建议，哪种电池类型和容量组合，更适合大户型且希望充电快的使用场景？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答准确涵盖了锂电池、容量≥5200mAh和快充功能三个要点，且所有信息均有上下文支持。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S1][S2]均支持其断言"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答准确涵盖了锂电池、容量≥5200mAh和快充功能三个要点，且所有信息均有上下文支持。",
+            "citation_supported": false,
+            "citation_reason": "未使用行内引用"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答准确指出了锂电池、容量≥5200mAh和支持快充功能的组合，且提供了相关依据。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S1]支持了所有提到的断言。"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答准确指出了锂电池、容量≥5200mAh和支持快充功能的组合，且提供了相关依据。",
+            "citation_supported": true,
+            "citation_reason": "引用的[S1][S2]支持了所有提到的断言。"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b249",
+      "source": "选购指南.txt",
+      "cluster": "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+      "query": "按课程资料的选购建议，怎样操作能让机器用得更省电，同时又不耽误重点地方的深度清洁？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了日常清洁使用节能模式、顽固污渍时切换强力模式以及节能模式可延长续航30%以上等要点，且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用的断言都被其对应的片段支持。"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了日常清洁使用节能模式、顽固污渍时切换强力模式以及节能模式可延长续航30%以上等要点，且没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "所有引用的断言都被其对应的片段支持。"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了日常清洁使用节能模式、顽固污渍时切换强力模式以及节能模式可延长续航30%以上等要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中未使用行内引用"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答涵盖了日常清洁使用节能模式、顽固污渍时切换强力模式以及节能模式可延长续航30%以上等要点，且没有实质错误。",
+            "citation_supported": false,
+            "citation_reason": "回答中未使用行内引用"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b252",
+      "source": "选购指南.txt",
+      "cluster": "ea4603cb-9fd2-593d-821c-7035d9ab8cd3",
+      "query": "按课程资料的选购建议，如果希望产品能自动倒垃圾还带烘干拖布功能，大致需要准备多少预算？",
+      "safety_expected": false,
+      "target_hit_at4": true,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答准确指出了需要5000元以上的预算，并且提供了相关功能的解释。没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用了[S1]中的条目，支持了自动集尘+热风烘干款的价格区间。"
+          },
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答准确指出了需要5000元以上的预算，并且提供了相关功能的解释。没有实质错误。",
+            "citation_supported": true,
+            "citation_reason": "引用了[S1]和[S3]中的条目，支持了自动集尘+热风烘干款的价格区间和烘干温度等信息。"
+          }
+        },
+        "judge_swapped": {
+          "new": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答准确指出了5000元以上的预算需求，并且解释了自动集尘和热风烘干功能的对应关系。所有信息均在提供的context中得到支持。",
+            "citation_supported": true,
+            "citation_reason": "引用的S1-53和S3-109都支持了相关断言"
+          },
+          "old": {
+            "correct": true,
+            "supported": true,
+            "context_sufficient": true,
+            "reason": "回答准确指出了5000元以上的预算需求，并且解释了自动集尘和热风烘干功能的对应关系。所有信息均在提供的context中得到支持。",
+            "citation_supported": true,
+            "citation_reason": "引用的S1-53支持了相关断言"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": true,
+          "judge_swapped": true
+        },
+        "new": {
+          "judgments": true,
+          "judge_swapped": true
+        }
+      },
+      "both_pass": {
+        "old": true,
+        "new": true
+      }
+    },
+    {
+      "id": "b285",
+      "source": "选购指南.txt",
+      "cluster": "06fe3577-2dee-5bfa-87d2-4f3a746c18fc",
+      "query": "按课程资料的选购建议，地面脏了擦几遍能基本干净？",
+      "safety_expected": false,
+      "target_hit_at4": false,
+      "reference_valid": {
+        "judgments": true,
+        "judge_swapped": true
+      },
+      "scores": {
+        "judgments": {
+          "new": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": false,
+            "reason": "回答未提及课程资料中关于拖布去污力的具体信息，即常规污渍可去除≥90%，顽固污渍经2-3次擦拭可清除。回答内容偏离了问题的核心需求。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          },
+          "old": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": false,
+            "reason": "回答未提及课程资料中关于拖布去污力的具体信息，即常规污渍可去除≥90%，顽固污渍经2-3次擦拭可清除。回答内容偏离了问题的核心需求。",
+            "citation_supported": false,
+            "citation_reason": "无引用"
+          }
+        },
+        "judge_swapped": {
+          "old": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": false,
+            "reason": "回答未提供课程资料中提到的拖布去污力和顽固污渍擦拭次数的信息。",
+            "citation_supported": false,
+            "citation_reason": "引用片段未支持回答中的实质断言。"
+          },
+          "new": {
+            "correct": false,
+            "supported": true,
+            "context_sufficient": false,
+            "reason": "回答未提供课程资料中提到的拖布去污力和顽固污渍擦拭次数的信息。",
+            "citation_supported": false,
+            "citation_reason": "引用片段未支持回答中的实质断言。"
+          }
+        }
+      },
+      "pass": {
+        "old": {
+          "judgments": false,
+          "judge_swapped": false
+        },
+        "new": {
+          "judgments": false,
+          "judge_swapped": false
+        }
+      },
+      "both_pass": {
+        "old": false,
+        "new": false
+      }
+    }
+  ]
+}

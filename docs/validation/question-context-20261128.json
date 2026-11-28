@@ -1,0 +1,95 @@
+{
+  "questions": 300,
+  "changed_ids": [
+    "b012",
+    "b018",
+    "b056",
+    "b064",
+    "b114",
+    "b263",
+    "b297"
+  ],
+  "unchanged": 293,
+  "risk_unchanged": 10,
+  "independent_replayed": 68,
+  "independent_guarded": 2,
+  "changed_case_review": {
+    "n": 7,
+    "before_pass": 5,
+    "after_pass": 7,
+    "before_citation_supported": 6,
+    "after_citation_supported": 7,
+    "method": "coding-assistant offline paired review against original points, evidence and scope; repeated in reverse order"
+  },
+  "tests": {
+    "passed": 399,
+    "database_skipped": 10
+  },
+  "new_model_calls": 0,
+  "phase1_accepted": false,
+  "review": [
+    {
+      "id": "b012",
+      "before_pass": true,
+      "after_pass": true,
+      "before_citation_supported": true,
+      "after_citation_supported": true,
+      "reverse_order_agrees": true,
+      "reason": "两版均满足原问题与冻结要点；新版改为完整原句，保持条件与来源。"
+    },
+    {
+      "id": "b018",
+      "before_pass": true,
+      "after_pass": true,
+      "before_citation_supported": true,
+      "after_citation_supported": true,
+      "reverse_order_agrees": true,
+      "reason": "两版均满足原问题与冻结要点；新版改为完整原句，保持条件与来源。"
+    },
+    {
+      "id": "b056",
+      "before_pass": false,
+      "after_pass": true,
+      "before_citation_supported": true,
+      "after_citation_supported": true,
+      "reverse_order_agrees": true,
+      "reason": "原版混入机械停机建议；修复版仅含APP后台、更新、内存与重装步骤。"
+    },
+    {
+      "id": "b064",
+      "before_pass": false,
+      "after_pass": true,
+      "before_citation_supported": true,
+      "after_citation_supported": true,
+      "reverse_order_agrees": true,
+      "reason": "原版缺少冻结要点中的清理尘盒、安装水箱拖布及出水量；修复版完整原句均包含。"
+    },
+    {
+      "id": "b114",
+      "before_pass": true,
+      "after_pass": true,
+      "before_citation_supported": true,
+      "after_citation_supported": true,
+      "reverse_order_agrees": true,
+      "reason": "两版均满足原问题与冻结要点；新版改为完整原句，保持条件与来源。"
+    },
+    {
+      "id": "b263",
+      "before_pass": true,
+      "after_pass": true,
+      "before_citation_supported": false,
+      "after_citation_supported": true,
+      "reverse_order_agrees": true,
+      "reason": "两版能力事实均有本轮资料支持；原版将木地板干拖建议错引为S1，原文展示恢复对应引用。"
+    },
+    {
+      "id": "b297",
+      "before_pass": true,
+      "after_pass": true,
+      "before_citation_supported": true,
+      "after_citation_supported": true,
+      "reverse_order_agrees": true,
+      "reason": "两版均满足原问题与冻结要点；新版改为完整原句，保持条件与来源。"
+    }
+  ]
+}

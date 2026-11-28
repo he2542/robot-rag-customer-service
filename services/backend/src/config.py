@@ -34,6 +34,18 @@ _rerank_enabled = os.environ.get("RAG_RERANK_ENABLED", "false").lower()
 if _rerank_enabled not in {"true", "false"}:
     raise ValueError("RAG_RERANK_ENABLED must be true or false")
 rerank_enabled = _rerank_enabled == "true"
+_context_entries_enabled = os.environ.get("RAG_CONTEXT_ENTRIES_ENABLED", "false").lower()
+if _context_entries_enabled not in {"true", "false"}:
+    raise ValueError("RAG_CONTEXT_ENTRIES_ENABLED must be true or false")
+context_entries_enabled = _context_entries_enabled == "true"
+_context_navigation_enabled = os.environ.get("RAG_CONTEXT_NAVIGATION_ENABLED", "false").lower()
+if _context_navigation_enabled not in {"true", "false"}:
+    raise ValueError("RAG_CONTEXT_NAVIGATION_ENABLED must be true or false")
+context_navigation_enabled = _context_navigation_enabled == "true"
+_context_extractive_quotes = os.environ.get("RAG_CONTEXT_EXTRACTIVE_QUOTES", "false").lower()
+if _context_extractive_quotes not in {"true", "false"}:
+    raise ValueError("RAG_CONTEXT_EXTRACTIVE_QUOTES must be true or false")
+context_extractive_quotes = _context_extractive_quotes == "true"
 rerank_model = os.environ.get("RAG_RERANK_MODEL", "qwen3-rerank")
 rerank_url = os.environ.get("RAG_RERANK_URL",
     "https://dashscope.aliyuncs.com/api/v1/services/rerank/text-rerank/text-rerank")

@@ -1,0 +1,44 @@
+{
+  "status": "live_integration_passed",
+  "model": "gpt-6.2-sol",
+  "tasks_reserved": 10,
+  "accepted_tasks": 8,
+  "failed_tasks": 2,
+  "generated": 3,
+  "judged": 5,
+  "agreement": {
+    "n": 5,
+    "same": 4,
+    "disagreement_ids": [
+      "n041"
+    ]
+  },
+  "accepted_usage": {
+    "input_tokens": 36619,
+    "output_tokens": 489
+  },
+  "prior_failed_attempts_usage": {
+    "attempt_1": null,
+    "attempt_2": {
+      "input_tokens": 4918,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 98,
+      "reasoning_output_tokens": 0
+    }
+  },
+  "known_usage_tasks": 9,
+  "unknown_usage_tasks": 1,
+  "input_bytes_reserved": 133279,
+  "elapsed_seconds_all_attempts": 115.03199999999924,
+  "accepted_elapsed_seconds": 90.95399999999972,
+  "aliyun_requests": 0,
+  "billing": "chatgpt_subscription",
+  "monetary_cost_cny": null,
+  "tool_declarations": [],
+  "frozen_sha256": "df03e9e09dac904d2aec49e4660934f1ddcb2a3e93f424e32a5c986044786414",
+  "offline_tests": 35,
+  "backend_tests_passed": 309,
+  "backend_db_skipped": 10,
+  "artifact_sha256": "9ef1f554f9aedceed9ad3d9687e7278f3c60fcf59209248391e4f029b5010a9e"
+}

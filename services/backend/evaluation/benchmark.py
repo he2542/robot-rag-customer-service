@@ -16,6 +16,7 @@ import re
 import time
 
 import httpx
+from evaluation.budget import BudgetError, add_budget_arguments, budget_from_args, require_budget
 
 SEED = 20261111
 GEN_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
@@ -65,6 +66,7 @@ def digest(path):
 
 def chat(system, payload, max_tokens=6000, model="qwen-plus"):
     """Explicit deterministic settings; retries limited to transient transport/429/5xx."""
+    require_budget()
     body = {"model": model, "input": {"messages": [
         {"role": "system", "content": system},
         {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}]},
@@ -101,6 +103,10 @@ def parallel(items, fn, workers):
         for future in as_completed(futures):
             try:
                 future.result()
+            except BudgetError:
+                for pending in futures:
+                    pending.cancel()
+                raise
             except Exception as error:
                 errors.append(type(error).__name__)
             done += 1
@@ -153,6 +159,7 @@ def prepare(root):
 
 
 def generate(root, workers):
+    require_budget()
     items = read(root / "sampling.json")["items"]
     batches = [items[i:i + 6] for i in range(0, len(items), 6)]
     def task(batch):
@@ -200,6 +207,7 @@ def freeze(root):
 
 
 def validate(root, workers):
+    require_budget()
     sampled = {q["id"]: q for q in read(root / "sampling.json")["items"]}
     jobs = sorted((root / "generation").glob("*.json"))
     def task(source):
@@ -254,6 +262,7 @@ def bind(root, template):
 
 
 def retrieve(root):
+    require_budget()
     from langchain_community.embeddings import DashScopeEmbeddings
     from src import config
     from evaluation.evaluate import TimedRetriever
@@ -281,6 +290,7 @@ def retrieve(root):
 
 
 def answer(root, workers):
+    require_budget()
     from langchain_community.chat_models.tongyi import ChatTongyi
     from langchain_core.chat_history import InMemoryChatMessageHistory
     from langchain_core.documents import Document
@@ -314,6 +324,7 @@ def answer(root, workers):
 
 
 def judge(root, workers, swapped=False, limit=None, available=False):
+    require_budget()
     questions = checked_dataset(root)
     if limit is not None:
         questions = random.Random(SEED).sample(questions, limit)
@@ -360,7 +371,19 @@ def main():
     parser.add_argument("--audit-limit", type=int, default=60, help="Swap-order sample size; use300 for complete sensitivity analysis")
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--watch", action="store_true", help="For judge only: grade completed pairs while answer generation runs")
+    add_budget_arguments(parser)
     args = parser.parse_args()
+    if args.stage in {"generate", "validate", "retrieve", "answer", "judge", "audit"}:
+        try:
+            with budget_from_args(args):
+                run_stage(args)
+        except BudgetError as error:
+            parser.exit(2, str(error) + "\n")
+    else:
+        run_stage(args)
+
+
+def run_stage(args):
     args.root.mkdir(parents=True, exist_ok=True)
     if args.watch:
         if args.stage != "judge":

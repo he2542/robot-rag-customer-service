@@ -1,0 +1,29 @@
+{
+  "method": "Offline paired replay: unchanged answers retain existing Qwen-Max labels; every changed answer reviewed against the same points and references by the coding assistant in both display orders. No new model scoring.",
+  "before_commit": "08b12ab",
+  "codex20": {
+    "n": 20,
+    "before_pass": 16,
+    "after_pass": 19,
+    "changed": [
+      "n011",
+      "n012",
+      "n013"
+    ],
+    "risk_changed": []
+  },
+  "qwen50": {
+    "n": 50,
+    "before_pass": 39,
+    "after_pass": 40,
+    "changed": [
+      "n016"
+    ],
+    "risk_changed": []
+  },
+  "new_model_calls": 0,
+  "backend_passed": 327,
+  "db_skipped": 10,
+  "new_tests": 8,
+  "artifact_sha256": "2b44d9c16169232d9a962205460b39e20c506be13894d52f3749995ba0a33cb7"
+}

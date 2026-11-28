@@ -14,6 +14,7 @@ from src.crud.knowledge import scoped_chunks
 from src.services.corpus import KNOWLEDGE_BASE, load_internal_files
 from src.services.retrieval import InternalKnowledgeRetriever, as_documents
 from src.services.rerank import Reranker
+from evaluation.budget import BudgetError, add_budget_arguments, budget_from_args, require_budget
 
 
 class TimedRetriever(InternalKnowledgeRetriever):
@@ -42,9 +43,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rerank", action="store_true", help="Compare model reranking on identical RRF candidates; incurs API usage")
+    add_budget_arguments(parser)
     args = parser.parse_args()
     if args.output.exists():
         parser.error("Output already exists; preserve previous evaluation evidence")
+    try:
+        with budget_from_args(args):
+            evaluate(args)
+    except BudgetError as error:
+        parser.exit(2, str(error) + "\n")
+
+
+def evaluate(args):
+    require_budget()
     dataset_path = Path(__file__).with_name("questions.json")
     dataset = json.loads(dataset_path.read_text(encoding="utf-8"))
     hashes = [file.document_hash for file in load_internal_files()]

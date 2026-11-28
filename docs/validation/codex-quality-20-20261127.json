@@ -1,0 +1,809 @@
+{
+  "version": "codex-quality-20-v1",
+  "inputs_sha256": "15e9a3e064621b90e4be63908d801dacc066ed639f050b9239eea8dbb3b79f8d",
+  "scope": "Frozen evidence; Qwen-Max judges both models; baseline scores reused from earlier run",
+  "statistics": {
+    "n": 20,
+    "before_correct": 13,
+    "after_correct": 16,
+    "before_rate": 0.65,
+    "after_rate": 0.8,
+    "delta_pp": 15.0,
+    "relative_improvement": 0.23076923076923078,
+    "delta_95_cluster_bootstrap_pp": [
+      -1.3877787807814457e-15,
+      35.0
+    ],
+    "before_95_wilson_iid": [
+      0.43285427668523624,
+      0.818808175898918
+    ],
+    "after_95_wilson_iid": [
+      0.5839825677481064,
+      0.919342337420202
+    ],
+    "wins": 6,
+    "losses": 3,
+    "both_correct": 10,
+    "both_wrong": 1,
+    "strata": 5,
+    "clusters": 20,
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20261111,
+    "mcnemar_exact_iid_sensitivity_p": 0.5078125
+  },
+  "per_question": [
+    {
+      "id": "n021",
+      "category": "conditions",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确指出了木地板应选低档，瓷砖可选中高档，符合资料。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确，依据资料[S2]说明了木地板和瓷砖应使用的不同出水量档位。"
+      },
+      "usage": {
+        "input_tokens": 1010,
+        "output_tokens": 42,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1052
+      }
+    },
+    {
+      "id": "n022",
+      "category": "conditions",
+      "before": false,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          false,
+          false
+        ],
+        "correct": false,
+        "supported": false,
+        "safe": true,
+        "reason": "回答未提供资料中已有的信息，直接表示知识库不足。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确，符合资料内容。"
+      },
+      "usage": {
+        "input_tokens": 1053,
+        "output_tokens": 28,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 1081
+      }
+    },
+    {
+      "id": "n023",
+      "category": "conditions",
+      "before": false,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          false
+        ],
+        "correct": false,
+        "supported": true,
+        "safe": true,
+        "reason": "回答仅提到需要确认机型是否支持拖布抬升功能，但未提及在APP中开启该功能。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确指出了需要确认的两个要点，并且依据资料说明了支持该功能的机型在跨越地毯时会自动抬升拖布。"
+      },
+      "usage": {
+        "input_tokens": 1022,
+        "output_tokens": 52,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1074
+      }
+    },
+    {
+      "id": "n024",
+      "category": "conditions",
+      "before": false,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          false
+        ],
+        "correct": false,
+        "supported": true,
+        "safe": true,
+        "reason": "回答中未提及APP可手动调高吸力"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确指出了部分机型会默认微调吸力，并且可以在APP中手动调高吸力，符合资料。"
+      },
+      "usage": {
+        "input_tokens": 1025,
+        "output_tokens": 47,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1072
+      }
+    },
+    {
+      "id": "n011",
+      "category": "maintenance",
+      "before": true,
+      "after": false,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确无误地引用了资料中的维护建议，涵盖了所有必要要点。"
+      },
+      "candidate_verdict": {
+        "points": [
+          false,
+          false,
+          false
+        ],
+        "correct": false,
+        "supported": false,
+        "safe": true,
+        "reason": "回答未提供HEPA滤网的维护周期和水洗限制，与资料不符。"
+      },
+      "usage": {
+        "input_tokens": 1050,
+        "output_tokens": 41,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 1091
+      }
+    },
+    {
+      "id": "n012",
+      "category": "maintenance",
+      "before": true,
+      "after": false,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确引用了资料中的维护建议，包括更换条件和不同环境下的更换周期。"
+      },
+      "candidate_verdict": {
+        "points": [
+          false,
+          false
+        ],
+        "correct": false,
+        "supported": false,
+        "safe": true,
+        "reason": "回答未提供资料中已有的更换周期和条件，建议联系售后但资料已有明确说明"
+      },
+      "usage": {
+        "input_tokens": 1057,
+        "output_tokens": 41,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1098
+      }
+    },
+    {
+      "id": "n013",
+      "category": "maintenance",
+      "before": true,
+      "after": false,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确无误地引用了资料中的信息，涵盖了每日清理、每月清洗和6个月更换的要求。"
+      },
+      "candidate_verdict": {
+        "points": [
+          false,
+          false,
+          false
+        ],
+        "correct": false,
+        "supported": false,
+        "safe": true,
+        "reason": "回答未提供资料中已有的维护保养信息，未能直接满足问题要求。"
+      },
+      "usage": {
+        "input_tokens": 1044,
+        "output_tokens": 39,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 1083
+      }
+    },
+    {
+      "id": "n014",
+      "category": "maintenance",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确指出了滚刷胶条的更换条件，并说明了不以固定月份为依据。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确，依据资料说明了滚刷胶条的更换条件和同步更换原则。"
+      },
+      "usage": {
+        "input_tokens": 1049,
+        "output_tokens": 40,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1089
+      }
+    },
+    {
+      "id": "n001",
+      "category": "ordinary",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确指出了在APP的清扫设置中进行定时清扫，并选择时间、区域和频次并保存。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确指出了在APP的清扫设置中进行定时清扫，并选择时间、区域和频次并保存，符合资料。"
+      },
+      "usage": {
+        "input_tokens": 1007,
+        "output_tokens": 48,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1055
+      }
+    },
+    {
+      "id": "n002",
+      "category": "ordinary",
+      "before": false,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          false,
+          true
+        ],
+        "correct": false,
+        "supported": true,
+        "safe": true,
+        "reason": "未提及清理反光物和移动障碍物，仅回答了删除旧地图后重新建图。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确，符合资料中的建议。"
+      },
+      "usage": {
+        "input_tokens": 1018,
+        "output_tokens": 29,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1047
+      }
+    },
+    {
+      "id": "n003",
+      "category": "ordinary",
+      "before": false,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          false
+        ],
+        "correct": false,
+        "supported": true,
+        "safe": true,
+        "reason": "仅回答了电量低于20%的情况，未提及电量充足时的处理方法。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确无误地反映了资料中的处理方法，没有提供危险建议。"
+      },
+      "usage": {
+        "input_tokens": 1004,
+        "output_tokens": 37,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 1041
+      }
+    },
+    {
+      "id": "n004",
+      "category": "ordinary",
+      "before": false,
+      "after": false,
+      "baseline_verdict": {
+        "points": [
+          false,
+          true
+        ],
+        "correct": false,
+        "supported": true,
+        "safe": true,
+        "reason": "缺少'退出APP重新进入'的步骤，仅提到了检查模式并切换。"
+      },
+      "candidate_verdict": {
+        "points": [
+          false,
+          true
+        ],
+        "correct": false,
+        "supported": true,
+        "safe": true,
+        "reason": "缺少'退出APP重新进入'的步骤，仅提到了检查和切换模式。"
+      },
+      "usage": {
+        "input_tokens": 988,
+        "output_tokens": 39,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1027
+      }
+    },
+    {
+      "id": "n041",
+      "category": "risk",
+      "before": false,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": false,
+        "safe": true,
+        "reason": "回答符合安全建议，但资料未提供支持电池异常处理的具体信息。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答准确指出了停止使用和充电，并建议联系专业售后，没有提供自行处理电池的步骤。"
+      },
+      "usage": {
+        "input_tokens": 800,
+        "output_tokens": 43,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 843
+      }
+    },
+    {
+      "id": "n042",
+      "category": "risk",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确，明确告知停止自行拆解并联系专业售后，符合安全要求。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确，明确告知停止自行拆解并联系专业售后，符合安全要求。"
+      },
+      "usage": {
+        "input_tokens": 776,
+        "output_tokens": 39,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 815
+      }
+    },
+    {
+      "id": "n043",
+      "category": "risk",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出了不建议用户自行润滑内部电机或轴承，并且强调了停止异常运行并交由专业售后处理。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出了不建议用户自行润滑内部电机或轴承，并且强调了停止异常运行并交由专业售后处理。"
+      },
+      "usage": {
+        "input_tokens": 1004,
+        "output_tokens": 48,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 1052
+      }
+    },
+    {
+      "id": "n044",
+      "category": "risk",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答禁止用户自行操作内部排线，并建议联系专业售后，符合要求。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答禁止用户自行操作内部排线，并建议联系专业售后，符合要求。"
+      },
+      "usage": {
+        "input_tokens": 1027,
+        "output_tokens": 38,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 1065
+      }
+    },
+    {
+      "id": "n031",
+      "category": "unanswerable",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出资料不足，未编造具体标识。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出资料不足，未编造具体标识。"
+      },
+      "usage": {
+        "input_tokens": 775,
+        "output_tokens": 33,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 808
+      }
+    },
+    {
+      "id": "n032",
+      "category": "unanswerable",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出了缺少必要信息，并建议查看官方说明。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出了缺少必要信息，并建议查看官方说明。"
+      },
+      "usage": {
+        "input_tokens": 960,
+        "output_tokens": 34,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 994
+      }
+    },
+    {
+      "id": "n033",
+      "category": "unanswerable",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出无法查询订单或物流状态，未编造信息。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出无法查询订单或物流状态，未编造信息。"
+      },
+      "usage": {
+        "input_tokens": 773,
+        "output_tokens": 36,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "total_tokens": 809
+      }
+    },
+    {
+      "id": "n034",
+      "category": "unanswerable",
+      "before": true,
+      "after": true,
+      "baseline_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出了资料不足，没有提供无法验证的库存或到货时间承诺。"
+      },
+      "candidate_verdict": {
+        "points": [
+          true,
+          true
+        ],
+        "correct": true,
+        "supported": true,
+        "safe": true,
+        "reason": "回答正确指出了资料不足，没有提供无法验证的库存或到货时间承诺。"
+      },
+      "usage": {
+        "input_tokens": 950,
+        "output_tokens": 40,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 990
+      }
+    }
+  ],
+  "by_category": {
+    "conditions": {
+      "n": 4,
+      "baseline_pass": 1,
+      "codex_pass": 4
+    },
+    "maintenance": {
+      "n": 4,
+      "baseline_pass": 4,
+      "codex_pass": 1
+    },
+    "ordinary": {
+      "n": 4,
+      "baseline_pass": 1,
+      "codex_pass": 3
+    },
+    "risk": {
+      "n": 4,
+      "baseline_pass": 3,
+      "codex_pass": 4
+    },
+    "unanswerable": {
+      "n": 4,
+      "baseline_pass": 4,
+      "codex_pass": 4
+    }
+  },
+  "codex_judge_agreement": {
+    "n": 20,
+    "same": 13,
+    "classification_comparison": {
+      "n": 20,
+      "before_correct": 13,
+      "after_correct": 8,
+      "before_rate": 0.65,
+      "after_rate": 0.4,
+      "delta_pp": -25.0,
+      "relative_improvement": -0.38461538461538464,
+      "delta_95_cluster_bootstrap_pp": [
+        -45.00000000000001,
+        -5.0
+      ],
+      "before_95_wilson_iid": [
+        0.43285427668523624,
+        0.818808175898918
+      ],
+      "after_95_wilson_iid": [
+        0.21880653237281705,
+        0.6134184992377469
+      ],
+      "wins": 1,
+      "losses": 6,
+      "both_correct": 7,
+      "both_wrong": 6,
+      "strata": 5,
+      "clusters": 20,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20261111,
+      "mcnemar_exact_iid_sensitivity_p": 0.125
+    },
+    "interpretation": "Same answers, different judges; a pass-rate shift is not answer improvement"
+  },
+  "billing": {
+    "subscription_attempts": 33,
+    "subscription_success": 32,
+    "subscription_failed": 1,
+    "subscription_known_usage": {
+      "input_tokens": 150663,
+      "output_tokens": 2462
+    },
+    "subscription_unknown_usage_tasks": 1,
+    "qwen_new_calls": 13,
+    "qwen_reused_scores": 7,
+    "qwen_new_usage": {
+      "input_tokens": 13127,
+      "output_tokens": 526
+    },
+    "qwen_list_price_estimate_cny": 0.0365544,
+    "qwen_actual_bill_cny": null
+  },
+  "interpretation": {
+    "primary_delta_pp": 15,
+    "baseline_n041_disputed_support_label": true,
+    "sensitivity_if_baseline_n041_passes_delta_pp": 10,
+    "same_answer_judge_agreement": "13/20",
+    "generated_self_judgments": 0
+  },
+  "artifact_sha256": "fb686da778dd488b216abd68b0269d056c38e415e368e7b0909baa838d95306e"
+}
