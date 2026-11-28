@@ -128,6 +128,7 @@ def test_budget_missing_key_and_trivial_inputs_skip_network(monkeypatch):
 
 
 def test_rerank_runs_before_top_four_and_only_for_enabled_hybrid(monkeypatch):
+    monkeypatch.setattr(config, "retrieval_top_k", 4)
     documents = docs()
     reranker = Reranker(transport=transport(response()))
     retriever = InternalKnowledgeRetriever(None, reranker)
@@ -140,6 +141,7 @@ def test_rerank_runs_before_top_four_and_only_for_enabled_hybrid(monkeypatch):
 
 
 def test_generation_and_public_sources_use_final_reranked_documents(monkeypatch):
+    monkeypatch.setattr(config, "retrieval_top_k", 4)
     monkeypatch.setattr(config, "rerank_enabled", True)
     retriever = InternalKnowledgeRetriever(None, Reranker(transport=transport(response())))
     monkeypatch.setattr(retriever, "rankings", lambda *_: {"hybrid": docs()})

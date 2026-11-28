@@ -1,11 +1,44 @@
 """Connection and embedding-space compatibility; no knowledge business workflow."""
+import atexit
+from threading import Lock
+
 import psycopg
+from psycopg_pool import ConnectionPool
 from src import config
+
+_pool = None
+_pool_url = None
+_pool_lock = Lock()
+
+
+def close_pool():
+    global _pool, _pool_url
+    with _pool_lock:
+        if _pool is not None:
+            _pool.close()
+            _pool = None
+            _pool_url = None
+
+
+atexit.register(close_pool)
+
+
 def connect():
+    global _pool, _pool_url
     if not config.database_url:
         raise ValueError("DATABASE_URL must be configured")
     conninfo = config.database_url.replace("postgresql+psycopg://", "postgresql://", 1)
-    return psycopg.connect(conninfo, connect_timeout=5, options="-c statement_timeout=15000")
+    with _pool_lock:
+        if _pool is None or _pool_url != conninfo:
+            if _pool is not None:
+                _pool.close()
+            _pool = ConnectionPool(
+                conninfo, min_size=0, max_size=8, timeout=5,
+                kwargs={"connect_timeout": 5, "options": "-c statement_timeout=15000"},
+                check=ConnectionPool.check_connection,
+            )
+            _pool_url = conninfo
+        return _pool.connection()
 
 
 def check_embedding_configuration(connection=None):

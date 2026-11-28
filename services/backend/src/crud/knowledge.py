@@ -60,10 +60,8 @@ def nearest_chunks(document_hashes, knowledge_base, vector, limit):
         register_vector(connection)
         check_embedding_configuration(connection)
         return connection.execute(
-            "WITH candidates AS MATERIALIZED ("
-            "SELECT id, content, metadata, embedding, document_hash FROM rag_chunks "
-            "WHERE document_hash = ANY(%s) AND metadata->>'knowledge_base' = %s) "
-            "SELECT content, metadata, document_hash, id FROM candidates "
+            "SELECT content, metadata, document_hash, id FROM rag_chunks "
+            "WHERE document_hash = ANY(%s) AND metadata->>'knowledge_base' = %s "
             "ORDER BY embedding <=> %s, id LIMIT %s",
             (document_hashes, knowledge_base, Vector(vector), limit),
         ).fetchall()

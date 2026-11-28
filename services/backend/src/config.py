@@ -17,18 +17,20 @@ embedding_dimensions = int(os.environ.get("EMBEDDING_DIMENSIONS", "1024"))
 if not 1 <= embedding_dimensions <= 2000:
     raise ValueError("EMBEDDING_DIMENSIONS must be between 1 and 2000")
 
-# Current chunking baseline; strategy tuning is independent from the layout.
+# Maximum entry size before recursive splitting; context prefixes are added afterward.
 chunk_size = 1000
 chunk_overlap = 100
 
-retrieval_top_k = 4
+retrieval_top_k = int(os.environ.get("RAG_RETRIEVAL_TOP_K", "6"))
+if not 1 <= retrieval_top_k <= 20:
+    raise ValueError("RAG_RETRIEVAL_TOP_K must be between 1 and 20")
 retrieval_mode = os.environ.get("RAG_RETRIEVAL_MODE", "hybrid")
 if retrieval_mode not in {"vector", "keyword", "hybrid"}:
     raise ValueError("RAG_RETRIEVAL_MODE must be vector, keyword or hybrid")
 retrieval_candidate_k = int(os.environ.get("RAG_RETRIEVAL_CANDIDATES", "10"))
 retrieval_rrf_k = int(os.environ.get("RAG_RRF_K", "60"))
 if not retrieval_top_k <= retrieval_candidate_k <= 100 or retrieval_rrf_k < 1:
-    raise ValueError("Retrieval candidates must be 4..100 and RRF constant must be positive")
+    raise ValueError("Require retrieval_top_k <= retrieval_candidate_k <= 100 and positive RRF constant")
 
 _rerank_enabled = os.environ.get("RAG_RERANK_ENABLED", "false").lower()
 if _rerank_enabled not in {"true", "false"}:

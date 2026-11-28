@@ -1,6 +1,6 @@
 import os
 import json
-from pathlib import Path
+import tempfile
 from langchain_core.chat_history import BaseChatMessageHistory
 from typing import Sequence, List
 from langchain_core.messages import BaseMessage, message_to_dict, messages_from_dict
@@ -24,9 +24,21 @@ class FileChatMessageHistory(BaseChatMessageHistory):
         all_messages = list(self.messages)
         all_messages.extend(messages)
         # 将消息转为字典并写入文件
-        new_messages = [message_to_dict(message) for message in all_messages]
-        with open(self.file_path, "w", encoding="utf-8") as f:
-            json.dump(new_messages, f)
+        self._write([message_to_dict(message) for message in all_messages[-40:]])
+
+    def _write(self, messages):
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", delete=False,
+                                             dir=os.path.dirname(self.file_path)) as stream:
+                temporary = stream.name
+                json.dump(messages, stream, ensure_ascii=False)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, self.file_path)
+        finally:
+            if temporary is not None and os.path.exists(temporary):
+                os.unlink(temporary)
 
     @property
     def messages(self) -> List[BaseMessage]:
@@ -42,5 +54,4 @@ class FileChatMessageHistory(BaseChatMessageHistory):
 
     def clear(self) -> None:
         # 清空文件内容
-        with open(self.file_path, "w", encoding="utf-8") as f:
-            json.dump([], f)
+        self._write([])

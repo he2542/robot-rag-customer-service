@@ -13,6 +13,7 @@ dependencies = [
   "langchain-core",
   "langchain-community",
   "psycopg[binary]",
+  "psycopg-pool",
   "pgvector",
   "langchain-text-splitters",
   "dashscope",

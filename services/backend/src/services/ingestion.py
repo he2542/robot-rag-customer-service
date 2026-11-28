@@ -4,12 +4,12 @@ import hashlib
 from datetime import datetime, timezone
 
 from langchain_community.embeddings import DashScopeEmbeddings
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from src import config
 from src.database.connection import check_embedding_configuration
 from src.crud.knowledge import document_exists, insert_document
 from .corpus import KNOWLEDGE_BASE, internal_document_hash
+from .chunking import split_knowledge
 
 
 class KnowledgeBaseService:
@@ -17,10 +17,6 @@ class KnowledgeBaseService:
         check_embedding_configuration()
         self.embedding = embedding if embedding is not None else DashScopeEmbeddings(
             model=config.embedding_model_name
-        )
-        self.splitter = RecursiveCharacterTextSplitter(
-            chunk_size=config.chunk_size, chunk_overlap=config.chunk_overlap,
-            separators=["\n\n", "\n", "。", ".", " ", ""], length_function=len,
         )
 
     def upload_by_str(self, data: str, filename: str, *, internal: bool = False) -> str:
@@ -30,7 +26,7 @@ class KnowledgeBaseService:
                          else hashlib.sha256(data.encode("utf-8")).hexdigest())
         if document_exists(document_hash):
             return "[跳过]，内容已存在知识库中"
-        chunks = self.splitter.split_text(data)
+        chunks = split_knowledge(data, filename)
         vectors = []
         # text-embedding-v4 accepts up to 10 texts per request.
         for offset in range(0, len(chunks), 10):

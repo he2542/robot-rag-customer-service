@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import pytest
 
 from fastapi.testclient import TestClient
 from src import config, main
@@ -60,4 +61,17 @@ def test_single_cli_entry_previews_corpus(tmp_path):
     result = json.loads(output.stdout)
     assert result["mode"] == "preview"
     assert len(result["files"]) == 5
-    assert result["total_chunks"] == 63
+    assert result["total_chunks"] == sum(item["chunks"] for item in result["files"])
+    assert result["total_chunks"] >= 800  # 100 + 100 + 200 + 200 + 200 numbered entries.
+    assert all(item["chunks"] >= 100 for item in result["files"])
+
+
+@pytest.mark.parametrize("top,candidates,valid", [
+    ("1", "1", True), ("20", "100", True), ("0", "10", False),
+    ("21", "30", False), ("6", "5", False), ("6", "101", False),
+])
+def test_retrieval_configuration_bounds(top, candidates, valid):
+    env = {**os.environ, "RAG_RETRIEVAL_TOP_K": top, "RAG_RETRIEVAL_CANDIDATES": candidates}
+    result = subprocess.run([sys.executable, "-c", "from src import config"],
+                            cwd=BACKEND, env=env, capture_output=True)
+    assert (result.returncode == 0) is valid
