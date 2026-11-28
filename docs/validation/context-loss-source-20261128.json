@@ -844,7 +844,8 @@
             }
           ]
         }
-      ]
+      ],
+      "exclusion_review": "EV-002: version-bound exclusion of internal motor-bearing inspection and lubrication, source line 93"
     },
     {
       "id": "b093",
