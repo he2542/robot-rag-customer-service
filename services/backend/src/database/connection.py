@@ -23,6 +23,34 @@ def close_pool():
 atexit.register(close_pool)
 
 
+class _PooledConnection:
+    """Support both `with connect() as c:` and `c = connect(); c.execute(...); c.close()`."""
+
+    def __init__(self, cm):
+        self._cm = cm
+        self._conn = None
+
+    def _acquire(self):
+        if self._conn is None:
+            self._conn = self._cm.__enter__()
+        return self._conn
+
+    def __enter__(self):
+        return self._acquire()
+
+    def __exit__(self, exc_type, exc, tb):
+        if self._conn is not None:
+            self._conn = None
+            return self._cm.__exit__(exc_type, exc, tb)
+        return False
+
+    def close(self):
+        self.__exit__(None, None, None)
+
+    def __getattr__(self, name):
+        return getattr(self._acquire(), name)
+
+
 def connect():
     global _pool, _pool_url
     if not config.database_url:
@@ -38,7 +66,7 @@ def connect():
                 check=ConnectionPool.check_connection,
             )
             _pool_url = conninfo
-        return _pool.connection()
+        return _PooledConnection(_pool.connection())
 
 
 def check_embedding_configuration(connection=None):

@@ -68,10 +68,22 @@ def test_pool_is_lazy_reused_and_can_be_reopened(monkeypatch):
 
         def __init__(self, conninfo, **kwargs):
             self.conninfo, self.kwargs, self.closed = conninfo, kwargs, False
+            self.entered, self.exited = 0, 0
             pools.append(self)
 
         def connection(self):
             return self
+
+        def __enter__(self):
+            self.entered += 1
+            return self
+
+        def __exit__(self, *args):
+            self.exited += 1
+            return False
+
+        def execute(self, sql):
+            return sql
 
         def close(self):
             self.closed = True
@@ -81,12 +93,18 @@ def test_pool_is_lazy_reused_and_can_be_reopened(monkeypatch):
     monkeypatch.setattr(config, "database_url", "postgresql+psycopg://localhost/robot_rag_test")
     try:
         assert not pools
-        assert database.connect() is database.connect()
+        with database.connect() as conn:
+            assert conn.execute("SELECT 1") == "SELECT 1"
+        direct = database.connect()
+        assert direct.execute("SELECT 2") == "SELECT 2"
+        direct.close()
         assert len(pools) == 1
+        assert pools[0].entered == 2 and pools[0].exited == 2
         assert pools[0].conninfo == "postgresql://localhost/robot_rag_test"
         database.close_pool()
         assert pools[0].closed
-        database.connect()
+        with database.connect():
+            pass
         assert len(pools) == 2
     finally:
         database.close_pool()
