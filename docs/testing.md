@@ -344,3 +344,5 @@ python -m evaluation.summarize_benchmark --root evaluation/results/run-300 --out
 ### 上下文候选300题验收
 
 [最新验收记录](validation/context-phase1-acceptance-20261128.md)比较原主分支真实回答与条目导航、完整原句展示候选：首轮261→257/300，引用支持177→281/300。交换顺序复评返回237份、有效236份，随后HTTP 500按无重试约定停止。原始标签、无效格式、风险审读、费用收据和标准库复算均随证据保存；该候选未达到合并条件。
+
+[问句语境验证](validation/question-context-20261128.md)复用300份生成，变化7份逐一配对审读5/7→7/7，293份及10道风险题不变；新增模型调用0次，原整体验收标准保持不变。

@@ -152,10 +152,12 @@ def operation_boundary(question, *, include_physical=False):
         return "先断电，仅目视检查无需拆机即可看到的外露电源线；内部排线和插接件的检查交由专业售后，不要拉扯、插拔或自行拆机。"
     if re.search(r"电机.{0,15}(?:响|故障|异常|卡顿)|轴承.{0,12}(?:保养|润滑|卡顿|检查)|(?:检查|检测|维修|拆).{0,8}(?:电机|轴承)|拖布.{0,12}(?:咔咔|异响|怪声)", question):
         return "请先停止异常运行；内部电机、轴承的检查由专业售后执行，不要自行拆修或润滑。"
-    physical = re.search(r"(?:机器人|机器|主刷|边刷|轮组|轮子|拖布|运行|工作).{0,15}(异响|卡住|卡顿)", question)
-    digital = re.search(r"(?:APP|app|手机|界面|页面).{0,4}(?:卡住|卡顿)", question)
-    if (include_physical and physical and _ASK_ACTION.search(question) and not digital
-            and not re.search(r"不|没|无|未", question[max(0, physical.start(1)-3):physical.start(1)])):
+    physical_matches = re.finditer(r"(?:机器人|机器|主刷|边刷|轮组|轮子|拖布|运行|工作).{0,15}(异响|卡住|卡顿)", question)
+    digital_matches = list(re.finditer(r"(?:APP|app|手机|界面|页面)[^，,。；;！？\n]{0,24}(?:卡住|卡顿)", question))
+    physical = next((match for match in physical_matches
+                     if not any(d.start() <= match.start(1) < d.end() for d in digital_matches)
+                     and not re.search(r"不|没|无|未", question[max(0, match.start(1)-3):match.start(1)])), None)
+    if include_physical and physical and _ASK_ACTION.search(question):
         return "请先停止异常运行，切勿强行继续使用，以免故障扩大。涉及内部部件的检查请联系专业售后。"
     return ""
 
@@ -336,7 +338,8 @@ def render_context_answer(raw, references, question="", *, extractive_quotes=Fal
                 safety_rejected=True
                 continue
             if (extractive_quotes and not claim['extractive']
-                    and not _NEGATION.search(question) and not _QUALIFIED_ACTION.search(question)
+                    and not _NEGATION.search(re.sub(r"能不能|可不可以", "", question))
+                    and not _QUALIFIED_ACTION.search(question)
                     and not _INSTRUCTION.search(quote)):
                 text = re.sub(r"^\s*\d+[.、]\s*", "", quote.strip())
             if decision == "answer" and not claim['extractive']:

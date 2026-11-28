@@ -101,3 +101,20 @@ def test_reported_physical_jam_requires_stop_before_remedies(question):
 ])
 def test_digital_jam_feature_queries_and_negated_symptoms_are_not_active_jams(question):
     assert operation_boundary(question, include_physical=True)==''
+
+
+@pytest.mark.parametrize('question', [
+    '手机上的扫地机器人APP老是自己退出或者卡住，咋办？',
+    '机器人APP更新后经常卡顿，如何处理？',
+])
+def test_distant_app_symptom_is_not_a_physical_jam(question):
+    assert operation_boundary(question,include_physical=True)==''
+
+
+@pytest.mark.parametrize('question', [
+    '机器人APP卡住了，轮组也卡住了，怎么办？',
+    'APP卡顿，机器人运行时也卡住，怎么处理？',
+    '机器人没有卡住，但轮组异响，怎么处理？',
+])
+def test_separate_physical_symptom_is_not_hidden_by_app_or_negated_symptom(question):
+    assert operation_boundary(question,include_physical=True).startswith('请先停止异常运行')

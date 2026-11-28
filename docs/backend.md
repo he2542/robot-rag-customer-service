@@ -150,7 +150,7 @@ human：本轮问题和参考资料组成的 JSON
 
 ### 验证与适用范围
 
-上下文构建默认关闭。最新完整首轮300题中，回答通过261→257，引用支持177→281；候选未达到整体质量要求。原文展示模式当前用于离线评测，已知问题包括APP语境误判、能力问句约束和原文操作范围审校。完整方法、结果和复现数据见：
+上下文构建默认关闭。最新完整首轮300题中，回答通过261→257，引用支持177→281；候选未达到整体质量要求。原文展示模式当前用于离线评测，APP语境与能力问句已修复，证据相关性和原文操作范围仍待验证。完整方法、结果和复现数据见：
 
 - [最新300题验收记录](validation/context-phase1-acceptance-20261128.md)
 
@@ -186,3 +186,5 @@ human：本轮问题和参考资料组成的 JSON
 构造 RagService 时可传入 context_entries_enabled=True、context_navigation_enabled=True，在模型输入中加入来源ID、excerpt行号与条目标题导航；完整参考资料和公开sources保持原样。导航默认关闭，仍使用结构化引句回答；导航、资料与历史共同受输入字节预算约束。验证方法和适用范围见[验证报告](validation/context-guard-navigation-20261127.md)。
 
 原文展示模式可通过 `RAG_CONTEXT_EXTRACTIVE_QUOTES=true` 启用；条目导航通过 `RAG_CONTEXT_NAVIGATION_ENABLED=true` 启用。两者均依赖 `RAG_CONTEXT_ENTRIES_ENABLED=true`，默认关闭。构造器同名布尔参数可覆盖配置，便于独立对照。
+
+能力问句和APP语境边界的修复、7份变化答案的效果复核见[问句语境验证](validation/question-context-20261128.md)。

@@ -58,3 +58,19 @@ def test_professional_role_is_not_duplicated_after_clause_level_checking():
     quote='故障现象：机身发热严重，有异味；检测：电机是否过载，电池是否短路，风道是否堵塞；修复：立即关机冷却，清理风道，联系售后检测电机和电池。'
     result=render('外壳烫手有怪味，提示哪些问题？','电机可能过载。',quote)
     assert result.count('专业售后检查项：')==1
+
+
+@pytest.mark.parametrize('question', ['能不能只拖地？', '可不可以只拖地？'])
+def test_ability_question_preserves_the_verified_complete_steps(question):
+    quote='清理尘盒，安装水箱和拖布，在APP中选择仅拖地模式，调整出水量。'
+    assert render(question,'可以只拖地。',quote)==quote+' [S1]'
+
+
+@pytest.mark.parametrize('question', [
+    '能不能不要重启APP，直接解锁？',
+    '可不可以不用重启？我已经重启过了。',
+    '不能重启APP，还有什么办法？',
+])
+def test_ability_wording_keeps_explicit_constraints(question):
+    quote='可重启APP并解锁设置。'
+    assert render(question,'解锁设置。',quote)=='解锁设置。 [S1]'
