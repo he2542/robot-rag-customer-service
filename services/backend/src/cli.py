@@ -6,19 +6,14 @@ import json
 
 from src.services.corpus import load_internal_files
 from src.services.ingestion import KnowledgeBaseService
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from src import config
+from src.services.chunking import split_knowledge
 
 
 def import_knowledge(apply: bool = False) -> int:
     try:
         files = load_internal_files()
-        splitter = RecursiveCharacterTextSplitter(
-            chunk_size=config.chunk_size, chunk_overlap=config.chunk_overlap,
-            separators=["\n\n", "\n", "。", ".", " ", ""], length_function=len,
-        )
         preview = [{"filename": file.filename, "characters": len(file.text),
-                    "chunks": len(splitter.split_text(file.text))} for file in files]
+                    "chunks": len(split_knowledge(file.text, file.filename))} for file in files]
         print(json.dumps({"mode": "apply" if apply else "preview", "files": preview,
                           "total_chunks": sum(item["chunks"] for item in preview)}, ensure_ascii=False))
         if not apply:

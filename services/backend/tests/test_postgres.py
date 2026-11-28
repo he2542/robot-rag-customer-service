@@ -61,7 +61,7 @@ def test_upload_retrieve_and_deduplicate(tmp_path, monkeypatch):
     service.upload_by_str("电池保修一年。", "电池.txt", internal=True)
     service.upload_by_str("拖布可拆卸清洗。", "拖布.txt", internal=True)
     result = InternalKnowledgeRetriever(embedding).invoke("电池保修多久？")
-    assert result[0].page_content == "电池保修一年。"
+    assert result[0].page_content == "[来源：电池.txt]\n电池保修一年。"
     assert result[0].metadata["source"] == "电池.txt"
     assert "跳过" in service.upload_by_str("电池保修一年。", "电池.txt", internal=True)
     assert counts() == (2, 2)
@@ -128,7 +128,7 @@ def test_internal_retrieval_excludes_uploads_and_superseded_versions(tmp_path, m
     service.upload_by_str("电池保修虚构政策，不能混入内部问答。", "历史上传.txt")
     retriever = InternalKnowledgeRetriever(embedding)
     assert internal_knowledge_status()["ready"] is True
-    assert [doc.page_content for doc in retriever.invoke("电池")] == ["电池维护旧版资料。"]
+    assert [doc.page_content for doc in retriever.invoke("电池")] == ["[来源：电池.txt]\n电池维护旧版资料。"]
     assert "跳过" in service.upload_by_str("电池维护旧版资料。", source.name, internal=True)
 
     source.write_text("电池维护新版资料。", encoding="utf-8")
@@ -136,5 +136,5 @@ def test_internal_retrieval_excludes_uploads_and_superseded_versions(tmp_path, m
     assert retriever.invoke("电池") == []
     service.upload_by_str("电池维护新版资料。", source.name, internal=True)
     assert internal_knowledge_status()["ready"] is True
-    assert [doc.page_content for doc in retriever.invoke("电池")] == ["电池维护新版资料。"]
+    assert [doc.page_content for doc in retriever.invoke("电池")] == ["[来源：电池.txt]\n电池维护新版资料。"]
     assert counts() == (3, 3)  # Historical rows are preserved but excluded from retrieval.
