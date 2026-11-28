@@ -7,7 +7,8 @@ from langchain_core.runnables import RunnableLambda
 from src.services.rag import RagService
 
 
-@pytest.mark.parametrize("result", [" 扫地机器人滤网怎么清洗？ ", "", "   ", RuntimeError("unavailable")])
+@pytest.mark.parametrize("result", [
+    " 扫地机器人滤网怎么清洗？ ", "", "   ", "超长回答" * 40, RuntimeError("unavailable")])
 def test_rewrite_only_followups_and_preserve_original_history(result):
     history = InMemoryChatMessageHistory()
     queries, calls = [], []
@@ -31,7 +32,10 @@ def test_rewrite_only_followups_and_preserve_original_history(result):
     assert len(calls) == 1
     assert calls[0]["query"] == "那滤网呢？"
     assert calls[0]["history"][0].content == "机器人怎么保养？"
-    expected = result.strip() if isinstance(result, str) and result.strip() else "那滤网呢？"
+    expected = (result.strip().splitlines()[0].strip()
+                if isinstance(result, str) and result.strip()
+                and len(result.strip().splitlines()[0].strip()) <= 120
+                else "那滤网呢？")
     assert queries == ["机器人怎么保养？", expected]
     assert [message.content for message in history.messages if message.type == "human"] == [
         "机器人怎么保养？", "那滤网呢？"]
